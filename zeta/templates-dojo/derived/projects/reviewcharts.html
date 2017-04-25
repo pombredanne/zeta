@@ -1,0 +1,107 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="revwchart27(chart27_data, chart27_usrs)">
+    <div name="chart27" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart27( chart27_data, width="100%" )}
+    </div>
+
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for u in chart27_usrs :
+            <div><a href="${u[1]}">${u[0]}</a></div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        rsearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchreview', 'Search-review',
+                        h.suburl_search, c.searchfaces, classes="ml10"
+                    )
+        sel_revw = capture( forms.form_selectrevw, c.authuser,
+                            c.revwlist, c.review and c.review.resource_url or '' )
+        sel_rset = capture( forms.form_selectrset, c.authuser,
+                            c.rsetlist, c.reviewset and c.reviewset.name or '' )
+
+        revwsets = '<span class="ml20 fwnormal fntsmall"> \
+                    <a href="%s" title="List of reviews sets"> \
+                    Reviewsets</a></span>' % h.url_reviewsets
+        attachs= '<span class="ml10 fwnormal fntsmall">' + \
+                 ( '<a href="%s" title="List of files attached to reviews"> \
+                   Attachments</a></span>' % h.url_revwattachs )
+        tline  = capture( elements.iconlink, h.url_revwtimeline,
+                          'timeline', title="Timeline of project reviews",
+                          classes="ml20" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ rsearchbox, sel_revw, sel_rset, revwsets,
+                              attachs, tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy">
+        <div id="reviewcharts">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="ml20 fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+            % if c.selectedchart[0] == 'chart27' :
+                <div style="margin : 0 auto;">
+                    ${revwchart27(c.chart27_data, c.chart27_usrs)}
+                </div>
+            % endif
+        </div>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        % if c.selectedchart[0] == 'chart27' :
+            dojo.addOnLoad( setup_chart27 );
+        % endif
+    </script>
+</%def>
+
+

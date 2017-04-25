@@ -1,0 +1,75 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Upload a file into the site. Uploaded file can be referenced using their
+`id` value. For example to download an attachment with id value 10, the url
+will look like, <em class="fggray">/attachment/download/10</em>. And the same 
+attachment can be refered like, <em class="fggray">/attachment/10</em>. """
+],
+
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Upload a file"
+        attachs = '<span class="ml10 fwnormal fntsmall">' +\
+                  ('<a href="%s">Attachments</a></span>' % h.url_attachments)
+        charts = capture( elements.iconlink, h.url_attachcharts,
+                          'barchart', title="Analytics on file attachments",
+                          classes="ml20" )
+        tline = capture( elements.iconlink, h.url_attachtline,
+                         'timeline', title="Attachment Timeline",
+                         classes="ml10" )
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, [ attachs, charts, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="p10">
+            <div class="disptable w100" style="border : 2px solid AliceBlue;">
+            <div class="disptrow">
+                <div class="disptcell p5">
+                    ${forms.form_addattachs( c.authuser, h.suburl_addattachs )}
+                </div>
+                <div class="disptcell p5">
+                    ${elements.helpboard("""
+                        Add attachment that is not associated with license,
+                        project, ticket, wiki etc ...
+                        <br/>
+                        Primarily useful for adding attachments and linking /
+                        referring them else where.
+                    """)}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+
+

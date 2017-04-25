@@ -1,0 +1,25 @@
+    " Quality is the continuing stimulus which our environment puts
+      upon us to create the world in which we live. All of it. Every
+      last bit of it.
+
+      Now, to take that which has caused us to create the world, and
+      include it within the world we have created, is clearly
+      impossible. That is why Quality cannot be defined. If we do
+      define it we are defining something less than Quality itself."
+
+                                    - Zen and the Art of motocycle maintanence
+
+But that is philosophy isn't it. In terms of nuts and bolts, we have
+implemented three levels of quality control. Like,
+
+    * Unit test case for every component and its functions, which randomized
+      and regressable as much as possible.
+    * User Acceptance testing, emulating a user accessing the site via web.
+    * Release-upgrade-Regression, where every new release used as upgrade for
+      all the previous releases and regressed.
+
+Out metrics says that, we have written about a line of test code for evey line
+of development code.
+
+We also have beta deployments which act as a test bed to take a stable release
+into public release.

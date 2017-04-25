@@ -1,0 +1,13 @@
+Notes :
+
+    * For "InnoDB" database, the Unique key cannot exceed the length of 1000.
+
+    * Dont user 'name' attribute or property for Table class and Objects under 
+      zeta.model.tables.
+
+DataBase : 
+
+  For development,
+    MySQL, InnoDB Tables, databasename='zetadev', password='zetadev#321'
+
+  * All the Unicode columns, use the encoding type 'utf-8'.

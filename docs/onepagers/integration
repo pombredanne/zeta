@@ -1,0 +1,12 @@
+Our objective is to make the tool suitable for projects and teams not the
+other way around. To fullfill that objective we have integrated Zeta with other
+applications like editors, IDEs, E-mail, version control system etc ... Once
+setup, there are so many ways to interact with the Zeta server, apart from
+browser. 
+
+Any application client can push or pull data from server using XMLRPC apis
+defined and exposed Zeta. Ofcourse, the client can do so, only after it is
+authenticated and authorized.
+
+Some the applications that already have a Zeta client,
+     * Vim

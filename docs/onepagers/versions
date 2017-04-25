@@ -1,0 +1,16 @@
+While milestones are about future, versions leave a track record of past.
+Time to time, a team shall log their activities and tag them when they reach a
+logical point, they can be called as versions. Having a formal procedure to
+do so will help in releasing your work to outside world, either to get initial
+feedback, or may be for real world applications.
+
+After a point, especially when more people are involved in a common goal, it
+is hard to say when the goal is met, or when the work is ready for real
+world application. Hence all the jargons like `pre-alpha`, `alpha`, `beta`,
+`release candidates` have cropped up. Your team can pick up an appropriate
+process to suite their style. But it is always the consumers who say whether
+your work is production ready.
+
+As usual our tool gives provision for managing your versions, while we leave
+the policies to your team. We strive to make the tool suite your process, not
+the vice versa.

@@ -1,0 +1,26 @@
+In-module caches :
+------------------
+
+    All in-module cache variable should be prefixed with,
+        gcache_
+
+
+[gcache_filters]    ./zeta/lib/helpers.py
+    Compile ticket filters into JavaScript convinient way.
+
+[gcache_tckproj]    ./zeta/lib/helpers.py
+    Map a ticket to its project and return the projectname. This function
+    maintains a in-module cache and is based on the assumption that a ticket
+    will always be part of the same project.
+
+[gcache_formcomps]  ./zeta/comp/forms.py
+    Mapping for formname to form-component for controller form processing.
+
+[gcache_permnames]      ./zeta/auth/users.py
+    List of permission names 
+
+[gcache_proj_permnames] ./zeta/auth/users.py
+    List of permission names under project context
+
+[gcache_site_permnames] ./zeta/auth/users.py
+    List of permission names that are not under project context

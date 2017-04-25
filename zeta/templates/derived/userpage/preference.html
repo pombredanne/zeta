@@ -1,0 +1,143 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="user" file="/forms/user.html"/>
+<%namespace name="attc" file="/forms/attc.html"/>
+
+<%!
+    prefmenu       = None
+    action_accform = None
+%>
+
+<%def name="init()" >
+    <%
+    global prefmenu, action_accform
+
+    prefmenu        = [ (h.url_for( h.r_user, username=c.username, action='account', form='request' ),
+                         ' Modify account preference',
+                         'account',
+                        ),
+                        (h.url_for( h.r_user, username=c.username, action='changepass', form='request' ),
+                         'Change user password',
+                         'change-password',
+                        ),
+                        (h.url_for( h.r_user, username=c.username, action='userrelation', form='request' ),
+                         'Modify user relationships',
+                         'user-relations',
+                        ),
+                      ]
+
+    action_accform   = h.url_for( h.r_user,
+                                  username=c.username,
+                                  action='account',
+                                  form='submit'
+                                  )
+    %>
+</%def>
+
+<%def name="bd_mainnav()">
+    ## Do nothing. Render nothing. 
+</%def>
+
+<%def name="account_ccol()">
+    <% usr = c.selusr ; user_info = c.selusr.userinfo %>
+    <div class="form" id="accform">
+    <form action="${action_accform}" method="post">
+    <table>
+        ${user.user_acc( usr.id, usr.username, usr.emailid, usr.timezone )}
+        ${user.user_info( usr.id, user_info.firstname, user_info.middlename, \
+                          user_info.lastname, user_info.addressline1, \
+                          user_info.addressline2, user_info.city, user_info.pincode, \
+                          user_info.state, user_info.country )}
+        ${attc.addattach( 'usrphoto', 'usrphoto', 'User Photo :', \
+            'Must be 100x75 sized thumbnail image file.' )}
+        ${attc.addattach( 'usricon', 'usricon', 'User Icon :', 'Must be 16x16 ICON file.')}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+
+<%def name="changepass_ccol()">
+    <div class="form" id="passform">
+    <form action="${action_accform}" method="post">
+    <table>
+        ${user.user_pass( c.selusr.id )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes")}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="userrelation_ccol()">
+    <div class="form" id="relform">
+    <form action="${action_accform}" method="post">
+    <table>
+        % for rel in c.reltypes :
+            ${user.add_user_relation( rel, c.selusr.id, c.potrels[rel])}
+        % endfor
+        ${user.approve_user_relation( c.selusr.id, c.approvelist )}
+        ${user.remove_user_relation( c.selusr.id, c.removelist )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    ${init()}
+    <% pagebartext = "User preference (%s)" % c.username %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 0px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">${pagebartext}</div>
+
+            ## Page Bar navigation
+            <div class="pbarnav">
+            % for m in prefmenu :
+                % if c.action == m[2] :
+                <div style="background: #FFFFFF">
+                    <span class="tab">${m[2]}</span>
+                </div>
+                % else :
+                <div>
+                    <a class="tab nodec" title="${m[1]}" href="${m[0]}">${m[2]}</a>
+                </div>
+                % endif
+            % endfor
+            </div>
+
+            ## Form content
+            <div class="pbarcont">
+                <table style="width: 100%;"><tr>
+                <td style="width: 80%;">
+                    % if c.action == 'account' :
+                        ${account_ccol()}
+                    % elif c.action == 'change-password' :
+                        ${changepass_ccol()}
+                    % elif c.action == 'user-relations' :
+                        ${userrelation_ccol()}
+                    % endif
+                </td>
+                <td style="width: 20%;">
+                    Tips and  help
+                </td>
+                </tr></table>
+            </div>
+        </div>
+    </div>
+
+</%def>

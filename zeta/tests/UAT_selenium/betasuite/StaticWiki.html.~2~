@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://sandbox.devwhiz.net" />
+<title>StaticWiki</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">StaticWiki</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>9000</td>
+	<td></td>
+</tr>
+<!--Signin as testuser1-->
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=aboutus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=aboutus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[6]/div/div[3]</td>
+	<td>aboutus</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='bdy']/div/div/div/div/dl/dt/b</td>
+	<td>Pratap</td>
+</tr>
+<!--Verify tool-tips-->
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>site-logo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-GuestWiki-pages']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<!--Verify Static wiki pages-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ZWExtensions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=vcs</td>
+	<td>vcs</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=PasterAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ticket</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=pms</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=ZWMacros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=ZWTemplateTags</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=features</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=XmlRpcApi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=ZWiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=ColorValue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ZWExtensions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ZWExtensions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-GuestWiki-pages']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ZWiki Extensions ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Box ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Code ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Footnote ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Html ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nested ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='footer']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=vcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=vcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Version control system ⚓</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=PasterAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=PasterAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td>Paster Admin commands ⚓</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ticket</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ticket</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Zeta tickets ⚓</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Ticket listing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=pms</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=pms</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Permission Management System ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ZWMacros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>ZWiki Macro framework ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ZWTemplateTags</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Templated Tags ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2</td>
+	<td>Administration ⚓</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Project Administrator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=features</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=features</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td>Feature overview ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Code collaboration ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=XmlRpcApi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=XmlRpcApi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td>XMLRPC API ⚓</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/help/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ZWiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-GuestWiki-pages']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ZWiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Table of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Text markup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Links</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Block level markup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Style shortcuts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Intersperse HTML text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Macros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Signin as admin-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>admin123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='satabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<!--CREATE for testuser1-->
+<tr>
+	<td>select</td>
+	<td>addtouser</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>delfromuser</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>add_perm_group</td>
+	<td>label=STATICWIKI_CREATE</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>addtouser</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>add_perm_group</td>
+	<td>label=STATICWIKI_CREATE</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>delfromuser</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>del_perm_group</td>
+	<td>label=STATICWIKI_CREATE</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser1-->
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=ZWiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[1]</td>
+	<td>Why ZWiki ⚓</td>
+</tr>
+<!--Edit and Preview-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Use wiki markup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>@ { 'Helvetica,Arial,sans-serif' }<br /><br />[&lt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type=&quot;text/css&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h1, h2, h3, h4, h5 { <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color : #EAEAFC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br />&gt;]<br /><br />{{ Toc( float=&quot;right&quot; ) }}<br /><br />== Why to use ZWiki<br /><br />Wiki in general has gained good acceptance in writing well formatted<br />documents with rich text, and that is without cluttering the document source<br />with criptic characters. While, wiki based document / publishing&nbsp;&nbsp;applications have<br />cropped-up in several segmets, Zwiki attempts to address the needs of<br />programmers, encouraging them to use Zwiki for their documentation.<br /><br />== Text markup<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;|= Markup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= Rendered as<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~`` just a span element ~``&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| `` just a span element ``<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'' bold ~''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '' bold ''<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~// italic ~//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| // italic//<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~__ underline ~__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| __ underline __<br />&nbsp;&nbsp;&nbsp;&nbsp;| x~^^2~^^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| x^^2^^<br />&nbsp;&nbsp;&nbsp;&nbsp;| log~,,2~,,10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| log,,2,,10<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'/ bold and italic '/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '/ bold and italic '/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'/ bold and italic /'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '/ bold and italic /'<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'_ bold and underline '_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '_ bold and underline '_<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'_ bold and underline _'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '_ bold and underline _'<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~/_ italic and underline /_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| /_ italic and underline _/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~/_ italic and underline _/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| /_ italic and underline _/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'~/_ bold, italic and underline '/_ | '/_ bold, italic and underline '/_<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'~/_ bold, italic and underline _/' | '/_ bold, italic and underline _/'<br /><br />}}}<br /><br />'' And feel free to nest text formatting, ''<br /><br />&gt; In // 1862 //, ''Charles Lutwidge Dodgson'', a shy Oxford mathematician<br />&gt; with a stammer, created a story about a little girl tubling down a rabbit<br />&gt; hole. Thus geban the immortal adventures of Alice, perhaps the most popular<br />&gt; heroine in English literature. Countless scholars have tried to define the<br />&gt; charm of the Alice&nbsp;&nbsp;books-with those wonderfully eccentric characters the<br />&gt; '' Queen of Hearts, //Tweedledum// and //Tweedledee//, the //Cheshire Cat//,<br />&gt; the //Mock Turtle// , the Mad Hatter, __et al__ '', by proclaiming that they<br />&gt; really comprise a satire on<br />&gt; language, a political allegory, a parody of Victorian children's<br />&gt; literature, even a reflection of contemporary ecclesiastical history.<br />&gt; Perhaps, as Dodgson might have said, Alice is no more than a dream, a<br />&gt; fairy tale about the trials and tribulations of growing up-or down, or all<br />&gt; turned around-as seen through the expert eyes of a child.<br /><br />=== Line Break<br /><br />To insert a line break any where in the text, use ''double backslash (~\\)''.<br />Line break can be freely mixed with text markups as well. For example,<br /><br /><br />&gt; [&lt;PRE<br />''Monsoon is a ``{g} blessing `` in disguise. \\ It's hard to describe<br />``{b} emotions `` it brings to life. '' \\ // When there is ``{r} rainfall<br />`` at night \\ I find in the morning, ``{c} dews `` alight.&nbsp;&nbsp;&gt;]<br /><br />&gt; ''Monsoon is a ``{g} blessing `` in disguise.<br />&gt; It's hard to describe ``{b} emotions `` it brings to life. ''<br />&gt; // When there is ``{r} rainfall `` at night<br />&gt; I find in the morning, ``{c} dews `` alight.//<br /><br />: Note :: <br />&nbsp;&nbsp;&nbsp;&nbsp;A ''new line (\n)'' should not immediately follow a new-line<br />&nbsp;&nbsp;&nbsp;&nbsp;markup ''~\\''<br /><br />=== Escaping markups<br /><br />There are two ways to escape wiki characters,<br />* Use ''backslash (\)'' to escape new lines.<br />* Use ''tilda (~~)'' to escape wiki markups<br /><br />== Links<br /><br />Hyper linking HTML pages is one of the strengths of HTML documentation. There<br />are quite a few ways to generate hyper links in a wiki text.<br /><br />Generate a simple hyper reference over arbitrary text by enclosing them in<br />''double-square bracket (~[[...~]])''. The enclosed text is composed of two parts,<br />the ''href'' part and ''text'' part. In the following example <br />// http://www.google.com // is ''href'', while //Google site// is the ''text''<br />part,<br /><br />&gt; [&lt;PRE<br />a simple reference link to [[ http://www.google.com | Google site ]] &gt;]<br /><br />&gt; a simple reference link to [[ http://www.google.com | Google site ]].<br /><br />You might have also noticed that hyper links are automatically generated for<br />text words starting with ''http:...'' or ''www''<br /><br />Opening a link in new browser window, notice the ''start (*)''character that<br />is prepended to ''href'',<br /><br />&gt; [&lt;PRE<br />open [[ *http://www.google.com | this ]] hyper reference in a new browser window<br />&gt;]<br /><br />&gt; open [[ *http://www.google.com | this ]] hyper reference in a new browser window <br /><br />It is also possible to create anchors inside a document that can be referenced<br />elsewhere, only that ''href'' is interpreted as ''anchor name''. Notice the<br />''dollar ($)'' that is prepended to ''anchor name''<br /><br />&gt; [&lt;PRE Creating an [[ $anchor-here | anchor-here ]] &gt;]<br /><br />&gt; Creating an [[ $anchor-here | anchor-here ]]<br /><br />The link markup also provides a short cut for Image() macro to embed images<br />in the document. In this case ''href'' is interpreted as url to fetch the<br />image. Notice the ''plus (+)'' prepended to the image-url.<br /><br />&gt; [&lt;PRE<br />Image (not a link) [[ +http://www.google.co.in/images/nav_logo7.png | google ]]<br />&gt;]<br /><br />&gt; Image (not a link) [[ +http://www.google.co.in/images/nav_logo7.png | google ]]<br /><br />Instead of using ''http:'', prepend the //email-id// with ''mailto:'' and use<br />it as ''href''<br /><br />&gt; [&lt;PRE mail to [[ mailto:hello.world@gmail.com | me ]] &gt;]<br /><br />&gt; mail to [[ mailto:hello.world@gmail.com | me ]]<br /><br />Feel free to intermix link markup with text markup, only rule being that, the<br />link text ~[[...]] must be fully contained within text markups, like,<br /><br />&gt; [&lt;PRE ``{c} www.google.com ``, //{20|} [[ www.google.com | google ]] // &gt;]<br /><br />&gt; ``{c} www.google.com ``, //{20|} [[ www.google.com | google ]] //<br /><br />== Block level markup<br /><br />=== Headings<br /><br />Headings are synonymous to sections and are contained within a single line<br />(ofcourse one can use ''backslash (\)'' to escape new lines).<br /><br />1^^st^^ level heading can be written as,<br />&gt; [&lt;PRE = section1 &gt;]<br /><br />2^^nd^^ level heading can be written as,<br />&gt; [&lt;PRE == section2 &gt;]<br /><br />3^^rd^^ level heading can be written as,<br />&gt; [&lt;PRE === section3 &gt;]<br /><br />4^^th^^ level heading can be written as,<br />&gt; [&lt;PRE ==== section4 &gt;]<br /><br />5^^th^^ level heading can be written as,<br />&gt; [&lt;PRE ===== section5 &gt;]<br /><br />The header markup begins from a new line and can accept //text markups//,<br />//link markup//, //URLs//, //line-break// in heading text.<br /><br />=== Horizontal rule<br /><br />To divide portions of text, try,<br />&nbsp;&nbsp;&nbsp;<br />&gt; [&lt;PRE ---- &gt;]<br /><br />Like header markup, the horizontal rule markup too begins from a new line.<br /><br />=== Ordered and un-ordered list<br /><br />Ordered lists are bullet point list //with numbering//, while un-ordered lists are<br />bullet point list //with-out numbering//. <br /><br />''Ordered lists'' can be formed, by starting the line with one or more (upto 5)<br />'' pound (#) '', where each ''#'' denotes an inner level list. For example,<br /><br />&gt; [&lt;PRE<br /># item one <br />## level 2 item one<br />## level 2 item two<br /># item two &gt;]<br /><br />will be translated as <br />{{{ Nested<br /># { 'margin-left' : '20px' }<br /><br /># item one <br />## level 2 item one<br />## level 2 item two<br /># item two <br />}}}<br /><br />''UnOrdered lists'' can be formed, by starting the line with one or more (upto 5)<br />'' start (*) '', where each ''*'' denotes an inner level list. For example,<br /><br />&gt; [&lt;PRE <br />* item one <br />** level 2 item one<br />** level 2 item two<br />* item two &gt;]<br /><br />will be translated as <br />{{{ Nested<br /># { 'margin-left' : '20px' }<br /><br />* item one <br />** level 2 item one<br />** level 2 item two<br />* item two <br />}}}<br /><br />It is also possible to arbitrarily nest both (ordered and unordered) type of<br />list items.<br /><br /># item ``{c} one ``<br />## Sub // ''item'' one //<br />## Visit www.google.com to access a peta \\ flop computer.<br /># [[ mailto:hello.world@google.com | Mail ]] with gmail.<br />** Sub item one<br />** Sub item [&lt;<br />&nbsp;&nbsp;&nbsp;&gt;] two<br /># item three<br />* item four<br />** Sub item one<br />** Sub item two<br />## Sub item three<br />## Sub item four<br /><br />Lists can be nested all the way upto 5 levels, while freely mixing the ordered<br />and un-ordered markups across the levels. Note, that within the same level,<br />mixing the ordered and un-ordered markup does not have any effect. List items<br />can contain //text markups//, //link markup//, //URLs//, //line-break// in its<br />text.<br /><br />=== Blockquoted text<br /><br />Block quoted text are written like,<br /><br />&gt; [&lt;PRE<br />&gt; That which doesnt kill you makes you stronger - Nietzsche.<br />&gt; That which doesnt kill you make you a stranger&nbsp;&nbsp;- Joker.<br />&gt;]<br /><br />Rendered as,<br />&gt; That which doesnt kill you makes you stronger - Nietzsche <br />&gt; That which doesnt kill you make you a stranger - Joker.<br /><br />Block quoted text can be nested as well.<br /><br />&gt; [&lt;PRE<br />&gt;&nbsp;&nbsp;``{b} ''Nietzsche '' `` That which doesnt kill you makes you stronger.<br />&gt;&gt; ``{t} ''Joker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'' `` That which doesnt kill you make you a stranger.<br />&gt;&nbsp;&nbsp;``{b} ''Nietzsche '' `` Oh. Just look at my mustache doesn't it look strong.<br />&gt;&gt; ``{t} ''Joker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'' `` Ha Ha. Look at my face, doesn't it look strange.<br /><br />&gt; Visit ''{t} [[ +http://thedarkknight.warnerbros.com/dvdsite/ | Joker ]] ''<br />&gt; to know more him And search yourself at<br />&gt; http://www.quotationspage.com/quotes/Friedrich_Nietzsche/<br /><br />&gt;]<br /><br />Rendered as,<br /><br />&gt;&nbsp;&nbsp;``{b} Nietzsche`` That which doesnt kill you makes you stronger.<br />&gt;&gt; ``{t} Joker `` That which doesnt kill you make you a stranger.<br />&gt;&nbsp;&nbsp;``{b} Nietzsche `` Oh. Just look at my mustache doesn't it look strong.<br />&gt;&gt; ``{t} Joker `` Ha Ha. Look at my face, doesn't it look strange.<br /><br />&gt; Visit ''{t} [[ *http://thedarkknight.warnerbros.com/dvdsite/ | Joker ]] ''<br />&gt; to know more about him And search yourself in<br />&gt; http://www.quotationspage.com/quotes/Friedrich_Nietzsche/<br /><br />And like this, block quoted text can nest all the way up to five levels. You<br />might have also noted that blockquoted text can have //text markups//,<br />//link markup//, //URLs// and //line-break//.<br /><br />=== Small table<br /><br />Tables are composed of rows and columns, where every intersecting row and<br />column is a cell. Simple tables can be generated like,<br /><br />&gt; [&lt;PRE<br />|= fruits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= icecreams&nbsp;&nbsp;<br />| oranges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| vanilla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />| grapes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| chocolate&nbsp;&nbsp;&nbsp;<br />| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| butterscotch<br />&gt;]<br /><br />Rendered as,<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />|= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= color<br />| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| orange<br />| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| light green<br />| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| yellow is so light<br /><br />}}}<br /><br />''|='' generates a table header cell, while ''|'' generate a cell. Each line<br />is interpreted as a table-row, and each line can have multiple cells<br />separated by ''|'' or ''|=''.<br /><br />``{r} There is a limitation is small tables, that each row in the table should<br />be contained in a single line.`` Ofcourse, you can overcome this limitation by<br />escaping the new line with a ''backslash (\)''.<br /><br />By now you should have taken it for granted that, //text markups//,<br />//link markup//, //URLs//, //line-break// can be used in table-text. You are<br />right.<br /><br />=== Big table<br /><br />Unlike the small tables, where every line is treated as a table-row, in a big<br />table every line is treated as a table-cell. So,<br /><br />Open the table,<br />&gt; [&lt;PRE ||{ &gt;]<br />Close the table,<br />&gt; [&lt;PRE ||} &gt;]<br />Open a table row,<br />&gt; [&lt;PRE ||- &gt;]<br />Open a table header cell,<br />&gt; [&lt;PRE ||=&nbsp;&nbsp;&gt;]<br />Open a table cell, and don't miss the space that immediately follows '' double<br />pipe (&quot;&quot;) ''<br />&gt; [&lt;PRE || orange &gt;]<br /><br />To generate the previous table using big-table markup, write it as,<br /><br />&gt; [&lt;PRE<br />||{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| light green<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| yellow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&gt;]<br /><br />which will be translated as,<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />||{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| light green <br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| yellow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />}}}<br /><br />=== Definition list<br /><br />Define terms as definition list,<br /><br />&gt; [&lt;PRE<br />: dojo :: JavaScript tool-kit supporting classes, widgets, data stored etc.<br />&gt;]<br /><br />&gt; [&lt;PRE<br />: minix3 :: Supposedly a next generation operating system aimed at distributed<br />computing and fault-tolerance.<br />&gt;]<br /><br />which will be translated as,<br /><br />: dojo :: JavaScript tool-kit supporting classes, widgets, data stored etc.<br /><br />: minix3 :: Supposedly a next generation operating system aimed at distributed computing \<br />and fault-tolerance.<br /><br />''double colon (::)'' should not be present in the text except where it delimits<br />definition-term from its definition.<br /><br />== Style shortcuts<br /><br />Starting from zwiki version 0.8dev style shortcuts are introduced, augmenting<br />text-markups, table markups (both small tables and big tables) and heading.<br />Play around in style.<br /><br />For example, the following text markup with style shortcuts is converted to,<br /><br />&gt; [&lt;PRE<br />&gt; ''{r} this text is colored ''<br />&gt; ''{|5} text with padding 5 pixels ''<br />&gt; ''{b;5|;|5} text with padding 5 pixels, margin 5 pixels and colored blue ''<br />&gt; ''{\1,solid,gray} bordered and padded with 2px ''<br />&gt;]<br /><br />translated as,<br /><br />&gt; ''{r} this text is colored''<br />&gt; ''{|5} text with padding 5 pixels''<br />&gt; ''{b;5|;|5} text with padding 5 pixels, margin 5 pixels and colored blue''<br />&gt; ''{/1,solid,g;|2} bordered and padded with 2px''<br /><br />Style shortcuts are enclosed in '' { ... } '', and immediately follows<br />wiki-markup that it augments. Within the curly braces, each style shortcut is<br />seperated by a ''semicolon (;)'',<br /><br />: Foreground color ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A single //small case alphabet//, ranging from a-z<br />: Background color ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A single //capital case alphabet//, ranging from A-Z<br />: Margin ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A //numerical value// followed immediately by a //pipe (|)//, like //5|//<br />: Padding ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A //numerical value// immediately following a //pipe (|)//, like //|5//<br />: Border ::<br />&nbsp;&nbsp;&nbsp;&nbsp;Comma seperated width, style, color (color being a small letter alphabet),<br />&nbsp;&nbsp;&nbsp;&nbsp;immediately following a //backslash (\)//. Bordered text elements are<br />&nbsp;&nbsp;&nbsp;&nbsp;automatically padded with 2 pixels.<br /><br />: Colormapping :: [[ /help/ColorValue | Know ]] the mapping between color-alphabet and its color value.<br /><br />== Intersperse HTML text<br /><br />Sometimes using just the wiki markup can be quite limiting in creating rich<br />documents. Those who are HTML/CSS experts, can directly document with HTML and<br />CSS, interspersed along with the rest of the wiki text. Just open the html<br />text with '' ~[&lt; '' and close them with '' ~&gt;]''. For example, the following<br />styling is directly used in all the help documents that you see here.<br /><br />[&lt; &lt;pre style=&quot;margin-left:50px&quot;&gt; &gt;]<br />~[&lt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type=&quot;text/css&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h1, h2, h3, h4, h5 { <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color : #EAEAFC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br />~&gt;]<br />[&lt;&lt;/pre&gt;&gt;]<br /><br />HTML text can be Interspersed in the following blocks,<br />* Text Paragraphs<br />* Within List Items<br />* BlockQuoted text<br />* Tables, both in small table and big table<br />* Definitions<br /><br />=== Templated Tags<br /><br />HTML tags with common usage pattern are pre-templated and can be used by<br />attaching the template name with beginning markup<br />''~[&lt;''. And the text contained within '' ~[&lt; .... &gt;] '' are interpreted by<br />the template. For example, most of the pre-formatted text in this page are<br />generated using ''PRE'' template, like,<br />&nbsp;&nbsp;&nbsp;&gt; ~[&lt;PRE preformatted text ~&gt;]<br /><br />&nbsp;&nbsp;&nbsp;&gt; [&lt;PRE preformatted text &gt;]<br /><br />[[ /help/ZWTemplateTags | Explore ]] more about the available templates.<br /><br />== Macros<br /><br />Macros are direct function calls that can be made from wiki text into the wiki<br />engine, provided, there is a macro my that name available. Most probably the<br />macro will return a html content, which will be used to replace the macro<br />call. [[ /help/ZWMacros | List ]] of available macros.<br /><br />== Extensions<br /><br />Wiki extensions are like plugins, and provide a way to extend the wiki engine<br />for new markups each one addressing a specific requirements, like math,<br />graphs, etc ... and most probably the extension will be translated into html<br />text which will be used to replace the extension-block.<br /><br />[&lt; &lt;pre style=&quot;margin-left:50px&quot;&gt;<br />{{{ Box<br />&nbsp;&nbsp;&nbsp;&nbsp;....<br />&nbsp;&nbsp;&nbsp;&nbsp;....<br />}}}<br />&lt;/pre&gt; &gt;]<br /><br />In the above case Box extension will be invoked and the lines in-between the triple<br />braces will be interpreted by the Box extension. [[ /help/ZWExtensions | List ]]<br />of ZWiki-extension.<br /><br />== Wiki properties<br /><br />Wiki properties are key,value pairs, where key and value are seperated by a<br />''colon (:)'' and the entire block is enclosed inside '' { ... } ''. They are<br />either interpreted by wiki engine or passed into html elements as<br />styling-attributes. Both key and value should be of literal types <br />(like string, int, float etc ...). Wiki properties are specified at two places,<br />* At the beginning of the wiki text, in which case the entire property block<br />&nbsp;&nbsp;'' { ... } '' is marked by a beginning ''@'', [&lt;PRE<br />&nbsp;&nbsp;@ { 'background' : '#00ff00 url('smiley.gif') no-repeat fixed center',<br />&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;'padding'&nbsp;&nbsp;&nbsp;&nbsp;: '2cm 4cm 3cm 4cm',<br />&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;'style'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 'font-family:&quot;Times New Roman&quot;,Georgia,Serif;'<br />&nbsp;&nbsp;@ } &gt;]<br />* At the beginning of wiki extension block (immediately following open triple<br />&nbsp;&nbsp;brace), in which case the entire property block is marked by a beginning<br />&nbsp;&nbsp;''#'', [&lt;PRE<br />&nbsp;&nbsp;# { 'background' : '#00ff00 url('smiley.gif') no-repeat fixed center',<br />&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;'padding'&nbsp;&nbsp;&nbsp;&nbsp;: '2cm 4cm 3cm 4cm',<br />&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;'style'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 'font-family:&quot;Times New Roman&quot;,Georgia,Serif;'<br />&nbsp;&nbsp;# } &gt;]<br /><br />/* vim: set filetype=zwiki : */</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>preview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/fieldset/div/div/div[2]/h2[1]</td>
+	<td>Why to use ZWiki ⚓</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/fieldset/legend/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>//div[@id='flashmsg']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back-to-Page</td>
+	<td></td>
+</tr>
+<!--Edit and Verify-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td>Why to use ZWiki ⚓</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Use wiki markup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>@ { 'Helvetica,Arial,sans-serif' }<br /><br />[&lt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type=&quot;text/css&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h1, h2, h3, h4, h5 { <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color : #EAEAFC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br />&gt;]<br /><br />{{ Toc( float=&quot;right&quot; ) }}<br /><br />== Why to use ZWiki<br /><br />Wiki in general has gained good acceptance in writing well formatted<br />documents with rich text, and that is without cluttering the document source<br />with criptic characters. While, wiki based document / publishing&nbsp;&nbsp;applications have<br />cropped-up in several segmets, Zwiki attempts to address the needs of<br />programmers, encouraging them to use Zwiki for their documentation.<br /><br />== Text markup<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;|= Markup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= Rendered as<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~`` just a span element ~``&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| `` just a span element ``<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'' bold ~''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '' bold ''<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~// italic ~//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| // italic//<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~__ underline ~__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| __ underline __<br />&nbsp;&nbsp;&nbsp;&nbsp;| x~^^2~^^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| x^^2^^<br />&nbsp;&nbsp;&nbsp;&nbsp;| log~,,2~,,10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| log,,2,,10<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'/ bold and italic '/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '/ bold and italic '/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'/ bold and italic /'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '/ bold and italic /'<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'_ bold and underline '_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '_ bold and underline '_<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'_ bold and underline _'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| '_ bold and underline _'<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~/_ italic and underline /_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| /_ italic and underline _/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~/_ italic and underline _/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| /_ italic and underline _/<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'~/_ bold, italic and underline '/_ | '/_ bold, italic and underline '/_<br />&nbsp;&nbsp;&nbsp;&nbsp;| ~'~/_ bold, italic and underline _/' | '/_ bold, italic and underline _/'<br /><br />}}}<br /><br />'' And feel free to nest text formatting, ''<br /><br />&gt; In // 1862 //, ''Charles Lutwidge Dodgson'', a shy Oxford mathematician<br />&gt; with a stammer, created a story about a little girl tubling down a rabbit<br />&gt; hole. Thus geban the immortal adventures of Alice, perhaps the most popular<br />&gt; heroine in English literature. Countless scholars have tried to define the<br />&gt; charm of the Alice&nbsp;&nbsp;books-with those wonderfully eccentric characters the<br />&gt; '' Queen of Hearts, //Tweedledum// and //Tweedledee//, the //Cheshire Cat//,<br />&gt; the //Mock Turtle// , the Mad Hatter, __et al__ '', by proclaiming that they<br />&gt; really comprise a satire on<br />&gt; language, a political allegory, a parody of Victorian children's<br />&gt; literature, even a reflection of contemporary ecclesiastical history.<br />&gt; Perhaps, as Dodgson might have said, Alice is no more than a dream, a<br />&gt; fairy tale about the trials and tribulations of growing up-or down, or all<br />&gt; turned around-as seen through the expert eyes of a child.<br /><br />=== Line Break<br /><br />To insert a line break any where in the text, use ''double backslash (~\\)''.<br />Line break can be freely mixed with text markups as well. For example,<br /><br /><br />&gt; [&lt;PRE<br />''Monsoon is a ``{g} blessing `` in disguise. \\ It's hard to describe<br />``{b} emotions `` it brings to life. '' \\ // When there is ``{r} rainfall<br />`` at night \\ I find in the morning, ``{c} dews `` alight.&nbsp;&nbsp;&gt;]<br /><br />&gt; ''Monsoon is a ``{g} blessing `` in disguise.<br />&gt; It's hard to describe ``{b} emotions `` it brings to life. ''<br />&gt; // When there is ``{r} rainfall `` at night<br />&gt; I find in the morning, ``{c} dews `` alight.//<br /><br />: Note :: <br />&nbsp;&nbsp;&nbsp;&nbsp;A ''new line (\n)'' should not immediately follow a new-line<br />&nbsp;&nbsp;&nbsp;&nbsp;markup ''~\\''<br /><br />=== Escaping markups<br /><br />There are two ways to escape wiki characters,<br />* Use ''backslash (\)'' to escape new lines.<br />* Use ''tilda (~~)'' to escape wiki markups<br /><br />== Links<br /><br />Hyper linking HTML pages is one of the strengths of HTML documentation. There<br />are quite a few ways to generate hyper links in a wiki text.<br /><br />Generate a simple hyper reference over arbitrary text by enclosing them in<br />''double-square bracket (~[[...~]])''. The enclosed text is composed of two parts,<br />the ''href'' part and ''text'' part. In the following example <br />// http://www.google.com // is ''href'', while //Google site// is the ''text''<br />part,<br /><br />&gt; [&lt;PRE<br />a simple reference link to [[ http://www.google.com | Google site ]] &gt;]<br /><br />&gt; a simple reference link to [[ http://www.google.com | Google site ]].<br /><br />You might have also noticed that hyper links are automatically generated for<br />text words starting with ''http:...'' or ''www''<br /><br />Opening a link in new browser window, notice the ''start (*)''character that<br />is prepended to ''href'',<br /><br />&gt; [&lt;PRE<br />open [[ *http://www.google.com | this ]] hyper reference in a new browser window<br />&gt;]<br /><br />&gt; open [[ *http://www.google.com | this ]] hyper reference in a new browser window <br /><br />It is also possible to create anchors inside a document that can be referenced<br />elsewhere, only that ''href'' is interpreted as ''anchor name''. Notice the<br />''dollar ($)'' that is prepended to ''anchor name''<br /><br />&gt; [&lt;PRE Creating an [[ $anchor-here | anchor-here ]] &gt;]<br /><br />&gt; Creating an [[ $anchor-here | anchor-here ]]<br /><br />The link markup also provides a short cut for Image() macro to embed images<br />in the document. In this case ''href'' is interpreted as url to fetch the<br />image. Notice the ''plus (+)'' prepended to the image-url.<br /><br />&gt; [&lt;PRE<br />Image (not a link) [[ +http://www.google.co.in/images/nav_logo7.png | google ]]<br />&gt;]<br /><br />&gt; Image (not a link) [[ +http://www.google.co.in/images/nav_logo7.png | google ]]<br /><br />Instead of using ''http:'', prepend the //email-id// with ''mailto:'' and use<br />it as ''href''<br /><br />&gt; [&lt;PRE mail to [[ mailto:hello.world@gmail.com | me ]] &gt;]<br /><br />&gt; mail to [[ mailto:hello.world@gmail.com | me ]]<br /><br />Feel free to intermix link markup with text markup, only rule being that, the<br />link text ~[[...]] must be fully contained within text markups, like,<br /><br />&gt; [&lt;PRE ``{c} www.google.com ``, //{20|} [[ www.google.com | google ]] // &gt;]<br /><br />&gt; ``{c} www.google.com ``, //{20|} [[ www.google.com | google ]] //<br /><br />== Block level markup<br /><br />=== Headings<br /><br />Headings are synonymous to sections and are contained within a single line<br />(ofcourse one can use ''backslash (\)'' to escape new lines).<br /><br />1^^st^^ level heading can be written as,<br />&gt; [&lt;PRE = section1 &gt;]<br /><br />2^^nd^^ level heading can be written as,<br />&gt; [&lt;PRE == section2 &gt;]<br /><br />3^^rd^^ level heading can be written as,<br />&gt; [&lt;PRE === section3 &gt;]<br /><br />4^^th^^ level heading can be written as,<br />&gt; [&lt;PRE ==== section4 &gt;]<br /><br />5^^th^^ level heading can be written as,<br />&gt; [&lt;PRE ===== section5 &gt;]<br /><br />The header markup begins from a new line and can accept //text markups//,<br />//link markup//, //URLs//, //line-break// in heading text.<br /><br />=== Horizontal rule<br /><br />To divide portions of text, try,<br />&nbsp;&nbsp;&nbsp;<br />&gt; [&lt;PRE ---- &gt;]<br /><br />Like header markup, the horizontal rule markup too begins from a new line.<br /><br />=== Ordered and un-ordered list<br /><br />Ordered lists are bullet point list //with numbering//, while un-ordered lists are<br />bullet point list //with-out numbering//. <br /><br />''Ordered lists'' can be formed, by starting the line with one or more (upto 5)<br />'' pound (#) '', where each ''#'' denotes an inner level list. For example,<br /><br />&gt; [&lt;PRE<br /># item one <br />## level 2 item one<br />## level 2 item two<br /># item two &gt;]<br /><br />will be translated as <br />{{{ Nested<br /># { 'margin-left' : '20px' }<br /><br /># item one <br />## level 2 item one<br />## level 2 item two<br /># item two <br />}}}<br /><br />''UnOrdered lists'' can be formed, by starting the line with one or more (upto 5)<br />'' start (*) '', where each ''*'' denotes an inner level list. For example,<br /><br />&gt; [&lt;PRE <br />* item one <br />** level 2 item one<br />** level 2 item two<br />* item two &gt;]<br /><br />will be translated as <br />{{{ Nested<br /># { 'margin-left' : '20px' }<br /><br />* item one <br />** level 2 item one<br />** level 2 item two<br />* item two <br />}}}<br /><br />It is also possible to arbitrarily nest both (ordered and unordered) type of<br />list items.<br /><br /># item ``{c} one ``<br />## Sub // ''item'' one //<br />## Visit www.google.com to access a peta \\ flop computer.<br /># [[ mailto:hello.world@google.com | Mail ]] with gmail.<br />** Sub item one<br />** Sub item [&lt;<br />&nbsp;&nbsp;&nbsp;&gt;] two<br /># item three<br />* item four<br />** Sub item one<br />** Sub item two<br />## Sub item three<br />## Sub item four<br /><br />Lists can be nested all the way upto 5 levels, while freely mixing the ordered<br />and un-ordered markups across the levels. Note, that within the same level,<br />mixing the ordered and un-ordered markup does not have any effect. List items<br />can contain //text markups//, //link markup//, //URLs//, //line-break// in its<br />text.<br /><br />=== Blockquoted text<br /><br />Block quoted text are written like,<br /><br />&gt; [&lt;PRE<br />&gt; That which doesnt kill you makes you stronger - Nietzsche.<br />&gt; That which doesnt kill you make you a stranger&nbsp;&nbsp;- Joker.<br />&gt;]<br /><br />Rendered as,<br />&gt; That which doesnt kill you makes you stronger - Nietzsche <br />&gt; That which doesnt kill you make you a stranger - Joker.<br /><br />Block quoted text can be nested as well.<br /><br />&gt; [&lt;PRE<br />&gt;&nbsp;&nbsp;``{b} ''Nietzsche '' `` That which doesnt kill you makes you stronger.<br />&gt;&gt; ``{t} ''Joker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'' `` That which doesnt kill you make you a stranger.<br />&gt;&nbsp;&nbsp;``{b} ''Nietzsche '' `` Oh. Just look at my mustache doesn't it look strong.<br />&gt;&gt; ``{t} ''Joker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'' `` Ha Ha. Look at my face, doesn't it look strange.<br /><br />&gt; Visit ''{t} [[ +http://thedarkknight.warnerbros.com/dvdsite/ | Joker ]] ''<br />&gt; to know more him And search yourself at<br />&gt; http://www.quotationspage.com/quotes/Friedrich_Nietzsche/<br /><br />&gt;]<br /><br />Rendered as,<br /><br />&gt;&nbsp;&nbsp;``{b} Nietzsche`` That which doesnt kill you makes you stronger.<br />&gt;&gt; ``{t} Joker `` That which doesnt kill you make you a stranger.<br />&gt;&nbsp;&nbsp;``{b} Nietzsche `` Oh. Just look at my mustache doesn't it look strong.<br />&gt;&gt; ``{t} Joker `` Ha Ha. Look at my face, doesn't it look strange.<br /><br />&gt; Visit ''{t} [[ *http://thedarkknight.warnerbros.com/dvdsite/ | Joker ]] ''<br />&gt; to know more about him And search yourself in<br />&gt; http://www.quotationspage.com/quotes/Friedrich_Nietzsche/<br /><br />And like this, block quoted text can nest all the way up to five levels. You<br />might have also noted that blockquoted text can have //text markups//,<br />//link markup//, //URLs// and //line-break//.<br /><br />=== Small table<br /><br />Tables are composed of rows and columns, where every intersecting row and<br />column is a cell. Simple tables can be generated like,<br /><br />&gt; [&lt;PRE<br />|= fruits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= icecreams&nbsp;&nbsp;<br />| oranges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| vanilla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />| grapes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| chocolate&nbsp;&nbsp;&nbsp;<br />| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| butterscotch<br />&gt;]<br /><br />Rendered as,<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />|= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|= color<br />| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| orange<br />| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| light green<br />| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| yellow is so light<br /><br />}}}<br /><br />''|='' generates a table header cell, while ''|'' generate a cell. Each line<br />is interpreted as a table-row, and each line can have multiple cells<br />separated by ''|'' or ''|=''.<br /><br />``{r} There is a limitation is small tables, that each row in the table should<br />be contained in a single line.`` Ofcourse, you can overcome this limitation by<br />escaping the new line with a ''backslash (\)''.<br /><br />By now you should have taken it for granted that, //text markups//,<br />//link markup//, //URLs//, //line-break// can be used in table-text. You are<br />right.<br /><br />=== Big table<br /><br />Unlike the small tables, where every line is treated as a table-row, in a big<br />table every line is treated as a table-cell. So,<br /><br />Open the table,<br />&gt; [&lt;PRE ||{ &gt;]<br />Close the table,<br />&gt; [&lt;PRE ||} &gt;]<br />Open a table row,<br />&gt; [&lt;PRE ||- &gt;]<br />Open a table header cell,<br />&gt; [&lt;PRE ||=&nbsp;&nbsp;&gt;]<br />Open a table cell, and don't miss the space that immediately follows '' double<br />pipe (&quot;&quot;) ''<br />&gt; [&lt;PRE || orange &gt;]<br /><br />To generate the previous table using big-table markup, write it as,<br /><br />&gt; [&lt;PRE<br />||{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| light green<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| yellow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&gt;]<br /><br />which will be translated as,<br /><br />{{{ Nested<br /># { 'margin-left' : '40px' }<br /><br />||{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= fruit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||= color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| grape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| light green <br />||-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| mango&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />|| yellow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />||}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />}}}<br /><br />=== Definition list<br /><br />Define terms as definition list,<br /><br />&gt; [&lt;PRE<br />: dojo :: JavaScript tool-kit supporting classes, widgets, data stored etc.<br />&gt;]<br /><br />&gt; [&lt;PRE<br />: minix3 :: Supposedly a next generation operating system aimed at distributed<br />computing and fault-tolerance.<br />&gt;]<br /><br />which will be translated as,<br /><br />: dojo :: JavaScript tool-kit supporting classes, widgets, data stored etc.<br /><br />: minix3 :: Supposedly a next generation operating system aimed at distributed computing \<br />and fault-tolerance.<br /><br />''double colon (::)'' should not be present in the text except where it delimits<br />definition-term from its definition.<br /><br />== Style shortcuts<br /><br />Starting from zwiki version 0.8dev style shortcuts are introduced, augmenting<br />text-markups, table markups (both small tables and big tables) and heading.<br />Play around in style.<br /><br />For example, the following text markup with style shortcuts is converted to,<br /><br />&gt; [&lt;PRE<br />&gt; ''{r} this text is colored ''<br />&gt; ''{|5} text with padding 5 pixels ''<br />&gt; ''{b;5|;|5} text with padding 5 pixels, margin 5 pixels and colored blue ''<br />&gt; ''{\1,solid,gray} bordered and padded with 2px ''<br />&gt;]<br /><br />translated as,<br /><br />&gt; ''{r} this text is colored''<br />&gt; ''{|5} text with padding 5 pixels''<br />&gt; ''{b;5|;|5} text with padding 5 pixels, margin 5 pixels and colored blue''<br />&gt; ''{/1,solid,g;|2} bordered and padded with 2px''<br /><br />Style shortcuts are enclosed in '' { ... } '', and immediately follows<br />wiki-markup that it augments. Within the curly braces, each style shortcut is<br />seperated by a ''semicolon (;)'',<br /><br />: Foreground color ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A single //small case alphabet//, ranging from a-z<br />: Background color ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A single //capital case alphabet//, ranging from A-Z<br />: Margin ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A //numerical value// followed immediately by a //pipe (|)//, like //5|//<br />: Padding ::<br />&nbsp;&nbsp;&nbsp;&nbsp;A //numerical value// immediately following a //pipe (|)//, like //|5//<br />: Border ::<br />&nbsp;&nbsp;&nbsp;&nbsp;Comma seperated width, style, color (color being a small letter alphabet),<br />&nbsp;&nbsp;&nbsp;&nbsp;immediately following a //backslash (\)//. Bordered text elements are<br />&nbsp;&nbsp;&nbsp;&nbsp;automatically padded with 2 pixels.<br /><br />: Colormapping :: [[ /help/ColorValue | Know ]] the mapping between color-alphabet and its color value.<br /><br />== Intersperse HTML text<br /><br />Sometimes using just the wiki markup can be quite limiting in creating rich<br />documents. Those who are HTML/CSS experts, can directly document with HTML and<br />CSS, interspersed along with the rest of the wiki text. Just open the html<br />text with '' ~[&lt; '' and close them with '' ~&gt;]''. For example, the following<br />styling is directly used in all the help documents that you see here.<br /><br />[&lt; &lt;pre style=&quot;margin-left:50px&quot;&gt; &gt;]<br />~[&lt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type=&quot;text/css&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h1, h2, h3, h4, h5 { <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color : #EAEAFC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br />~&gt;]<br />[&lt;&lt;/pre&gt;&gt;]<br /><br />HTML text can be Interspersed in the following blocks,<br />* Text Paragraphs<br />* Within List Items<br />* BlockQuoted text<br />* Tables, both in small table and big table<br />* Definitions<br /><br />=== Templated Tags<br /><br />HTML tags with common usage pattern are pre-templated and can be used by<br />attaching the template name with beginning markup<br />''~[&lt;''. And the text contained within '' ~[&lt; .... &gt;] '' are interpreted by<br />the template. For example, most of the pre-formatted text in this page are<br />generated using ''PRE'' template, like,<br />&nbsp;&nbsp;&nbsp;&gt; ~[&lt;PRE preformatted text ~&gt;]<br /><br />&nbsp;&nbsp;&nbsp;&gt; [&lt;PRE preformatted text &gt;]<br /><br />[[ /help/ZWTemplateTags | Explore ]] more about the available templates.<br /><br />== Macros<br /><br />Macros are direct function calls that can be made from wiki text into the wiki<br />engine, provided, there is a macro my that name available. Most probably the<br />macro will return a html content, which will be used to replace the macro<br />call. [[ /help/ZWMacros | List ]] of available macros.<br /><br />== Extensions<br /><br />Wiki extensions are like plugins, and provide a way to extend the wiki engine<br />for new markups each one addressing a specific requirements, like math,<br />graphs, etc ... and most probably the extension will be translated into html<br />text which will be used to replace the extension-block.<br /><br />[&lt; &lt;pre style=&quot;margin-left:50px&quot;&gt;<br />{{{ Box<br />&nbsp;&nbsp;&nbsp;&nbsp;....<br />&nbsp;&nbsp;&nbsp;&nbsp;....<br />}}}<br />&lt;/pre&gt; &gt;]<br /><br />In the above case Box extension will be invoked and the lines in-between the triple<br />braces will be interpreted by the Box extension. [[ /help/ZWExtensions | List ]]<br />of ZWiki-extension.<br /><br />== Wiki properties<br /><br />Wiki properties are key,value pairs, where key and value are seperated by a<br />''colon (:)'' and the entire block is enclosed inside '' { ... } ''. They are<br />either interpreted by wiki engine or passed into html elements as<br />styling-attributes. Both key and value should be of literal types <br />(like string, int, float etc ...). Wiki properties are specified at two places,<br />* At the beginning of the wiki text, in which case the entire property block<br />&nbsp;&nbsp;'' { ... } '' is marked by a beginning ''@'', [&lt;PRE<br />&nbsp;&nbsp;@ { 'background' : '#00ff00 url('smiley.gif') no-repeat fixed center',<br />&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;'padding'&nbsp;&nbsp;&nbsp;&nbsp;: '2cm 4cm 3cm 4cm',<br />&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;'style'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 'font-family:&quot;Times New Roman&quot;,Georgia,Serif;'<br />&nbsp;&nbsp;@ } &gt;]<br />* At the beginning of wiki extension block (immediately following open triple<br />&nbsp;&nbsp;brace), in which case the entire property block is marked by a beginning<br />&nbsp;&nbsp;''#'', [&lt;PRE<br />&nbsp;&nbsp;# { 'background' : '#00ff00 url('smiley.gif') no-repeat fixed center',<br />&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;'padding'&nbsp;&nbsp;&nbsp;&nbsp;: '2cm 4cm 3cm 4cm',<br />&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;'style'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 'font-family:&quot;Times New Roman&quot;,Georgia,Serif;'<br />&nbsp;&nbsp;# } &gt;]<br /><br />/* vim: set filetype=zwiki : */</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back-to-Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td>Why to use ZWiki ⚓</td>
+</tr>
+<!--Create new static wiki page-->
+<tr>
+	<td>open</td>
+	<td>/MyPages/MyPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>seems to be working<br />* list item 1<br />* list item 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back-to-Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div/p[1]</td>
+	<td>seems to be working</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Zwiki reference</td>
+	<td>Zwiki reference</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Zwiki reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/MyPages/MyPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>seems to be working</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>list item 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>list item 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser2-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/MyPages/MyPage?form=request&amp;editsw=1&amp;formname=editsw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Do not have STATICWIKI_CREATE permission !!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--Sign-in as admin-->
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>admin123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/MyPages/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=MyPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>MyPages/MyPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Zwiki reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>Sample page to test static wiki creation by a newly registered user<br />* list item 1<br />* list item 2<br /><br />&gt; Seems to be working<br />&gt; works for admin as well</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back-to-Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Seems to be working<br /> works for admin as well</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

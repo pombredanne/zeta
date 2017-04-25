@@ -1,0 +1,695 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+<%namespace name="tag" file="/forms/tag.html"/>
+
+## ----------------------------- Project -------------------------------------
+
+<%def name="project( user_id=None, project_id=None, prjname='', summ='', adminemail='' )">
+    ## POST : (project_id), (user_id), projectname, summary, admin_email
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'prjn', 'Project Name :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='projectname', id='prjn', value=prjname, maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'summ', 'Project Summary :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='summary', id='summ', value=summ, size=64, maxlength=h.LEN_SUMMARY )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_SUMMARY} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'aemail', 'Administrator Email ID :')}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='admin_email', id='aemail', value=adminemail, maxlength=h.LEN_EMAILID )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_EMAILID} characters</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="projectadmin( user_id=None, project_id=None, adminname='', usernames=[] )" >
+    ## POST : (project_id), (user_id), adminname
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'prjadmin', 'Project Admin :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="adminname" size="1" id="prjadmin">
+            % for username in usernames :
+                % if username == adminname :
+                    ${lib.input_option( username, value=username, selected="selected" )}
+                % else :
+                    ${lib.input_option( username, value=username )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_license( user_id=None, project_id=None, license='', licensenames=[] )">
+    ## POST : (project_id), (user_id), licensename
+    
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'prjlic', 'Project under License :' )}</div>
+    <td class="formitem">
+    <div class="input">
+        <select name="licensename" size="1" id="prjlic">
+            % for lic in licensenames :
+                % if lic == license :
+                    ${lib.input_option( lic, value=lic, selected="selected" )}
+                % else :
+                    ${lib.input_option( lic, value=lic )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_info( user_id=None, project_id=None, prjdesc='' )">
+    ## POST : (project_id), (user_id), description
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'pdesc', 'Description :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_textarea( name='description', rows=20, cols=80, id='pdesc', text=prjdesc )}
+        <br></br>
+        <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_enable( disabledprojs )">
+    ## POST : (project_id), (user_id), disableprj
+    <tr>
+    <td class="label">Enable Projects : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for projectname in disabledprojs :
+            <div class="chkitem">
+            ${projectname}
+            ${lib.input_checkbox( name='enableprj', value=projectname, id='prjen' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_disable( enabledprojs )">
+    ## POST : (project_id), (user_id), disableprj
+    <tr>
+    <td class="label">Disable Projects : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for projectname in enabledprojs :
+            <div class="chkitem">
+            ${projectname}
+            ${lib.input_checkbox( name='disableprj', value=projectname, id='prjdis' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_expose( privateprojs )">
+    ## POST : (project_id), (user_id), exposeprj
+    <tr>
+    <td class="label">Expose Projects : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for projectname in privateprojs :
+            <div class="chkitem">
+            ${projectname}
+            ${lib.input_checkbox( name='exposeprj', value=projectname, id='prjexp' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_private( exposedprojs )">
+    ## POST : (project_id), (user_id), exposeprj
+    <tr>
+    <td class="label">Privatise Projects : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for projectname in exposedprojs :
+            <div class="chkitem">
+            ${projectname}
+            ${lib.input_checkbox( name='privateprj', value=projectname, id='prjprv' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------------------------- Mailinglists --------------------------------
+
+<%def name="project_add_mlist( user_id=None, project_id=None )">
+    ## POST : (project_id), (user_id), mailing_lists
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'mlista', 'Add Mailing lists to the project :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='mailing_lists', id='mlists', size=64 )}
+        <br></br>
+        <span class="frmhlp">Comma seperated maillist ids.</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_remove_mlist( user_id=None, project_id=None, mlists=[] )">
+    ## POST : (project_id), (user_id), mailing_lists
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'mlistr', 'Remove Mailing Lists from the project :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="ircchannels" multiple="multiple" size="3" id="mlistr">
+            % for m in mlists :
+            ${lib.input_option( m, value=m )}
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------------------------- IRC channels --------------------------------
+
+<%def name="project_add_ircchannel( user_id=None, project_id=None )">
+    ## POST : (project_id), (user_id), ircchannels
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'irca', 'Add IRC Channels to the project :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='ircchannels', id='irca', size=64 )}
+        <br></br>
+        <span class="frmhlp">Comma seperated irc-channel ids.</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_remove_ircchannel( user_id=None, project_id=None, ircs=[] )">
+    ## POST : (project_id), (user_id), ircchannels
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'ircr', 'Remove IRC Channels from the project :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="ircchannel" multiple="multiple" size="3" id="ircr">
+            % for i in ircs :
+            ${lib.input_option( i, value=i )}
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------------------------- Components ----------------------------------
+
+<%def name="prjcomp_create( user_id, project_id, usernames=[], defusername='', componentnames=[] )">
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">Create Project Component :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Component name </td>
+            <td>
+            ${lib.input_text( name='componentname', id='crcompnm', maxlength=h.LEN_NAME )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Owner </td>
+            <td>
+            <select name="owner" size="1" id="crcompown">
+                % for username in usernames :
+                    % if username == defusername :
+                        ${lib.input_option( username, value=username, selected="selected" )}
+                    % else :
+                        ${lib.input_option( username, value=username )}
+                    % endif
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='crcompdes' )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple()}
+        </table>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">Update Project Component :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select Component </td>
+            <td>
+            <select name="selcomponentname" size=1 id="selcomp">
+                % for comp in [ '' ] + componentnames :
+                    ${lib.input_option( comp, value=comp )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Component name </td>
+            <td>
+            ${lib.input_text( name='componentname', id='upcompnm', maxlength=h.LEN_NAME, disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Owner </td>
+            <td>
+            <select name="owner" size="1" id="upcompown" disabled="disabled">
+                % for username in usernames :
+                    ${lib.input_option( username, value=username )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='upcompdes', disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple( disabled="disabled" )}
+        ${tag.removetags_simple( disabled="disabled" )}
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------------------------- Milestones ----------------------------------
+
+<%def name="prjmstn_create( user_id, project_id, milestonenames=[] )">
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">Create Project Milestone :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Milestone name </td>
+            <td>
+            ${lib.input_text( name='milestone_name', id='crmstnnm', maxlength=h.LEN_NAME1 )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME1} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='crmstndes' )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Due data </td>
+            <td>
+            ${lib.input_text( name='due_date', id='crmstndd', maxlength=12 )}
+            <br></br>
+            <span class="frmhlp">Enter the due date in DD/MM/YYYY format</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple()}
+        </table>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">Update Project Milestone :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select Milestone </td>
+            <td>
+            <select name="selmilestonename" size=1 id="selmstn">
+                % for mstn in [ '' ] + milestonenames :
+                    ${lib.input_option( mstn, value=mstn )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Milestone name </td>
+            <td>
+            ${lib.input_text( name='milestone_name', id='upmstnnm', maxlength=h.LEN_NAME, disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='upmstndes', disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Due data </td>
+            <td>
+            ${lib.input_text( name='due_date', id='upmstndd', maxlength=12, disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Enter the due date in DD/MM/YYYY format</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple( disabled="disabled" )}
+        ${tag.removetags_simple( disabled="disabled" )}
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------------------------- Versions ------------------------------------
+
+<%def name="prjver_create( user_id, project_id, versionnames=[] )">
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">Create a New Project Version :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Version name </td>
+            <td>
+            ${lib.input_text( name='version_name', id='crvernm', maxlength=h.LEN_NAME1 )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME1} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='crverdes' )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple()}
+        </table>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">Update Project Versions :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select Version </td>
+            <td>
+            <select name="selversionname" size=1 id="selver">
+                % for ver in [ '' ] + versionnames :
+                    ${lib.input_option( ver, value=ver )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Version name </td>
+            <td>
+            ${lib.input_text( name='version_name', id='upvernm', maxlength=h.LEN_NAME, disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>
+            ${lib.input_textarea( name='description', rows=5, cols=40, id='upverdes', disabled="disabled" )}
+            <br></br>
+            <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+            </td>
+        </tr>
+        ${tag.addtags_simple( disabled="disabled" )}
+        ${tag.removetags_simple( disabled="disabled" )}
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ---------------------------- Project Relation -----------------------------
+
+<%def name="project_teams( user_id=None, project_id=None, teams=[], projectname='', usernames=[] )" >
+    <tr>
+    <td class="label">${'Update project teams for `%s` :' % projectname}</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select team </td>
+            <td>
+            <select name="updtppteam" size=1 id="updtteam">
+                % for t in teams :
+                    ${lib.input_option( t, value=t )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Remove users </td>
+            <td>
+            <select name="rmusr" multiple="multiple" size=6 id="rmusr" disabled="disabled">
+                % for u in usernames :
+                    ${lib.input_option( u, value=u )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Add users </td>
+            <td>
+            <select name="addusr" size=6 id="addusr" disabled="disabled">
+                % for u in usernames :
+                    ${lib.input_option( u, value=u )}
+                % endfor
+            </select>
+            </td>
+        <tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ------------------------------ Project Permission -------------------------
+
+<%def name="project_userpermissions( user_id=None, project_id=None, usernames=[], projectname='', permissions=[] )" >
+    <tr>
+    <td class="label">${'Update user permissions for `%s` :' % projectname}</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select user </td>
+            <td>
+            <select name="updtppusr" size=1 id="updtusr">
+                % for u in usernames :
+                    ${lib.input_option( u, value=u )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Remove permissions </td>
+            <td>
+            <select name="rmpg" multiple="multiple" size=6 id="rmpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Add permissions </td>
+            <td>
+            <select name="addpg" size=6 id="addpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        <tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="project_teampermissions( user_id=None, project_id=None, teams=[], projectname='', permissions=[] )" >
+    <tr>
+    <td class="label">${'Update team permissions for `%s` :' % projectname}</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select team </td>
+            <td>
+            <select name="updtppteam" size=1 id="updtteam">
+                % for t in teams :
+                    ${lib.input_option( t, value=t )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Remove permissions </td>
+            <td>
+            <select name="rmpg" multiple="multiple" size=6 id="rmpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Add permissions </td>
+            <td>
+            <select name="addpg" size=6 id="addpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        <tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>

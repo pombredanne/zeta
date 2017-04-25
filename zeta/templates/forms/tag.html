@@ -1,0 +1,62 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+
+<%def name="addtags( size=64 )">
+    <tr>
+    <td class="label">${lib.label_input( 'tga', 'Add Tags :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='addtags', id='tga', size=size )}
+        <br></br>
+        <span class="frmhlp">Comma seperated tag names</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="removetags( size=64, tagnames=[] )">
+    <tr>
+    <td class="label">${lib.label_input( 'tgr', 'Remove Tags :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="rmtags" multiple="multiple" size="3" id="tgr">
+            % for t in tagnames :
+            ${lib.input_option( t, value=t )}
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="addtags_simple( size=64, disabled=None )">
+    <tr>
+        <td>Add tags</td>
+        <td>
+            % if disabled :
+                ${lib.input_text( name='addtags', id='tga', size=size, disabled=disabled )}
+            % else :
+                ${lib.input_text( name='addtags', id='tga', size=size )}
+            % endif
+            <br></br>
+            <span class="frmhlp">Comma seperated tag names</span>
+        </td>
+    </tr>
+</%def>
+
+<%def name="removetags_simple( size=64, disabled=None, tagnames=[] )">
+    <% dis = ( '', 'disabled="disabled"' )[bool(disabled)] %>
+    <tr>
+        <td>Remove tags</td>
+        <td>
+            <select name="rmtags" multiple="multiple" size="3" id="tgr" ${dis} >
+                % for t in tagnames :
+                ${lib.input_option( t, value=t )}
+                % endfor
+            </select>
+        </td>
+    </tr>
+</%def>

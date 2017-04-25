@@ -1,0 +1,61 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+
+<%def name="license_edit( license_id=None, licensename='', summary='', source='', text='' )">
+    ## POST : (license_id), licensename, summary, source, text
+    <% 
+    viewlic_url = h.url_for( h.r_license, id=str(license_id) )
+    %>
+
+    % if license_id :
+    <div class="input">${lib.input_hidden( name='license_id', value=str(license_id) )}</div>
+    % endif
+
+    <tr>
+        <td class="label">Update license `${licensename}`</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width: auto">
+        <tr>
+            <td>License name</td>
+            <td>
+            ${lib.input_text( name='licensename', id='licensename', value=licensename, size=32, maxlength=h.LEN_LICENSENAME)}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_LICENSENAME} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Summary</td>
+            <td>
+            ${lib.input_text( name='summary', id='summ', value=summary, size=64, maxlength=h.LEN_SUMMARY )}
+            <br></br>
+            <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_SUMMARY} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Source</td>
+            <td>
+            ${lib.input_text( name='source', id='src', value=source, size=64, maxlength=h.LEN_LICENSESOURCE )}
+            <br></br>
+            <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_LICENSESOURCE} characters</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Upload a new license text file</td>
+            <td>
+                ${lib.input_file( name='textattach', size=32 )}
+                <a style="font-size : 70%" href="${viewlic_url}">view text</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Delete license</td>
+            <td>${lib.input_checkbox( name='deletelic', value=licensename, id='licdel' )}</td>
+        </tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>

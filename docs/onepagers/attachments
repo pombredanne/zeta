@@ -1,0 +1,10 @@
+Attachments became popular along with E-mail. Nowadays, attachment seem to
+accompany everything that is sent across the wire. Zeta is not an
+exception, which allows user to attach files to anything, be it a wiki page,
+ticket or even a license page. Afterall, having integrated zeta with e-mail
+applications, it only becomes natural to support attachments.
+
+And we dont stop just at this, we combine attachments with tags, allowing
+users to classify and manage attachments in interesting ways. For instance, by
+tagging an attachment as `download` it automatically gets highlighted where
+ever downloadable files are expected.

@@ -1,0 +1,521 @@
+{{ Toc( float='right' ) }}
+
+h3. 0.7b1
+
+//(Zwiki version : 0.9beta)//
+//(Database version : 1.1)//
+
+'' ****** First public release of Zeta web-application ****** ''
+
+* Zeta features and enhancements
+   ** Added paster-admin command `replogprocess` to process repository logs.
+   ** Zeta vim plugin
+
+* Zeta bugfixes
+   ** Changed MySQLdb_python dependancy to 1.2.2 to avoid version conflict
+      with libmysqlclient.
+   ** Moved all JS script tags to end of the body, to reduce the probablity of
+      blank page.
+   ** Templates, tag and attachment changed for project, wiki, ticket and
+      review pages.
+   ** If project milestone duedate was `empty`, chart analytics were throwing
+      error.
+   ** Updated page footer.
+
+h3. 0.61b1
+
+//(Zwiki version : 0.9beta)//
+//(Database version : 1.1)//
+
+* Zeta features and enhancements
+  ** Integration with googlemaps and google analytics, completed.
+  ** Sitelogo uploadable via web, by administrator.
+  ** Wiki page template refined.
+  ** SMTP client &  POP3 client.
+  ** APIs to send and receive mails via SMTP client and POP3 client.
+  ** Mail database for managing virtual domains and virtual users (email-ids)
+  ** Dependency graph (for blocking tickets) and hierarchy tree
+     (of parent-children) for each ticket.
+  ** Ticket descriptions now support wiki markup
+  ** Timeline logs are expandable.
+  ** In ticket page, hyper links available for all referenced tickets
+     (that is, blocked, blocking, parent, children)
+  ** Standard ticket filters feature.
+  ** Custom ticket filters feature.
+  ** Saved ticket filters feature.
+  ** `mytickets` standard filter added in ticket-index page.
+  ** site-users can be disabled or enabled by site administrator.
+  ** `titleindex` page added for guest-wiki, to list all guest-wiki pages under
+     the site.
+  ** `titleindex` page added for project wiki pages, to list all wiki pages under
+     the project.
+  ** For wiki pages, if the url ends with a trailing `/` it will be interpreted
+     as directory, and list all the pages under the url path.
+  ** Zetalinks short-cut added for repository, revisions and wiki pages.
+  ** If milestones and tickets are referred by zetalinks, it will
+     `struck-through` if they are closed or resolved.
+  ** Image captcha added for user-registration page.
+  ** Path crumbs (similar to navigation bread crumbs) added.
+  ** Roadmap for project, includes pie charts for ticket reports.
+  ** Each milestone has its own page with charts and reports.
+  ** Bazaar repositories can now be integrated with Zeta sites.
+  ** Source code annotation added for files listed from repositories.
+  ** Repository explorer remembers back button.
+  ** Repository directories can be mounted and hosted as web pages. Directory
+     contents can be in `html` or `wiki` or `plain-text` format.
+  ** Refined User home-page
+  ** Reviews can be grouped into review sets.
+  ** Charting functionality added. Around 27 charts and analytics added in
+     phase-1.
+  ** Timeline of activities for entire site.
+  ** Color coding for modified lines in reviewed files.
+  
+* Zeta bugfixes
+  ** Migrated to pylons 0.10rc1. Check r485, r486, r487, r488 for more details.
+  ** While creating a new ticket and subsequently modifying it, `promptuser`
+     field should list project-admin as an option.
+  ** `Submit` button for wiki-edit and guestwiki-edit is renamed to
+     `Save & Continue`
+  ** Ticket create-time and creator highlighted in ticket-board.
+  ** Default favicon.ico
+  ** h.translate() function updated to cache the html page only when wiki text
+     is not dynamic.
+     project home page and wiki pages, upon finding 'texthtml' empty,
+     re-translates the wiki text and renders the resulting html
+  ** While hitching h.translate function, `attr` keyword argument is changed to
+     `cacheattr` argument.
+  ** zwiki_version showed in site-info page.
+  ** Fixed corner case problem in wiki-diff, when c.oldver and c.newver are not
+     provided.
+  ** Refined log messages while updating database.
+  ** Updated documentation.
+  ** Ticket's `change-status` interface is not visible to `anonymous` user.
+  **  `ZETA_ADMIN` permission name changed to `SITE_ADMIN`
+  ** While updating `system` table in database, only changed fields are logged.
+  ** Iconized timeline, charts and refresh hyper-links.
+  ** Improved template and GUI for repository explorer.
+
+h3. 0.6b2
+
+//(Zwiki version : 0.83dev)//
+//(Database version : 1.0 )//
+
+* Zeta features and enhancements
+
+* Zeta bugfixes
+ ** ticket and ticketindex templates are still using config['zeta.ticketresolv']
+    instead of get it from c.sysentries
+ ** Issue ID: 114,
+        Sort milestones, components, versions selection list in ticket create
+        page.
+ ** Ticket: 100, SEARCH_VIEW is now part of site-permissions.
+ ** milestone color codes should be interpreted in fail safe manner.
+ ** Ticket select-list was sorted alphabetically instead of numerically. Fixed
+    by moving the sort operation from templates to DB-query.
+
+h3. 0.6b1
+
+//(Zwiki version : 0.83dev)//
+//(Database version : 1.0 )//
+
+* Zeta features and enhancements
+   ** Migrated to pylons 1.0b1 version, sqlalchemy 0.6beta1 version. Almost
+      all the dependant packages are upgraded to its latest version.
+   ** By default IP address is not used for computing auth-cookie.
+   ** Any registered user can do site-configuration, provided the user is
+      granted `ZETA_ADMIN` permission
+   ** Integrated with googlemaps, geo-coding.
+   ** Refined wiki page layout and style.
+   ** Seperated wiki comments into `talkpage`
+   ** Wiki documents downloadable in other formats.
+   ** Attachment pages for license, project, wiki, ticket, review, to edit
+      attachment summary and tag attachments.
+   ** Project download page added.
+   ** User index page, user home page, users on google map, user(s) timelines
+      and feeds added.
+   ** Improved permission map. `anonymous` users, when `strictauth` is False,
+      have all the view permissions in the site.
+   ** Added review support in structured text parsing.
+   ** Added SMTP client support.
+   ** User registration by invitation.
+   ** Secure password reset, using smtp.
+   ** Quick-links menu added in the meta-navigation bar.
+
+* Zeta bugfixes
+   ** Bad cookie is gracefully handled by showing the sign-in page.
+   ** `environ` variable is made as a standard parameter to all controller
+      actions, including __before__
+   ** Optimized ticket creating logic.
+   ** firstname and lastname for users are made optional.
+   ** templates for timeline logs are refined.
+   ** Reply-cancel interfaces for Wiki/ticket/review comments, where not
+      toggling properly.
+   ** Attachment summary is show as hover text for attachment links.
+   ** For XMLRPC, None is marshalled as `None` string.
+
+h3. 0.5b2
+
+//(Zwiki version : 0.83dev)//
+//(Database version : 0.9 )//
+
+* Zeta bugfixes
+   ** refactored all the templates to build the dojo modules into one of,
+      dojo.js, dijit.js, datagrid.js and are fetched directly using `script`
+      tag. All the `addOnLoad` handlers are moved to end of the page.
+      This to avoid a synchronization problem in FF3.5
+   ** `colorvalues` are hard coded into an array.
+   ** Increased the `max-age` value for `cache-control` field to 1year
+      (31536000 sec)
+   ** Upgraded to dojo version 1.4.1
+
+h3. 0.5b1
+
+//(Zwiki version : 0.83dev)//
+//(Database version : 0.9 )//
+
+* Zeta features and enhancements
+   ** release-upgrade-regression process created to test the stability of an
+      existing deployment when upgraded to the latest release.
+   ** Basic User Acceptance Test suite created using selenium.
+    
+* Zeta bugfixes
+   ** Cache invalidation bug fix for project-admin and project-team,
+      permission mapping.
+   ** Form validation logic in the front end, for
+        create-project, create-ticket, create-component,
+        update-component, create-milestone, update-milestone,
+        create-version, update-version
+   ** Refined logging for database updates.
+   ** Changed html template for timelines.
+
+h3. 0.43dev
+
+//(Zwiki version : 0.82dev)//
+//(Database version : 0.8 )//
+
+* Zeta features and enhancements
+   ** User password is stored as hash digest.
+   ** XMLRPC defined and implemented, enabling third-party applications to
+      interface.
+   ** XMLRPC client for python.
+   ** Zeta integrated with Vim.
+   ** Vim plugin for syntax highlighting for ZWiki text.
+   ** Library to parse plain text from 3rd party application to structured
+      object to interface with Zeta.
+   ** Ticket filters like resolved, unresolved added for ticket index.
+   ** Database upgradation libraries.
+    
+* Zeta bugfixes
+   ** UAT initiated.
+   ** Improved templates for ticket, wiki, vcs, review index.
+   ** Improved performance for submit request.
+
+h3. 0.42dev
+
+//(Zwiki version : 0.81dev)//
+//(Database version : 0.7dev)//
+
+* Zeta features and enhancements
+   ** In module caching for permission names.
+   ** Caching the resuls for function mapfor_projadmins().
+   ** SQL query optmizations.
+   ** Added a search page for searching under project's context.
+   ** Schema updates adding column / table indexing.
+   ** Optmizied `timeline` module both by changing the table schema and
+      logger code.
+   ** Added a new column in `ticket` table, to hold a reference to latest
+      `ticket_status_history` entry for the table.
+   ** Changed the template for license page.
+   ** Changed the template for project-milestone page.
+   ** Changed the templage for ticket-create page.
+
+* Zeta bugfixes
+   ** Refactoring Cache module.
+   ** Fixed bugs in color coding for ticket-idex page.
+   ** Project-milestones are grouped by `open`, `completed`, `cancelled` and 
+      sorted by `due_date`.
+
+h3. 0.41dev
+
+* Zeta features and enhancements
+   ** RSS syndication added for all timelines.
+   ** Faceted search using Xapian search engine, with live indexing support.
+   ** Project's component-description, milestone-description,
+      milestone-closing_remark, version-description support wiki markup.
+
+* Zeta bugfixes
+   ** Signin template used by Authkit returns a non-string datatype to
+      mod_wsgi. Force encoding to 'utf-8' in render_signin() function
+   ** Pruned caching bugs in 'metanav' and 'mainnav' templates.
+   ** Optimized the number of dbase queries from permission-system.
+
+h3. 0.4dev
+
+* Zeta features and enhancements
+   ** Review feature added for source code and wiki-docs.
+   ** User Favorites for projects, tickets, wikipages.
+   ** User can up-vote or down-vote wiki-pages and tickets.
+   ** Timeline view for all updates in reverse chronological order.
+   ** Download revision differences (in Version Control System) for
+      individual files or for the entire revision as a patch file.
+   ** File downloadable from repository for the current revision or any
+      previous revision.
+   ** Static wiki pages are editable via web.
+   ** Tag page and Tag-cloud page added.
+   ** User modifiable project home-page support using wiki markup.
+   ** Header elements in the page layout is made optional and configurable via
+      .ini file.
+   ** Source code highlighting and differece highlighting enabled for VCS
+      pages.
+   ** Help documentation.
+
+* Zeta bugfixes
+   ** Any registered user can be made as the new project administrator.
+   ** Refactored Comments widget to optimize loading JSON objects.
+   ** When a new comment is added, the form is to be hidden after the comment
+      addition.
+   ** Tool-tip documentation.
+   ** ShrinkNode widgetified.
+   ** Permanently caching html content generated from wiki text.
+   ** 'admin' and 'anonymous' users cannot be assined site permissions.
+   ** In ticket edit page, when attributes like tck_typename, tck_statusname,
+      tck_severityname is changed the ticket board background is dynamically
+      changed.
+   ** License pages are available for project administrator (provided the user
+      has got the LICENSE_* permissions)
+
+h3. 0.34dev
+
+* Zeta features and enhancements
+   ** Documentation.
+   ** Added controller logic for static wiki pages.
+
+* Zeta bugfixes
+   ** In sampledb, save memory while populating ticket.
+   ** Fixed unicode issues in test data.
+
+h3. 0.33dev
+
+* Zeta features and enhancements
+   ** Created Tool-Tips widget.
+   ** Added tool-tips for each templates.
+   ** Filtering feature for ticket list.
+   ** Site level user permissions can be managed only for non-project
+      permissions.
+   ** Removed user level permissions for projects.
+   ** Added admin command to auto generate database schema document.
+   ** Added admin command to upgrade zwiki translations in the database to the
+      latest version.
+   ** Added admin command to manage staticwiki pages in the database.
+
+* Zeta bugfixes
+   ** Ticket Template cleanups.
+   ** Bug fixes in permission mapping system.
+   ** For wiki and ticket page, comments data store is provided at page load
+      time itself. Only subsequent fetches for 'comments' and 'rcomments' data
+      store are actually fetched from server.
+
+
+h3. 0.32dev
+
+* Zeta features and enhancements
+   ** Zeta deployable under apache.
+
+* Zeta bugfixes
+   ** Added 'environ' as the first positional parameter to all the controller
+      actions.
+   ** Cleaned by tag module.
+
+h3. 0.31dev
+
+* Zeta features and enhancements
+   ** New 'html' column is added for tables supporting wiki makrup text.
+   ** Added static wiki table to store static files while initialization time.
+   ** Revamped permission system. A new permission system called Permission
+      Mapping System (PMS) is provided.
+   ** Widgetified Wiki, Ticket comments with enhanced styling.
+
+* Zeta bugfixes
+   ** Fixed 'fetching ...' flash message while fetching data from data-store.
+   ** For VCS, added revision numver in the file title, while displaying file
+      content.
+   ** CSS styling for wiki, ticket, vcs grid header with left border.
+   ** Removed transactions for database reads.
+   ** Optimised unit test case execution time, by disabling (optional)
+      timeline logging.
+
+h3. 0.3dev
+
+* Zeta features and enhancements
+   ** Framework created for integrating Version Control System (VCS).
+   ** SVN integrated with Zeta-VCS.
+   ** Google-web analytics option.
+
+h3. 0.22dev
+
+* Zeta features and enhancements
+
+* Zeta bugfixes.
+   ** When a project administrator is accesing a page in his/her project's
+      context (i.e) when c.project is set, then full access is given to the user
+      (who is the project administrator).
+   ** User 'middlename' is made optional and entirely removed from user
+      registration page. Users can set their 'middlename' only through their
+      preference page.
+   ** Projects are listed in sorted order in Project listing page.
+   ** While updating the milestone / version details, the updated elements
+      should retain its value.
+   ** Color coding for tickets are prioritized by,
+       *** tck_statusname,
+       *** tck_severityname,
+       *** tck_typename
+   ** In ticket show page, due_date is not interpreted for resolved tickets.
+   ** In ticket show page, ticket heading is styled with 'line-through' for
+      resolved tickets.
+   ** In ticket list page, due_date is styled with 'line-through' for resolved
+      tickets.
+   ** In ticket listpage, when the ticket details are updated, the color
+      colding is updated as well.
+   ** Account-Info form is submited with normalsub=true. Previously it was
+      neither normal submission nor a special submission.
+
+h3. 0.21dev
+
+* Zeta features and enhancements
+   ** Visual enhancements for license table.
+   ** Automatically create reference links for tagnames in wiki-text.
+   ** ZWiki markup language supported for tickets and wiki comments.
+   ** Improved styling for adding, updating and replying to comments.
+   ** Preview background-text made one shade lighter.
+   ** External links in wiki pages are iconized (to highlight it).
+   ** Links in wiki translated html are dotted-underlined instead of
+      solid-underlined.
+   ** Improved styling for ''Column-Select Menu'' in wikilist and ticket list
+      Grid
+   ** JavaScript library added to ''Expand'' / ''Shrink'' paragraph content.
+   ** Added milestone timeline page with report cards.
+   ** JavaScript library added to toggle a node display.
+   ** Ticket pages contain shortcut (via selection element) to ticket list.
+
+* Zeta bugfixes.
+   ** Create-project 'submit' should not be breadcrumbed. Only Create-project
+      'request' is breadcrumbed.
+   ** When signing-in with wrong username/password, an error message is
+      flashed back to the user.
+   ** When a page having forms is loaded, cursor is positioned in the first
+      field of the form.
+   ** License, Tickets and Attachments are displayed with ID, to help user
+      reference it using zetalinks
+   ** Styling 'FilteringSelect' popup widget for editing ticket is naturalised
+      to the application theme.
+   ** 'onblur' event not handled for attachment widget.
+   ** Fixed the permission system, so as to flash the login-page if 'strict
+      authentication' is required.
+   ** While Updating a project component is updated, the updated element
+      should retained in the view.
+   ** The default value for project's component owner is incorrectly
+      initialized.
+   ** Font bolded for milestone name.
+
+h3. 0.2dev
+
+* Zeta features and enhancements
+   ** Zetalinks feature added in wiki markup.
+   ** Interzeta added to augment Zetalinks, but not yet exposed.
+   ** Ticket status due_date is user-timezone aware.
+   ** Ticket status flow in a timeline.
+   ** Color coding for tickets based on simple and configurable rules.
+   ** Optimized number of request by packaging CSS files.
+
+* Zeta bugfixes.
+   ** Grid CSS files are imported only for ticket list and wiki list, yielding
+      better load times for other pages.
+   ** Localized all the form specific JavaScript code to the form templates.
+   ** Improved comments page for wiki and ticket.
+   ** Code Refactoring.
+   ** Optimized number AJAX requests made in preference/siteadmin/projectadmin
+      pages.
+
+h3. 0.13dev
+
+* Zeta features and enhancements
+   ** Widgetified the following visual elements,
+      [<PRE    Menu, MenuItem, Attachments, Tags, Forms, ConfigTabs >]
+   ** Improvement in number of request per page. Dojo modules are required
+      only on need basis.
+   ** Optimizations on AJAX requests, by loading the JSON object along with
+      the html page. Only subsequent request of the same object is fetched in
+      AJAX way.
+   ** Consistent and improved styling for various forms.
+   ** elements.pagebar() template function now made more generic accepting
+      multiline span-arrays.
+   ** Refactored projects.py controller code into projticket.py and projwiki.py
+   ** Improved styling for comments.
+   ** Localized form JavaScript code along with the form templates.
+
+h3. 0.12dev
+
+* Zeta features and enhancements
+   ** Number of request (during the initial load time) is reduced by half.
+   ** Enabled Gzip middleware.
+   ** The initial loading time has improved by a factor of 4 times.
+
+h3. 0.11dev
+
+* Zeta features and enhancements
+   ** Along with latest version of the wiki-page, any of the previous version
+      of the same page is available for viewing.
+   ** Added ticket description form for inline editing.
+   ** Updated ticket 'createstat' form
+   ** Improved ticket-list grid and inline editing.
+   ** Unified the ticket view page, ticket edit page and ticket status change
+      page, using inline editing feature.
+   ** Cell-wise navigation enabled and highlighted for wiki-list and
+      ticket-list, using up,down,left,right keys.
+   ** ticket and wiki comments are threaded in depth first mode,
+      which is more natural in a conversation.
+   ** JavaScript library to create static data stores (dojo).
+   ** JavaScript library to get property keys as a list.
+   ** JavaScript library to get property values as a list.
+   ** JavaScript library to obtain the property key for the given property value.
+   ** Wiki comment block is now aligned with wiki content block.
+   ** Visual enhancement on wiki page and wiki-list.
+
+* Zeta bugfixes.
+   ** For DateTextBox widget, added constraints and value.
+   ** The owner field for ticket status form should be implicitly provided.
+   ** When the ticket does not have a parent, then make the parent_id as empty.
+   ** ts.due_date should be checked for valid data before operating on it.
+   ** After moving the wiki-translation function to h ( h.translate() ),
+      the preview logic was not updated.
+   ** When creating a new wiki page mark the latest_version as '0'
+      (which means no versions yet). When a wiki page is fetched which doest 
+      not yet have a version, then display the edit page by default.
+   ** Fixed preview bug, which seem to be because of persisting widget object
+      after a refresh. Comment added to persue the root cause.
+   ** Wiki page url converted to unicode before fetching from database.
+   ** `Your icon` and `Your photo` changed to `Upload icon` and `Upload photo`.
+   ** Ticket comment block is aligned with ticket block.  And horizontal rule
+      is removed.
+   ** Sample wiki page, content pruned off unicode characters.
+
+h3. 0.1dev
+
+* Zeta features and enhancements
+   ** Provides User registration and authentication.
+   ** Provides Site level, Team level, User level permissions system and allowing
+      permissions to be grouped.
+   ** Users can relate with other users and also relate with project ( via teams ).
+   ** Project feature, with,
+      [<PRE
+        Logo, icon, license, project components,
+        milestones, versions, mailinglist etc ...
+      >]
+   ** Ticketing feature to track activities.
+   ** Wiki feature to document project activities, with versioning and
+      differences between versions.
+   ** Adding comments, replying  to comments for tickets and wiki pages.
+   ** projects, tickets, wiki pages can be tagged.
+   ** Attachments can be uploaded to projects, tickets and wiki pages.
+
+/* vim: set filetype=zwiki : */

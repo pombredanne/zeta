@@ -1,0 +1,86 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+]
+%>
+
+<%def name="hd_links()">
+    ${parent.hd_links()}
+</%def>
+
+<%def name="hd_styles()">
+    ${parent.hd_styles()}
+</%def>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <%
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+
+        sel_vcs = capture( forms.form_selectvcs, c.authuser,
+                           c.vcslist, c.vcs and c.vcs.name or '' )
+        if c.vcs :
+            vcsbrowse = '<a class="fntsmall fwnormal ml10" href="%s">Browse</a>' %\
+                        h.url_vcsbrowse
+            revlist = '<a class="fntsmall fwnormal ml10" href="%s">Revisions</a>' %\
+                      h.url_revlist
+        else :
+            vcsbrowse = ''
+            revlist   = ''
+
+        if c.vcseditable :
+            intgvcs  = '<span class="ml10 fwnormal fntsmall">' +\
+                      ( '<a href="%s" ' % h.url_vcsintegrate ) +\
+                      'title="Integrate a new repository">Integrate</a></span>'
+        else :
+            intgvcs = ''
+
+        if c.vcs :
+            ctxt_title = '<span class="fntbold fggray ml10 mr10">Timeline for vcs' + \
+                         ( ' [%s]</span>' % c.vcs.name )
+        else :
+            ctxt_title = '<span class="fntbold fggray ml10">Timeline for project ' + \
+                         'vcs </span>'
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ ctxt_title, sel_vcs, intgvcs, vcsbrowse,
+                              revlist ],
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            <div>
+                ${elements.timeline_view( c.logs, c.fromoff, c.tooff, c.links )}
+            </div>
+        </div> 
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( function() {
+            /* Setup the vcs goto list */
+            select_goto( dojo.query( '#selectvcs' )[0] );
+        });
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

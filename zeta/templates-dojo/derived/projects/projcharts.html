@@ -1,0 +1,125 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="projchart14(chart14_data)">
+    <div name="chart14" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart14( chart14_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="projchart15(chart15_data, fromdate)">
+    <div name="chart15" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart15( chart15_data, fromdate, width="100%" )}
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        fav  = capture( elements.favoriteicon, 'favproj', classes="ml10" )
+        ctxt_title = '<span class="fggray fntbold ml10 mr10">' + \
+                     ('%s - charts & analytics </span>' % c.project.projectname)
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        attachs = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project attachmens"> \
+                    Attachments</a></span>' % h.url_projattachs )
+        downlds = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project downloads"> \
+                    Downloads</a></span>' % h.url_projdownloads )
+        roadmap = '<span class="ml20 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Past, current and future milestones">\
+                    Roadmap</a></span>' % h.url_projroadmap )
+        mountpt = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Mounted repository directories"> \
+                    Mountpoints</a></span>' % h.url_projmounts )
+        tline   = capture( elements.iconlink, h.url_projtimeline,
+                           'timeline', title="Project timeline",
+                           classes="ml20" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ fav, ctxt_title, roadmap, mountpt, attachs, downlds,
+                              tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+        <div id="projcharts" class="fullpanel">
+            % if c.authorized :
+                ${forms.form_projfav(
+                    c.authuser, c.project, h.suburl_projfav,
+                    c.isfavorite and 'delfavuser' or 'addfavuser'
+                )}
+            % endif
+
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart14' :
+                <div style="margin : 0 auto;">
+                    ${projchart14(c.chart14_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart15' :
+                <div style="margin : 0 auto;">
+                    ${projchart15(c.chart15_data, c.chart15_frmdt)}
+                </div>
+            % else :
+                <div style="margin : 0 auto;"></div>
+            % endif
+        </div>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        dojoaddOnLoad( 'initform_projfav' );
+
+        % if c.selectedchart[0] == 'chart14' :
+            dojo.addOnLoad( setup_chart14 );
+        % elif c.selectedchart[0] == 'chart15' :
+            dojo.addOnLoad( setup_chart15 );
+        % endif
+
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+
+

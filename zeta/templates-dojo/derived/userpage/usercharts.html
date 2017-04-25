@@ -1,0 +1,82 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+chartoptions = [ 'chart12' ]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="userchart12(chart12_data)">
+    <div name="chart12" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart12( chart12_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Charts and Analytics for `%s`" % c.authusername
+        users = '<span class="ml10 fwnormal fntsmall">' +\
+                   ( '<a href="%s">Users</a></span>' % h.url_usershome )
+        usersgmap = '<span class="ml10 fwnormal fntsmall">' +\
+                    ( '<a href="%s">OnGooglemap</a></span>' % h.url_usersgmap )
+        mytickets = '<span class="ml10 fwnormal fntsmall">' +\
+                    ( '<a href="%s">MyTickets</a></span>' % h.url_mytickets )
+        tline  = capture( elements.iconlink, h.url_usertline,
+                          'timeline', title="Timeline", classes="ml20" )
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, [ users, usersgmap, mytickets, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart12' :
+                <div style="margin : 0 auto;">
+                    ${userchart12(c.chart12_data)}
+                </div>
+            % endif
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        % if c.selectedchart[0] == 'chart12' :
+            dojo.addOnLoad( setup_chart12 );
+        % endif
+    </script>
+</%def>
+
+

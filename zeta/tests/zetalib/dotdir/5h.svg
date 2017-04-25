@@ -1,0 +1,38 @@
+<svg width="44pt" height="116pt"
+ viewBox="0.00 0.00 44.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<polygon style="fill:white;stroke:white;" points="-4,4 -4,-112 40,-112 40,4 -4,4"/>
+<!-- 1 -->
+<g id="node1" class="node"><title>1</title>
+<a xlink:href="/p/denethor/t/1" xlink:title="REOPEN &#45; &#160;One problem with the precedence specifier techniq..." target="_top">
+<polygon style="fill:#ffe1e1;stroke:#ffe1e1;" points="24,-108 12,-108 8.28967e-15,-96 5.92119e-15,-84 12,-72 24,-72 36,-84 36,-96 24,-108"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M12,-108C6,-108 9.4739e-15,-102 8.28967e-15,-96"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M5.92119e-15,-84C4.73695e-15,-78 6,-72 12,-72"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M24,-72C30,-72 36,-78 36,-84"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M36,-96C36,-102 30,-108 24,-108"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="24,-108 12,-108 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M12,-108C6,-108 9.4739e-15,-102 8.28967e-15,-96"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="8.28967e-15,-96 5.92119e-15,-84 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M5.92119e-15,-84C4.73695e-15,-78 6,-72 12,-72"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="12,-72 24,-72 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M24,-72C30,-72 36,-78 36,-84"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="36,-84 36,-96 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M36,-96C36,-102 30,-108 24,-108"/>
+<text text-anchor="middle" x="18" y="-84.1" style="font-family:Terminus;font-size:16.00;">1</text>
+</a>
+</g>
+<!-- 5 -->
+<g id="node3" class="node"><title>5</title>
+<a xlink:title="5" target="_top">
+<ellipse style="fill:white;stroke:black;" cx="18" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-12.1" style="font-family:Terminus;font-size:16.00;">5</text>
+</a>
+</g>
+<!-- 1&#45;&gt;5 -->
+<g id="edge2" class="edge"><title>1&#45;&gt;5</title>
+<path style="fill:none;stroke:#1fdbfd;stroke-width:0.3;" d="M18,-72C18,-64 18,-55 18,-46"/>
+<polygon style="fill:#1fdbfd;stroke:#1fdbfd;" points="21.5001,-46 18,-36 14.5001,-46 21.5001,-46"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,54 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%!
+
+page_tooltips = [
+]
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+
+    <script type="text/javascript">
+    function setup_charts() {
+        var datatline = ${ h.json.dumps(c.datatline) | n}
+        timelinechart( datatline, Date.UTC( ${','.join(c.startdt)} ),
+                       'chart_tline', 'Users Activity' );
+    }
+    </script>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+    if c.user :
+        pagebartext = "Timeline of `%s` activities" % c.user.username
+    else :
+        pagebartext = "Timeline of all user activities"
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            ${elements.timeline_view( c.logs, c.fromoff, c.tooff, c.links,
+                                      chartid='chart_tline')}
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+

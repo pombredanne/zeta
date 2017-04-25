@@ -1,0 +1,114 @@
+(dp1
+S'fedef5d551730d8cb1aa04b8ccd82028bfaa680b'
+p2
+(F1295963362.6364291
+N(dp3
+Vinvitebyall
+p4
+VFalse
+p5
+sVproduct_version
+p6
+V0.71b1
+p7
+sVdef_wikitype
+p8
+Vdraft
+p9
+sVtimezone
+p10
+VUTC
+p11
+sVvcstypes
+p12
+Vsvn, bzr, hg
+p13
+sVprojteamtypes
+p14
+Vnon-members, owner, developer, member
+p15
+sVsitename
+p16
+VZetaDemo
+p17
+sVmailacc_offsets
+p18
+V{'enstein@zt.devwhiz.net': 100, 'pratap@virtual.test': 100}
+p19
+sVreviewactions
+p20
+Vrectified, redundant, invalid
+p21
+sVreviewnatures
+p22
+Vcosmetic, bug, optimisation, comment, document
+p23
+sVwelcomestring
+p24
+VDemonstration site for Zeta Collaboration Tool
+p25
+sVunicode_encoding
+p26
+Vutf-8
+p27
+sVproduct_name
+p28
+Vzeta
+p29
+sVstrictauth
+p30
+VFalse
+p31
+sVtickettypes
+p32
+Vfeature, document, blueprint, defect, enhancement, clarification
+p33
+sVgooglemaps
+p34
+V
+sVticketresolv
+p35
+Vfixed, duplicate, wontfix
+p36
+sVregrbyinvite
+p37
+VFalse
+p38
+sVdatabase_version
+p39
+V1.2
+p40
+sVspecialtags
+p41
+Vdownload, docs, featured
+p42
+sVticketseverity
+p43
+Vblocker, critical, major, normal, minor, trivial
+p44
+sVuserrel_types
+p45
+Vmentor, helper, associate
+p46
+sVticketstatus
+p47
+Vnew, open, reopen, assign, accept, review, verify, fixed, duplicate, wontfix
+p48
+sVsiteadmin
+p49
+Vadmin
+p50
+sVinterzeta
+p51
+V{}
+p52
+sVenvpath
+p53
+V/home/pratap/mybzr/pratap/dev/zeta/defenv
+p54
+sVwikitypes
+p55
+Vdraft, text, html, zwiki, iframe, redirect
+p56
+stp57
+s.

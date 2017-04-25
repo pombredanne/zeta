@@ -1,0 +1,38 @@
+<svg width="44pt" height="116pt"
+ viewBox="0.00 0.00 44.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<polygon style="fill:white;stroke:white;" points="-4,4 -4,-112 40,-112 40,4 -4,4"/>
+<!-- 1 -->
+<g id="node1" class="node"><title>1</title>
+<a xlink:title="1" target="_top">
+<ellipse style="fill:white;stroke:black;" cx="18" cy="-90" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-84.1" style="font-family:Terminus;font-size:16.00;">1</text>
+</a>
+</g>
+<!-- 3 -->
+<g id="node3" class="node"><title>3</title>
+<a xlink:href="/p/denethor/t/3" xlink:title="OPEN &#45; &#160;This document provides an overview of lexing and ..." target="_top">
+<polygon style="fill:#fafafa;stroke:#fafafa;" points="24,-36 12,-36 8.28967e-15,-24 5.92119e-15,-12 12,-7.10543e-15 24,-3.55271e-15 36,-12 36,-24 24,-36"/>
+<path style="fill:#fafafa;stroke:#fafafa;" d="M12,-36C6,-36 9.4739e-15,-30 8.28967e-15,-24"/>
+<path style="fill:#fafafa;stroke:#fafafa;" d="M5.92119e-15,-12C4.73695e-15,-6 6,-8.88178e-15 12,-7.10543e-15"/>
+<path style="fill:#fafafa;stroke:#fafafa;" d="M24,-3.55271e-15C30,-1.77636e-15 36,-6 36,-12"/>
+<path style="fill:#fafafa;stroke:#fafafa;" d="M36,-24C36,-30 30,-36 24,-36"/>
+<polyline style="fill:none;stroke:#fafafa;" points="24,-36 12,-36 "/>
+<path style="fill:none;stroke:#fafafa;" d="M12,-36C6,-36 9.4739e-15,-30 8.28967e-15,-24"/>
+<polyline style="fill:none;stroke:#fafafa;" points="8.28967e-15,-24 5.92119e-15,-12 "/>
+<path style="fill:none;stroke:#fafafa;" d="M5.92119e-15,-12C4.73695e-15,-6 6,-8.88178e-15 12,-7.10543e-15"/>
+<polyline style="fill:none;stroke:#fafafa;" points="12,-7.10543e-15 24,-3.55271e-15 "/>
+<path style="fill:none;stroke:#fafafa;" d="M24,-3.55271e-15C30,-1.77636e-15 36,-6 36,-12"/>
+<polyline style="fill:none;stroke:#fafafa;" points="36,-12 36,-24 "/>
+<path style="fill:none;stroke:#fafafa;" d="M36,-24C36,-30 30,-36 24,-36"/>
+<text text-anchor="middle" x="18" y="-12.1" style="font-family:Terminus;font-size:16.00;">3</text>
+</a>
+</g>
+<!-- 1&#45;&gt;3 -->
+<g id="edge2" class="edge"><title>1&#45;&gt;3</title>
+<path style="fill:none;stroke:#1fdbfd;stroke-width:0.3;" d="M18,-72C18,-64 18,-55 18,-46"/>
+<polygon style="fill:#1fdbfd;stroke:#1fdbfd;" points="21.5001,-46 18,-36 14.5001,-46 21.5001,-46"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,11 @@
+* Specifying the width of `span` element using padding, while its content is
+  empty.
+
+* `clear` styling to `table` element that falls immediately after floating
+  elements have different layout in FF and Chrome.
+
+* Empty elements should be closed using special form like,
+  <br/> instead of <br></br>
+
+* <img> sources can refer to attachment files. While transfering such files
+  the server uses MIME type text/html. ???

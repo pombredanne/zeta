@@ -1,0 +1,118 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+chartoptions = [ 'chart8', 'chart9', 'chart10', 'chart11' ]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="userschart8(chart8_data)">
+    <div name="chart8" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart8( chart8_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="userschart9(chart9_data)">
+    <div name="chart9" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart9( chart9_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="userschart10(chart10_data)">
+    <div name="chart10" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart10( chart10_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="userschart11(chart11_data, chart11_ccnt)">
+    <div name="chart11" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart11( chart11_data, chart11_ccnt, width="100%" )}
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Charts and Analytics for registered users"
+        users = '<span class="ml10 fwnormal fntsmall">' +\
+                ( '<a href="%s">Users</a></span>' % h.url_usershome )
+        usersgmap = '<span class="ml10 fwnormal fntsmall">' +\
+                    ( '<a href="%s">OnGooglemap</a></span>' % h.url_usersgmap )
+        tline = capture( elements.iconlink, h.url_usertline,
+                         'timeline', title="Timeline", classes="ml10" )
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, [users, usersgmap, tline],
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart8' :
+                <div style="margin : 0 auto;">
+                    ${userschart8(c.chart8_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart9' :
+                <div style="margin : 0 auto;">
+                    ${userschart9(c.chart9_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart10' :
+                <div style="margin : 0 auto;">
+                    ${userschart10(c.chart10_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart11' :
+                <div style="margin : 0 auto;">
+                    ${userschart11(c.chart11_data, c.chart11_ccnt)}
+                </div>
+            % else :
+                <div style="margin : 0 auto;"></div>
+            % endif
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        % if c.selectedchart[0] == 'chart8' :
+            dojo.addOnLoad( setup_chart8 );
+        % elif c.selectedchart[0] == 'chart9' :
+            dojo.addOnLoad( setup_chart9 );
+        % elif c.selectedchart[0] == 'chart10' :
+            dojo.addOnLoad( setup_chart10 );
+        % elif c.selectedchart[0] == 'chart11' :
+            dojo.addOnLoad( setup_chart11 );
+        % endif
+    </script>
+</%def>
+
+

@@ -1,0 +1,59 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext  = ( isinstance( c.license, list ) and "License Informations" ) or \
+                         "License Information `%s`" % c.license.licensename
+        licindex_url = h.url_for( h.r_licenses )
+    %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 0px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">
+                ${pagebartext}
+                % if not isinstance( c.license, list ) :
+                    <a style="font-size : 75%;" href="${licindex_url}">view all license</a>
+                % endif
+            </div>
+            <div class="pbarcont">
+            % if not isinstance( c.license, list ) :
+                <br></br>
+                <dl style="margin : 0px 0px 0px 5px;">
+                    <dt style="font-weight : bold;">Source </dt>
+                    <dd>${c.license.source}</dd>
+                    <br></br>
+                    <dt style="font-weight : bold;">Summary </dt>
+                    <dd>${c.license.summary}</dd>
+                    <br></br>
+                    <dt style="font-weight : bold">License Text</dt>
+                    <dd><pre style="font-size : large;">${c.license.text}</pre></dd>
+                </dl>
+            % else :
+                <table style="margin : 10px 10px 0px 10px; width : 100%;">
+                <tr>
+                    <th>License Name</th>
+                    <th>License Summary</th>
+                    <th>License Source</th>
+                </tr>
+                % for l in c.license :
+                <tr>
+                    <% url = h.url_for( h.r_license, id=str(l.id) ) %>
+                    <td><a href="${url}">${l.licensename}</a></td>
+                    <td>${l.summary}</td>
+                    <td>${l.source}</td>
+                </tr>
+                % endfor
+                </table>
+            % endif
+            </div>
+        </div>
+    </div>
+</%def>

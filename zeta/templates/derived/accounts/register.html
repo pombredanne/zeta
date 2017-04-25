@@ -1,0 +1,47 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="user" file="/forms/user.html"/>
+<%namespace name="attc" file="/forms/attc.html"/>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_body()">
+    <% actionurl  = h.url_for( h.r_accounts, 
+                               action='newaccount',
+                               form='submit'
+                               )
+    %>
+    <% pagebartext = "Create a new %s account" % c.sitename %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 1px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">${pagebartext}</div>
+        </div>
+    </div>
+
+    <div class="pbarcont form" id="regform">
+    <form enctype="${c.enctype}" action="${actionurl}" method="post">
+    <table>
+        ${user.user_acc()}
+        ${user.user_pass()}
+        ${user.user_info()}
+        ${attc.addattach( 'usrphoto', 'usrphoto', 'User Photo :', \
+            'Must be 100x75 sized thumbnail image file.' )}
+        ${attc.addattach( 'usricon', 'usricon', 'User Icon :', 'Must be 16x16 ICON file.')}
+        ${libform.input_captcha( 'urcaptcha', 'Captcha :', 'urcaptcha', c.captchaimg, 4, \
+            'Enter the text visible in the above image.')}
+        ${user.user_tos()}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit()}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>

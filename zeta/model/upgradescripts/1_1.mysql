@@ -1,0 +1,13 @@
+ALTER TABLE wiki ADD sourceurl varchar(512) default NULL AFTER summary;
+
+ALTER TABLE staticwiki CHANGE path path varchar(512) NOT NULL;
+
+ALTER TABLE staticwiki ADD sourceurl varchar(512) default NULL AFTER path;
+
+ALTER TABLE staticwiki ADD created_on datetime default NULL AFTER texthtml;
+
+ALTER TABLE staticwiki ADD type_id int(11) NOT NULL DEFAULT 1 AFTER id;
+
+ALTER TABLE staticwiki ADD CONSTRAINT `staticwiki_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `wiki_type` (`id`);
+
+ALTER TABLE attachment ADD size int(11) default 0 AFTER content;

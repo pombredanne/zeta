@@ -1,0 +1,182 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+chartoptions = [ 'chart16', 'chart17', 'chart18', 'chart19', 'chart20' ]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="wikichart16(chart16_data, chart16_wiki)">
+    <div name="chart16" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart16( chart16_data, width="100%" )}
+    </div>
+
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for w in chart16_wiki :
+            <div><a href="${w[0]}">${w[1]}</a></div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="wikichart17(chart17_data)">
+    <div name="chart17" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart17( chart17_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="wikichart18(chart18_data, chart18_usrs)">
+    <div name="chart18" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart18( chart18_data, width="100%" )}
+    </div>
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for u in chart18_usrs :
+            <div><a href="${u[1]}">${u[0]}</a></div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="wikichart19(chart19_data, chart19_usrs)">
+    <div name="chart19" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart19( chart19_data, width="100%" )}
+    </div>
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for u in chart19_usrs :
+            <div><a href="${u[1]}">${u[0]}</a></div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="wikichart20(chart20_data, chart20_tags)">
+    <div name="chart20" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart20( chart20_data, width="100%" )}
+    </div>
+    <div class="vtop p10 floatl" style="width: 22%;">
+        <div class="br5 p5 ml20" style="border: 2px solid LightSteelBlue">
+            <div class="fntbold">Tagnames : </div>
+            ${ ', '.join([ '<a href="%s">%s</a>' % ( c.cntlrobj.url_tag(tag), tag )
+                           for tag in chart20_tags ]) | n}
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        wsearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchwiki', 'Search-wiki',
+                        h.suburl_search, c.searchfaces, classes="ml5"
+                    )
+        sel_wp  = capture( forms.form_selectwikipage, c.authuser,
+                           c.wikipagenames, c.wikipagename or '' )
+
+        tindex = '<span class="ml20 fwnormal fntsmall">' + \
+                 ( '<a href="%s" title="Index of wiki pages"> \
+                   Titleindex</a></span>' % h.url_wikititleindex )
+        attachs= '<span class="ml10 fwnormal fntsmall">' + \
+                 ( '<a href="%s" title="Attachments to wiki pages"> \
+                   Attachments</a></span>' % h.url_wikiattachs )
+
+        _charts = capture( elements.iconlink, h.url_wikicharts,
+                          'barchart', title="Wiki charts", classes="ml20" )
+        tline  = capture( elements.iconlink, h.url_wikitimeline,
+                          'timeline', title="Timeline for project wiki pages",
+                          classes="ml10" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ wsearchbox, sel_wp, tindex, attachs, _charts, tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+        <div id="wikicharts" class="fullpanel">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart16' :
+                <div style="margin : 0 auto;">
+                    ${wikichart16(c.chart16_data, c.chart16_wiki)}
+                </div>
+            % elif c.selectedchart[0] == 'chart17' :
+                <div style="margin : 0 auto;">
+                    ${wikichart17(c.chart17_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart18' :
+                <div style="margin : 0 auto;">
+                    ${wikichart18(c.chart18_data, c.chart18_usrs)}
+                </div>
+            % elif c.selectedchart[0] == 'chart19' :
+                <div style="margin : 0 auto;">
+                    ${wikichart19(c.chart19_data, c.chart19_usrs)}
+                </div>
+            % elif c.selectedchart[0] == 'chart20' :
+                <div style="margin : 0 auto;">
+                    ${wikichart20(c.chart20_data, c.chart20_tags)}
+                </div>
+            % else :
+                <div style="margin : 0 auto;"></div>
+            % endif
+        </div>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+
+        % if c.selectedchart[0] == 'chart16' :
+            dojo.addOnLoad( setup_chart16 );
+        % elif c.selectedchart[0] == 'chart17' :
+            dojo.addOnLoad( setup_chart17 );
+        % elif c.selectedchart[0] == 'chart18' :
+            dojo.addOnLoad( setup_chart18 );
+        % elif c.selectedchart[0] == 'chart19' :
+            dojo.addOnLoad( setup_chart19 );
+        % elif c.selectedchart[0] == 'chart20' :
+            dojo.addOnLoad( setup_chart20 );
+        % endif
+    </script>
+</%def>
+
+

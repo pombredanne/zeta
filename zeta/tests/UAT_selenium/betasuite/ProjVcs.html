@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.182:5002" />
+<title>ProjVcs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ProjVcs</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>9000</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser1-->
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<!--Create a new project-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New-project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>projectname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>projectname</td>
+	<td>testvcs1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>summary</td>
+	<td>Project to test vcs features</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>licensename</td>
+	<td>label=SUN Public License</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Hopefully it works</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>projectname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<!--Add team members-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser2</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<!--Add Permissions-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='prjpermissions']/div[1]/div[1]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=VCS_CREATE</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=VCS_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permissions to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=VCS_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<!--Integrate with repositories-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>betarepo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rooturl</td>
+	<td>file:///home/pratap/dev/oss/svn-sync/mako</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vcs_typename</td>
+	<td>label=svn</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>betarepo1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rooturl</td>
+	<td>file:///home/pratap/dev/oss/svn-sync/mako</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vcs_typename</td>
+	<td>label=svn</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<!--Browse-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Browsing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>( SVN: file:///home/pratap/dev/oss/svn-sync/mako )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>₊ mako</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='zeta_VcsDir_2']/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>₊ trunk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='zeta_VcsDir_7']/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=setup.py</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=setup.cfg</td>
+	<td></td>
+</tr>
+<!--File-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=setup.py</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/mako /trunk /setup.py</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=download-file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LifeSpan :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File-History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=232</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=232</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=‹ r231</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=r233 ›</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Log Message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Affected Files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=download-diff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=exact:file:mako/trunk/test/cache.py</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=r233 ›</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>exact:Revision:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>r233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=download-diff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Affected Files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<!--Revision list-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=401</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=301</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=201</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=201</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=300</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div[1]/div/div/div[2]/div/div[1]/div[2]</td>
+	<td>Log</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div[1]/div/div/div[2]/div/div[1]/div[3]</td>
+	<td>Author</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div[1]/div/div/div[2]/div/div[1]/div[4]</td>
+	<td>Date</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=297</td>
+	<td></td>
+</tr>
+<!--Revision log-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=297</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div/div/div[1]/span[2]</td>
+	<td>r297</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=‹ r296</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=r298 ›</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Affected Files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=download-diff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='diff']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='affectedfiles']/tbody/tr[2]/td/div/table/tbody/tr/td[2]/div/pre</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='diff']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>selectvcs</td>
+	<td>label=betarepo</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>betarepo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser2-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>betarepo2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rooturl</td>
+	<td>file:///home/pratap/dev/oss/svn-sync/mako</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vcs_typename</td>
+	<td>label=svn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/p/testvcs1/s/createvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser4-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Revisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/p/testvcs1/s/createvcs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body</td>
+	<td>403 Forbidden Access was denied to this resource.<br /><br /> User doesn't have the permissions ['VCS_CREATE']</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser5-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testvcs1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body</td>
+	<td>403 Forbidden Access was denied to this resource.<br /><br /> User doesn't have the permissions ['VCS_VIEW']</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Roadmap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

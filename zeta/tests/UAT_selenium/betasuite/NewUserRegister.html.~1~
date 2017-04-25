@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.122.253:5001" />
+<title>NewUserRegister</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">NewUserRegister</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<!--testuser1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>All fields are mandatory.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Terms of Service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser1@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User successfully created. Try signing in.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--testuser2-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser2@yahoo.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--testuser3-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser3@yahoo.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--testuser4-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser4@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--testuser5-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser5@hotmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Highlights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>anonymous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<!--testuser6-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser6@hotmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>captcha</td>
+	<td>meat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>anonymous</td>
+	<td></td>
+</tr>
+<!--Verify User preference-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>useringmap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>AccountInfo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ChangePassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstname</td>
+	<td>t</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastname</td>
+	<td>u</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>addressline1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>city</td>
+	<td>c</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pincode</td>
+	<td>b</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>state</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>country</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='preftabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>changepass</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>changepass</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Enter a correct username, password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>changepass</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>AccountInfo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ChangePassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='preftabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confpass</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<!--Add SITE_ADMIN permission-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>admin123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td>SiteInfo</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permission groups to user :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>addtouser</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>add_perm_group</td>
+	<td>label=SITE_ADMIN</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=visit here</td>
+	<td>visit here</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=support@discoverzeta.com</td>
+	<td>support@discoverzeta.com</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td>SiteInfo</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td>SiteConfig</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sys_googlemaps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_googlemaps</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=preference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='preftabs']/div/div[1]/span[1]</td>
+	<td>AccountInfo</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='preftabs']/div/div[1]/span[2]</td>
+	<td>ChangePassword</td>
+</tr>
+<!--User pages-->
+<tr>
+	<td>click</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[6]/div/div[3]</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=OnGooglemap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser1@gmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser2@yahoo.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser3@yahoo.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser4@gmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser5@hotmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>admin admin admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Administrator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Project teams</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Files uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[4]/div[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=OnGooglemap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>admin : Timeline</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=OnGooglemap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=OnGooglemap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Users on google map</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<!--User timeline-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>UsersTimeline</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<!--Invite user registration-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Contact site administrator enable invitation.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sys_regrbyinvite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_regrbyinvite</td>
+	<td>True</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Contact site administrator enable invitation.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sys_invitebyall</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_invitebyall</td>
+	<td>True</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='quick-links']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invite a user to your site</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>emailid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>prataprc@gmail.com</td>
+</tr>
+<tr>
+	<td>keyPress</td>
+	<td>emailid</td>
+	<td>\13</td>
+</tr>
+<!--Remove SITE_ADMIN permission-->
+<tr>
+	<td>waitForValue</td>
+	<td>emailid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[1]</td>
+	<td>SiteInfo</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td>SiteConfig</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_googlemaps</td>
+	<td>False</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Delete permission groups from user :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>delfromuser</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>del_perm_group</td>
+	<td>label=SITE_ADMIN</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='sitelogo']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Forgot password-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Registration is allowed only by invitation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=forgot-password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=forgot-password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email id to reset password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>emailid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser1@gmail.com</td>
+</tr>
+<tr>
+	<td>keyPress</td>
+	<td>emailid</td>
+	<td>\13</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>emailid</td>
+	<td>testuser1@gmail.com</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Reset link sent to your emailid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>admin123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=site-admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td>SiteConfig</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='satabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sys_regrbyinvite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_regrbyinvite</td>
+	<td>False</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sys_invitebyall</td>
+	<td>False</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div/h3/u</td>
+	<td>Highlights</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

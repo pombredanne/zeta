@@ -1,0 +1,802 @@
+
+Auto generated file. Based on SQLalchemy schema definitions
+-----------------------------------------------------------
+
+( Attrs  Column_name  Column_type  Length  Constraints )
+
+  ( attrs P - primary_key, U - Unique, N - Nullable )
+
+
+[ vcs_type ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  vcs_typename               Unicode          32                              
+
+
+[ permission_group ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  perm_group                 String           32                              
+
+
+[ project ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  projectname                Unicode          32                              
+  ___  summary                    Unicode          128                             
+  ___  admin_email                Unicode          64                              
+  _N_  exposed                    Boolean          NA                              
+  _N_  disabled                   Boolean          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ tag ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  tagname                    Unicode          256                             
+
+
+[ ticket_status ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  tck_statusname             Unicode          32                              
+
+
+[ reviewcomment_nature ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  naturename                 Unicode          32                              
+
+
+[ permission_name ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  perm_name                  String           32                              
+
+
+[ projectteam_type ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  team_type                  Unicode          32                              
+
+
+[ attachment ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  _N_  summary                    Unicode          128                             
+  ___  filename                   String           512                             
+  _N_  content                    LargeBinary      10485760                          
+  _N_  size                       Integer          NA                              
+  _N_  download_count             Integer          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ license ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  licensename                Unicode          64                              
+  ___  summary                    Unicode          128                             
+  ___  text                       UnicodeText      65536                           
+  ___  source                     Unicode          128                             
+  _N_  created_on                 DateTime         NA                              
+
+
+[ wiki_type ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  wiki_typename              Unicode          32                              
+
+
+[ timeline ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  log                        Unicode          1024                            
+  _N_  userhtml                   Unicode          512                             
+  _N_  itemhtml                   Unicode          1024                            
+  _N_  created_on                 DateTime         NA                              
+
+
+[ ticket_severity ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  tck_severityname           Unicode          32                              
+
+
+[ survey ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  name                       Unicode          32                              
+  _N_  question                   Unicode          128                             
+  _N_  options                    Unicode          1024                            
+  _N_  start_time                 PickleType       None                            
+  _N_  end_time                   PickleType       None                            
+  _N_  anonymous                  Boolean          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ ticket_type ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  tck_typename               Unicode          32                              
+
+
+[ system ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  field                      Unicode          64                              
+  ___  value                      Unicode          256                             
+
+
+[ reviewcomment_action ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  actionname                 Unicode          32                              
+
+
+[ user ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  username                   Unicode          32                              
+  ___  emailid                    Unicode          64                              
+  _N_  password                   LargeBinary      256                             
+  _N_  timezone                   String           32                              
+  _N_  disabled                   Boolean          NA                              
+
+
+[ userrelation_type ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  userrel_type               Unicode          32                              
+
+
+[ review ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  review_number              Integer          NA                              
+  ___  resource_url               Unicode          512                             
+  _N_  version                    Integer          NA                              
+  _N_  closed                     Boolean          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ review_tags ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ userinvitation ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  _N_  byuser_id                  Integer          NA     user.id                  
+  ___  emailid                    Unicode          64                              
+  ___  digest                     LargeBinary      256                             
+  _N_  acceptedby                 Unicode          32                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ license_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  licenseid                  Integer          NA     license.id               
+
+
+[ attachment_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  attachid                   Integer          NA     attachment.id            
+
+
+[ project_licenses ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  license_id                 Integer          NA     license.id               
+
+
+[ user_icons ] InnoDB : 
+
+  ___  userid                     Integer          NA     user.id                  
+  ___  attachid                   Integer          NA     attachment.id            
+
+
+[ project_favorites ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  userid                     Integer          NA     user.id                  
+
+
+[ project_logos ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  attachid                   Integer          NA     attachment.id            
+
+
+[ license_tags ] InnoDB : 
+
+  ___  licenseid                  Integer          NA     license.id               
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ component ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  componentname              Unicode          32                              
+  ___  comp_number                Integer          NA                              
+  ___  description                UnicodeText      65536                           
+  _N_  descriptionhtml            UnicodeText      131072                          
+  _N_  created_on                 DateTime         NA                              
+
+
+[ attachment_tags ] InnoDB : 
+
+  ___  attachmentid               Integer          NA     attachment.id            
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ review_favorites ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  userid                     Integer          NA     user.id                  
+
+
+[ mailinglist ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  _N_  project_id                 Integer          NA     project.id               
+  _N_  mailing_list               Unicode          64                              
+
+
+[ user_relation ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  userfrom_id                Integer          NA     user.id                  
+  ___  userto_id                  Integer          NA     user.id                  
+  ___  userreltype_id             Integer          NA     userrelation_type.id     
+  _N_  approved                   Boolean          NA                              
+
+
+[ review_projects ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  projectid                  Integer          NA     project.id               
+
+
+[ user_permissions ] InnoDB : 
+
+  ___  userid                     Integer          NA     user.id                  
+  ___  groupid                    Integer          NA     permission_group.id      
+
+
+[ tag_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ review_attachments ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  attachmentid               Integer          NA     attachment.id            
+
+
+[ projectteam_perm ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  teamtype_id                Integer          NA     projectteam_type.id      
+  ___  perm_group_id              Integer          NA     permission_group.id      
+
+
+[ reviewset ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  name                       Unicode          32                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ project_info ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  project_id                 Integer          NA     project.id               
+  ___  description                UnicodeText      65536                           
+  _N_  descriptionhtml            UnicodeText      131072                          
+
+
+[ project_admins ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  adminid                    Integer          NA     user.id                  
+
+
+[ user_photos ] InnoDB : 
+
+  ___  userid                     Integer          NA     user.id                  
+  ___  attachid                   Integer          NA     attachment.id            
+
+
+[ project_attachments ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  attachmentid               Integer          NA     attachment.id            
+
+
+[ vote ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  user_id                    Integer          NA     user.id                  
+  _N_  votedas                    Unicode          32                              
+  _N_  medium                     Unicode          32                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ license_attachments ] InnoDB : 
+
+  ___  licenseid                  Integer          NA     license.id               
+  ___  attachmentid               Integer          NA     attachment.id            
+
+
+[ version ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  version_name               Unicode          64                              
+  ___  ver_number                 Integer          NA                              
+  ___  description                UnicodeText      65536                           
+  _N_  descriptionhtml            UnicodeText      131072                          
+  _N_  created_on                 DateTime         NA                              
+
+
+[ project_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  projectid                  Integer          NA     project.id               
+
+
+[ staticwiki ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  type_id                    Integer          NA     wiki_type.id             
+  U__  path                       Unicode          512                             
+  _N_  sourceurl                  Unicode          512                             
+  _N_  text                       UnicodeText      65536                           
+  _N_  texthtml                   UnicodeText      131072                          
+  _N_  created_on                 DateTime         NA                              
+
+
+[ review_participants ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  participantid              Integer          NA     user.id                  
+
+
+[ milestone ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  milestone_name             Unicode          64                              
+  ___  mstn_number                Integer          NA                              
+  ___  description                UnicodeText      65536                           
+  _N_  descriptionhtml            UnicodeText      131072                          
+  _N_  due_date                   PickleType       None                            
+  _N_  closing_remark             UnicodeText      65536                           
+  _N_  closing_remarkhtml         UnicodeText      131072                          
+  _N_  completed                  Boolean          NA                              
+  _N_  cancelled                  Boolean          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ wiki ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  U__  wikiurl                    Unicode          512                             
+  ___  type_id                    Integer          NA     wiki_type.id             
+  _N_  summary                    Unicode          128                             
+  _N_  sourceurl                  Unicode          512                             
+  _N_  latest_version             Integer          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ project_team ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  user_id                    Integer          NA     user.id                  
+  ___  project_id                 Integer          NA     project.id               
+  ___  teamtype_id                Integer          NA     projectteam_type.id      
+  _N_  approved                   Boolean          NA                              
+
+
+[ review_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  reviewid                   Integer          NA     review.id                
+
+
+[ project_perm ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  project_id                 Integer          NA     project.id               
+  ___  user_id                    Integer          NA     user.id                  
+  ___  perm_group_id              Integer          NA     permission_group.id      
+
+
+[ user_info ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  user_id                    Integer          NA     user.id                  
+  _N_  firstname                  Unicode          32                              
+  _N_  middlename                 Unicode          32                              
+  _N_  lastname                   Unicode          32                              
+  _N_  addressline1               Unicode          64                              
+  _N_  addressline2               Unicode          64                              
+  _N_  city                       Unicode          32                              
+  _N_  pincode                    String           8                               
+  _N_  state                      Unicode          32                              
+  _N_  country                    Unicode          32                              
+  _N_  userpanes                  Unicode          256                             
+  _N_  created_on                 DateTime         NA                              
+
+
+[ review_authors ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  authorid                   Integer          NA     user.id                  
+
+
+[ permission_maps ] InnoDB : 
+
+  ___  groupid                    Integer          NA     permission_group.id      
+  ___  permid                     Integer          NA     permission_name.id       
+
+
+[ project_tags ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ review_comment ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  review_id                  Integer          NA     review.id                
+  _N_  nature_id                  Integer          NA     reviewcomment_nature.id  
+  _N_  position                   Integer          NA                              
+  ___  text                       UnicodeText      65536                           
+  _N_  texthtml                   UnicodeText      131072                          
+  _N_  action_id                  Integer          NA     reviewcomment_action.id  
+  _N_  approved                   Boolean          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ user_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  userid                     Integer          NA     user.id                  
+
+
+[ survey_moderators ] InnoDB : 
+
+  ___  surveyid                   Integer          NA     survey.id                
+  ___  moderatorid                Integer          NA     user.id                  
+
+
+[ ticket ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  ticket_number              Integer          NA                              
+  ___  summary                    Unicode          128                             
+  _N_  description                UnicodeText      65536                           
+  _N_  descriptionhtml            UnicodeText      131072                          
+  ___  type_id                    Integer          NA     ticket_type.id           
+  ___  severity_id                Integer          NA     ticket_severity.id       
+  _N_  tsh_id                     Integer          NA                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ project_icons ] InnoDB : 
+
+  ___  projectid                  Integer          NA     project.id               
+  ___  attachid                   Integer          NA     attachment.id            
+
+
+[ vcs ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  type_id                    Integer          NA     vcs_type.id              
+  ___  name                       Unicode          32                              
+  ___  rooturl                    Unicode          512                             
+  _N_  loginname                  Unicode          32                              
+  _N_  password                   Unicode          32                              
+  _N_  created_on                 DateTime         NA                              
+
+
+[ attachment_uploaders ] InnoDB : 
+
+  ___  attachmentid               Integer          NA     attachment.id            
+  ___  uploaderid                 Integer          NA     user.id                  
+
+
+[ ticket_filter ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  name                       Unicode          256                             
+  ___  user_id                    Integer          NA     user.id                  
+  _N_  filterbyjson               Unicode          1024                            
+
+
+[ permgroup_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  groupid                    Integer          NA     permission_group.id      
+
+
+[ ircchannel ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  _N_  project_id                 Integer          NA     project.id               
+  _N_  ircchannel                 Unicode          64                              
+
+
+[ review_moderators ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  moderatorid                Integer          NA     user.id                  
+
+
+[ vcsmount ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  name                       Unicode          32                              
+  ___  content                    Unicode          32                              
+  _N_  vcs_id                     Integer          NA     vcs.id                   
+  ___  repospath                  Unicode          512                             
+  _N_  created_on                 DateTime         NA                              
+
+
+[ ticket_promptusers ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  promptuserid               Integer          NA     user.id                  
+
+
+[ wiki_attachments ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  attachmentid               Integer          NA     attachment.id            
+
+
+[ ticket_reference ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  ticket_id                  Integer          NA     ticket.id                
+  ___  resource_url               Unicode          512                             
+
+
+[ wiki_comment ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  wiki_id                    Integer          NA     wiki.id                  
+  _N_  version_id                 Integer          NA                              
+  ___  text                       UnicodeText      65536                           
+  _N_  texthtml                   UnicodeText      131072                          
+  _N_  created_on                 DateTime         NA                              
+
+
+[ survey_votes ] InnoDB : 
+
+  ___  surveyid                   Integer          NA     survey.id                
+  ___  voteid                     Integer          NA     vote.id                  
+
+
+[ ticket_attachments ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  attachmentid               Integer          NA     attachment.id            
+
+
+[ reviewset_reviews ] InnoDB : 
+
+  ___  reviewid                   Integer          NA     review.id                
+  ___  reviewsetid                Integer          NA     reviewset.id             
+
+
+[ ticket_milestones ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  milestoneid                Integer          NA     milestone.id             
+
+
+[ milestone_tags ] InnoDB : 
+
+  ___  milestoneid                Integer          NA     milestone.id             
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ ticket_favorites ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  userid                     Integer          NA     user.id                  
+
+
+[ ticket_versions ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  versionid                  Integer          NA     version.id               
+
+
+[ wiki_votes ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  voteid                     Integer          NA     vote.id                  
+
+
+[ ticket_tags ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ ticket_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  ticketid                   Integer          NA     ticket.id                
+
+
+[ ticket_status_history ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  ticket_id                  Integer          NA     ticket.id                
+  ___  status_id                  Integer          NA     ticket_status.id         
+  _N_  due_date                   PickleType       None                            
+  _N_  created_on                 DateTime         NA                              
+
+
+[ wiki_creators ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  creatorid                  Integer          NA     user.id                  
+
+
+[ review_replies ] InnoDB : 
+
+  ___  reviewcommentid            Integer          NA     review_comment.id        
+  ___  replytoid                  Integer          NA     review_comment.id        
+
+
+[ ticket_comment ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  ticket_id                  Integer          NA     ticket.id                
+  ___  text                       UnicodeText      65536                           
+  _N_  texthtml                   UnicodeText      131072                          
+  _N_  created_on                 DateTime         NA                              
+
+
+[ component_tags ] InnoDB : 
+
+  ___  componentid                Integer          NA     component.id             
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ wiki_projects ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  projectid                  Integer          NA     project.id               
+
+
+[ ticket_blockers ] InnoDB : 
+
+  ___  blockedbyid                Integer          NA     ticket.id                
+  ___  blockingid                 Integer          NA     ticket.id                
+
+
+[ ticket_votes ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  voteid                     Integer          NA     vote.id                  
+
+
+[ ticket_components ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  componentid                Integer          NA     component.id             
+
+
+[ vcs_projects ] InnoDB : 
+
+  ___  vscid                      Integer          NA     vcs.id                   
+  ___  projectid                  Integer          NA     project.id               
+
+
+[ wiki_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  wikiid                     Integer          NA     wiki.id                  
+
+
+[ vcs_logs ] InnoDB : 
+
+  ___  timelineid                 Integer          NA     timeline.id              
+  ___  vcsid                      Integer          NA     vcs.id                   
+
+
+[ ticket_hier ] InnoDB : 
+
+  ___  partckid                   Integer          NA     ticket.id                
+  ___  childtckid                 Integer          NA     ticket.id                
+
+
+[ wiki_favorites ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  userid                     Integer          NA     user.id                  
+
+
+[ wikitable_map ] InnoDB : 
+
+  __P  id                         Integer          NA                              
+  ___  wiki_id                    Integer          NA     wiki.id                  
+  ___  table_pagenum              Integer          NA                              
+
+
+[ wiki_tags ] InnoDB : 
+
+  ___  wikiid                     Integer          NA     wiki.id                  
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ ticket_projects ] InnoDB : 
+
+  ___  ticketid                   Integer          NA     ticket.id                
+  ___  projectid                  Integer          NA     project.id               
+
+
+[ version_tags ] InnoDB : 
+
+  ___  versionid                  Integer          NA     version.id               
+  ___  tagid                      Integer          NA     tag.id                   
+
+
+[ review_commentors ] InnoDB : 
+
+  ___  reviewcommentid            Integer          NA     review_comment.id        
+  ___  commentorid                Integer          NA     user.id                  
+
+
+[ component_owners ] InnoDB : 
+
+  ___  componentid                Integer          NA     component.id             
+  ___  ownerid                    Integer          NA     user.id                  
+
+
+[ wiki_commentors ] InnoDB : 
+
+  ___  wikicommentid              Integer          NA     wiki_comment.id          
+  ___  commentorid                Integer          NA     user.id                  
+
+
+[ wiki_replies ] InnoDB : 
+
+  ___  wikicommentid              Integer          NA     wiki_comment.id          
+  ___  replytoid                  Integer          NA     wiki_comment.id          
+
+
+[ ticketcomment_authors ] InnoDB : 
+
+  ___  ticketcommentid            Integer          NA     ticket_comment.id        
+  ___  authorid                   Integer          NA     user.id                  
+
+
+[ ticket_replies ] InnoDB : 
+
+  ___  ticketcommentid            Integer          NA     ticket_comment.id        
+  ___  replytoid                  Integer          NA     ticket_comment.id        
+
+
+[ ticketstatus_owners ] InnoDB : 
+
+  ___  ticketstatusid             Integer          NA     ticket_status_history.id 
+  ___  ownerid                    Integer          NA     user.id                  
+
+

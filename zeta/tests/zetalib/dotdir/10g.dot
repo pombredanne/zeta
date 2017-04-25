@@ -1,0 +1,50 @@
+
+digraph G {
+fontname="Helvetica";
+
+1 -> 10 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+3 -> 10 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+4 -> 10 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+3 -> 1 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+5 -> 3 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+4 -> 5 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+2 -> 5 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+1 -> 2 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+4 -> 2 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+/* Node attributes */
+
+1 [color="#ebebeb", shape="box" style="filled,rounded", fillcolor="#ebebeb", URL="/p/GCC/t/1", tooltip="FIXED -           * config/m32c/m32c.c (TARGET_PROMOTE_FUN...", target="_blank"];
+
+
+2 [color="#fafafa", shape="box" style="filled,rounded", fillcolor="#fafafa", URL="/p/GCC/t/2", tooltip="OPEN -  Updated the wrong changelog   	PR fortran/39861 	...", target="_blank"];
+
+
+3 [color="#fafafa", shape="box" style="filled,rounded", fillcolor="#fafafa", URL="/p/GCC/t/3", tooltip="REOPEN -   	* sem_warn.adb: Add comment on obsolete warning...", target="_blank"];
+
+
+4 [color="#fafafa", shape="box" style="filled,rounded", fillcolor="#fafafa", URL="/p/GCC/t/4", tooltip="REOPEN -  	* configure.ac:  Also check if assembler support...", target="_blank"];
+
+
+5 [color="#fffce1", shape="box" style="filled,rounded", fillcolor="#fffce1", URL="/p/GCC/t/5", tooltip="REVIEW -  Minor reformatting.    	PR target/39856 	* reg-st...", target="_blank"];
+
+
+10 [color="black", shape="ellipse" style="filled,rounded", fillcolor="white", URL="", tooltip="10", target="_blank"];
+
+}

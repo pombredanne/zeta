@@ -1,0 +1,218 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements"  file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Home page can be constructed using wiki markup. To change home page
+content edit project's <b>'homepage'</b> wiki document.
+"""
+],
+[ 'Roadmap',
+"""Use the Roadmap page to view project's progress and achievements.
+Milestones are grouped into catagories <em>closed</em> and <em>opened</em>,
+and chronologically sorted.<br/>
+<b>Background color coding</b> : 
+<span class="bgblue1">open milestones</span>
+<span class="bggrn2">closed milestones</span>
+<span class="bggray1">cancelled milestones</span>
+<br/><br/>
+Milestone-id is displayed along with the milestone name in paranthesis, use
+this where ever the milestone needs to be referenced.
+<b>Report Card</b> gives a visual segmentation of milestone tickets in terms
+of 'ticket-types', 'ticket-status', 'ticket-severity'.
+"""
+],
+[ 'Mountpoints',
+"""Repository directories can be mounted on-to site's url path, so that
+contents of its directory, including its sub-directory can be viewed as html
+pages"""
+],
+[ 'Favorites',
+"""Registered users can pick project(s) as their favorite, provided the user
+has 'PROJECT_VIEW' permission"""
+],
+[ 'Downloads',
+"""Downloable files for this project."""
+],
+
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+
+    <script type="text/javascript">
+    <% project_id = (c.project and c.project.id) or '' %>
+    function setup_project() {
+
+        /* Tags */
+        new zeta.Tags(
+            { user: [ '${str(c.authuser.id)}', '${c.authuser.username}' ],
+              id: 'prjtagblk',
+              addform: [ 'addprjtags', '${h.suburl_addprjtags | n}' ],
+              delform: [ 'delprjtags', '${h.suburl_delprjtags | n}' ],
+              tagon: [ '${str(project_id)}', 'project_id' ],
+              editable: ${[0,1][c.tag_editable == True]},
+              url: '${h.url_prjtags | n}',
+              tags: ${ h.json.dumps(c.tags) | n }
+            }, dojo.query( "div[name=ptagblk]" )[0]
+        )
+    }
+    </script>
+</%def>
+
+<%def name="show_homepage()">
+    <div class="zhomepage disptable w100">
+    <div class="disptrow">
+        <div class="disptcell p10">
+            % if c.fphtml :
+                ${c.fphtml | n}
+            % endif
+        </div>
+        <div class="disptcell bggray1 pr10" style="width: 250px;">
+            <div class="br4 ml10 fntbold p3" style="border : 1px dotted gray;">
+                ${c.project.summary}
+            </div>
+            <div class="br4 ml10 mt5" style="border : 1px dotted gray;">
+                <ul class="lstnone pl10">
+                    % if c.project.license :
+                    <li class="p5">
+                        <div><b>License</b></div>
+                        <div class="ml5">${c.project.license.licensename}</div>
+                    </li>
+                    % endif
+
+                    % if c.project.admin_email :
+                    <li class="p5 pt10">
+                        <div><b>Administrator</b></div>
+                        <div class="ml5">
+                            <a href="${c.cntlrobj.url_user( c.project.admin.username)}"
+                               >${c.project.admin.username}</a>
+                        </div>
+                        <div class="ml5 fntitalic">
+                            ${h.protectemail(c.project.admin_email)}
+                        </div>
+                    </li>
+                    % endif
+
+                    % for team, users in c.projectteams.iteritems() :
+                    <li class="p5 pt10">
+                        <div><b>${team}</b></div>
+                        <div class="ml5">
+                        % for u in users :
+                            <a href="${c.cntlrobj.url_user(u)}">${u}</a>,
+                        % endfor
+                        </div>
+                    </li>
+                    % endfor
+
+                    % if c.project.mailinglists :
+                    <li class="p5 pt10" title="project mailinglist">
+                        <div><b>Mailing lists</b></div> 
+                        <ul class="ml5 fntitalic"
+                            style="padding-left: 10px; list-style-type: circle;">
+                            % for m in c.project.mailinglists :
+                            <li>
+                                ${h.protectemail(m.mailing_list)}
+                            </li>
+                        % endfor
+                        </ul>
+                    </li>
+                    % endif
+
+                    % if c.project.ircchannels :
+                    <li class="p5 pt10" title="project ircchannels">
+                        <div><b>IRC channels</b></div> 
+                        <ul class="ml5 fntitalic"
+                            style="padding-left: 10px; list-style-type: circle;">
+                            % for r in c.project.ircchannels :
+                            <li>${r.ircchannel}</li>
+                            % endfor
+                        </ul>
+                    </li>
+                    % endif
+                </ul>
+            </div>
+
+            <div class="">
+                <div name="ptagblk"></div>
+            </div>
+
+            <div class="ml10 pt5 fntbold bclear">
+                <a href="${h.url_tagcloud}">Tag cloud</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <%
+        fav  = capture( elements.favoriteicon, 'favproj', classes="ml10" )
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        attachs = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project attachmens"> \
+                    Attachments</a></span>' % h.url_projattachs )
+        downlds = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project downloads"> \
+                    Downloads</a></span>' % h.url_projdownloads )
+        roadmap = '<span class="ml20 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Past, current and future milestones">\
+                    Roadmap</a></span>' % h.url_projroadmap )
+        mountpt = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Mounted repository directories"> \
+                    Mountpoints</a></span>' % h.url_projmounts )
+        refr    = capture( elements.iconlink, h.url_translatefp,
+                           'refresh', title='Bring this wiki-html upto-date',
+                           classes="ml20"
+                         )
+        charts  = capture( elements.iconlink, h.url_projectcharts,
+                           'barchart', title="Project analytics",
+                           classes="ml10" )
+        tline   = capture( elements.iconlink, h.url_projtimeline,
+                           'timeline', title="Project timeline",
+                           classes="ml10" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ fav, roadmap, mountpt, attachs, downlds,
+                              refr, charts, tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+            % if c.authorized :
+                ${forms.form_projfav(
+                    c.authuser, c.project, h.suburl_projfav,
+                    c.isfavorite and 'delfavuser' or 'addfavuser'
+                )}
+            % endif
+            <div>${show_homepage()}</div>
+        </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_project );
+        dojoaddOnLoad( 'initform_projfav' );
+
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

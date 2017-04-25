@@ -1,0 +1,95 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="licchart6(chart6_data)">
+    <div name="chart6" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart6( chart6_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="licchart7(chart7_data, tagnames)">
+    <div name="chart7" class="floatl p10" style="width: 70%">
+        ${charts.chart7( chart7_data, width="100%" )}
+    </div>
+
+    <div class="p10 floatl" style="width: 25%">
+        <div class="br5 p5 ml20" style="border: 2px solid LightSteelBlue">
+            <div class="fntbold pb5">Tagnames : </div>
+            ${ ', '.join([ '<a href="%s">%s</a>' % ( c.cntlrobj.url_tag(tag), tag )
+                           for tag in tagnames ]) | n}
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Charts and Analytics"
+        tline   = capture( elements.iconlink, h.url_lictimeline,
+                           'timeline', title="License Timeline" )
+        pbar_spans = [ tline ]
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, pbar_spans, tooltips=page_tooltips,)}
+        <div id="bdy" class="height: 600px;">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart6' :
+                <div style="margin : 0 auto;">
+                    ${licchart6(c.chart6_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart7' :
+                <div style="margin : 0 auto;">
+                    ${licchart7(c.chart7_data, c.chart7_tags)}
+                </div>
+            % else :
+                <div style="margin : 0 auto;"></div>
+            % endif
+        </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        % if c.selectedchart[0] == 'chart6' :
+            dojo.addOnLoad( setup_chart6 );
+        % elif c.selectedchart[0] == 'chart7' :
+            dojo.addOnLoad( setup_chart7 );
+        % endif
+    </script>
+</%def>
+
+

@@ -1,0 +1,197 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="pgrp"     file="/forms/pgrp.html"/>
+<%namespace name="user"     file="/forms/user.html"/>
+<%namespace name="proj"     file="/forms/proj.html"/>
+<%namespace name="lic"      file="/forms/lic.html"/>
+
+<%!
+    adminmenu        = None
+    submit_perms     = None
+    submit_usrperms  = None
+    submit_usradmin  = None
+    submit_prjadmin  = None
+    submit_licadmin  = None
+%>
+
+<%def name="init()">
+    <%
+    global adminmenu, submit_perms, submit_usrperms, \
+           submit_usradmin, submit_prjadmin, submit_licadmin
+
+    adminmenu        = [ (h.url_for( h.r_siteadmin, action='permgroup', form='request' ),
+                         'Create, Modify, Delete Permission Groups',
+                         'permission-groups',
+                        ),
+                        (h.url_for( h.r_siteadmin, action='userperm', form='request' ),
+                         'Assign site-wide permissions for user',
+                         'user-permissions',
+                        ),
+                        (h.url_for( h.r_siteadmin, action='useradmin', form='request' ),
+                         'Manage registered users for %s' % c.sitename,
+                         'users',
+                        ),
+                        (h.url_for( h.r_siteadmin, action='projectadmin', form='request' ),
+                         'Manage projects in %s ' % c.sitename,
+                         'projects',
+                        ),
+                        (h.url_for( h.r_siteadmin, action='licenseadmin', form='request' ),
+                         'Manage license',
+                         'license',
+                        ),
+                      ]
+
+    submit_perms       = h.url_for( h.r_siteadmin,
+                                    action='permgroup',
+                                    form='submit',
+                                  )
+    submit_usrperms    = h.url_for( h.r_siteadmin,
+                                    action='userperm',
+                                    form='submit',
+                                  )
+    submit_usradmin    = h.url_for( h.r_siteadmin,
+                                    action='useradmin',
+                                    form='submit',
+                                  )
+    submit_prjadmin    = h.url_for( h.r_siteadmin,
+                                    action='projectadmin',
+                                    form='submit',
+                                  )
+    submit_licadmin    = h.url_for( h.r_siteadmin,
+                                    action='licenseadmin',
+                                    form='submit',
+                                  )
+    %>
+</%def>
+
+<%def name="permgroup_form( perm_groups, perm_names )">
+    <div class="form" id="pgform">
+    <form action="${submit_perms}" method="post">
+    <table>
+        ${pgrp.pgroup_create( perm_groups, perm_names )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="userperm_form( usernames, permissions )">
+    <div class="form" id="upgform">
+    <form action="${submit_usrperms}" method="post">
+    <table>
+        ${user.user_permissions( usernames, permissions )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="useradmin_form( enabledusers, disabledusers )">
+    <div class="form" id="usradminform">
+    <form action="${submit_usradmin}" method="post">
+    <table>
+        ${user.user_enable( disabledusers )}
+        ${user.user_disable( enabledusers )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="projectadmin_form( enabledprojs, disabledprojs, privateprojs, exposedprojs )">
+    <div class="form" id="prjadminform">
+    <form action="${submit_prjadmin}" method="post">
+    <table>
+        ${proj.project_disable( enabledprojs )}
+        ${proj.project_enable( disabledprojs )}
+        ${proj.project_expose( privateprojs )}
+        ${proj.project_private( exposedprojs )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="license_form( license )">
+    <div class="form" id="licadminform">
+    <form action="${submit_licadmin}" method="post">
+    <table>
+        % for l in license :
+            ${lic.license_edit( l.id, l.licensename, l.summary, l.source, l.text)}
+        % endfor
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_body()">
+    ${init()}
+    <% pagebartext = "%s Site-Administration" % c.sitename %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 0px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">${pagebartext}</div>
+
+            ## Page Bar navigation
+            <div class="pbarnav">
+            % for m in adminmenu :
+                % if c.action == m[2] :
+                <div style="background: #FFFFFF">
+                    <span class="tab">${m[2]}</span>
+                </div>
+                % else :
+                <div>
+                    <a class="tab nodec" title="${m[1]}" href="${m[0]}">${m[2]}</a>
+                </div>
+                % endif
+            % endfor
+            </div>
+
+            ## Form content
+            <div class="pbarcont">
+                <table style="width: 100%;"><tr>
+                <td style="width: 80%;">
+                    % if c.action == 'permission-groups' :
+                        ${permgroup_form( c.custompgroups, c.perm_names )}
+                    % elif c.action == 'user-permissions' :
+                        ${userperm_form( c.usernames, c.permissions )}
+                    % elif c.action == 'users' :
+                        ${useradmin_form( c.enabledusers, c.disabledusers )}
+                    % elif c.action == 'projects' :
+                        ${projectadmin_form( c.enabledprojs, c.disabledprojs, c.privateprojs, c.exposedprojs )}
+                    % elif c.action == 'license' :
+                        ${license_form( c.license )}
+                    % endif
+                </td>
+                <td style="width: 20%;">
+                    Tips and  help
+                </td>
+                </tr></table>
+            </div>
+        </div>
+    </div>
+</%def>

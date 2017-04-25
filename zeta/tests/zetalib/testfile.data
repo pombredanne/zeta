@@ -1,0 +1,3030 @@
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE', which is part of this source code package.
+#       Copyright (c) 2009 SKR Farms (P) LTD.
+
+import logging
+import unittest
+import os
+from   os.path                   import join, isdir
+import random
+from   random                    import choice, randint, shuffle, seed
+from   datetime                  import datetime
+import re
+
+from   pylons                    import config
+import pytz
+from   nose.tools                import assert_equal, assert_raises, assert_true
+import simplejson                as json
+from   sqlalchemy                import engine_from_config
+ 
+from   zeta.auth.perm            import permissions
+from   zeta.model                import init_model, create_models, delete_models
+from   zeta.model                import meta
+import zeta.lib.cache            as cachemod 
+import zeta.lib.helpers          as h
+from   zeta.lib.error            import ZetaFormError
+from   zeta.tests.tlib           import *
+from   zeta.tests.model.generate import genattachs
+
+log     = logging.getLogger(__name__)
+seed    = None
+
+cachemgr= None
+
+cachedir= '/tmp/testcache'
+
+def setUpModule() :
+    global cachemgr
+
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    seed     = config['seed'] and int(config['seed']) or genseed()
+    log_mheader( log, testdir, testfile, seed )
+    random.seed( seed )
+
+    # Setup SQLAlchemy database engine
+    engine = engine_from_config( config, 'sqlalchemy.' )
+    # init_model( engine )
+    create_models( engine, config, sysentries_cfg=meta.sysentries_cfg, 
+                   permissions=permissions )
+
+    # Setup cache manager
+    isdir( cachedir ) or os.makedirs( cachedir )
+    cachemgr = cachemod.cachemanager( cachedir )
+
+
+def tearDownModule() :
+    testdir  = os.path.basename( os.path.dirname( __file__ ))
+    testfile = os.path.basename( __file__ )
+    log_mfooter( log, testdir, testfile )
+
+    info = "   Deleting models ... "
+    log.info( info )
+    print info
+    delete_models( meta.engine )
+
+    # Clean up cache
+    cachemod.cleancache( cachedir )
+
+
+def countalphas() :
+    for a in open( __file__ ).read() :
+
+
+class TestCache( object ) :
+
+    def test_1_func2namespace( self ) :
+        """Testing func2namespace()"""
+        log.info( "Testng func2namespace() ..." )
+
+        # Namespace for module function
+        def func() :
+            pass
+        assert_equal( cachemod.func2namespace( func ).split('.')[-1],
+                      'test_cache',
+                      'Mismatch in func2namespace for function' 
+                    )
+
+        # Namespace for class function
+        class O( object ) :
+            def func( self ) :
+                pass
+        o = O()
+        #assert_equal( '.'join(cachemod.func2namespace(o.func).split('.')[1:]),
+        assert_equal( cachemod.func2namespace(o.func).split('.')[1:],
+                      [ 'test_cache', 'O' ],
+                      'Mismatch in func2namespace for method'
+                    )
+
+    def test_2_decorators( self ) :
+        """Testing decorators"""
+        log.info( "Testing cache decorator ..." )

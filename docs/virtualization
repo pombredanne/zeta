@@ -1,0 +1,244 @@
+
+=== Setup virtualized server
+
+Setup virtualization on ubuntu 10.04 using KVM.
+
+Install kvm and lib-virt package,
+
+{{{ Code sh
+   sudo apt-get install kvm libvirt-bin  
+}}}
+
+
+The //libvirt// library is used to interface with different virtualization
+technologies. Before getting started with //libvirt// it is best to make sure your
+hardware supports the necessary virtualization extensions for KVM. Enter the
+following from a terminal,
+
+{{{ Code sh
+    kvm-ok
+}}}
+
+A message will be printed informing you if your CPU does or does not support
+hardware virtualization. ''On most computer whose processor supports
+virtualization, it is necessary to activate an option in the BIOS to enable
+it.''
+
+Add //user// who will perform VM managment to //libvirtd// group,
+
+{{{ Code sh
+    sudo adduser $USER libvirtd  
+}}}
+
+If the user chosen is the current user, you will need to log out and back in
+for the new group membership to take effect.
+
+Install bridge utilities,
+
+{{{ Code sh
+    sudo apt-get install bridge-utils
+}}}
+
+virt-install is part of the python-virtinst package. To install it, from a
+terminal prompt enter:
+
+{{{ Code sh
+    sudo apt-get install python-virtinst
+}}}
+
+=== Setup guest OS
+
+Based on the target guest OS follow one of the sections below and install the
+virtual-machine using //virt-install// tool. Note that the //virt-install//
+command should be executed on the host machine.
+
+Once the virtual machine is created using //virt-install// tool, it should be
+executing, booting from the iso image. Connect to the VM using
+//virt-manager// or physically connect monitor and console to the host machine 
+and watch the VM in action.
+
+{{{ Code sh
+    virt-viewer -c qemu:///system fedora13
+}}}
+
+==== Fedora 13 
+
+Install using //virt-install// commmand line tool, 
+
+{{{ Code sh
+    virt-install --connect qemu:///system --name fedora13 --ram 1024 --disk path=/home/zetavm/images/fedora13_hda.img,size=12 --network network=default --virt-type=kvm --vnc --os-variant fedora13 --cdrom /home/zetavm/bootiso/Fedora-13-i686-Live.iso
+}}}
+
+where,
+    * //fedora13// is the name of the virtual machine.
+    * //ram// is 1024 MB.
+    * //fedora13_hda// is used as hard disk for the virtual machine, size
+      being 12 GB.
+    * //--cdrom// is essential to provide the installation iso image.
+    * use //--virt-type=kvm// to get maximum performance.
+    * //path// provides the disk image file. //size// attribute of //path
+      provides the size of the disk in GB.
+
+==== Ubuntu 8.04
+
+Install using //virt-install// commmand line tool, 
+
+{{{ Code sh
+    virt-install --connect qemu:///system --name ubuntu804 --ram 1024 --disk path=/home/zetavm/images/ubuntu804_hda.img,size=12 --network network=default --virt-type=kvm --vnc --os-variant ubuntu --cdrom /home/zetavm/bootiso/ubuntu-8.04.4-server-i386.iso
+}}}
+
+where,
+    * //ubuntu804// is the name of the virtual machine.
+    * //ram// is 1024 MB.
+    * //ubuntu804_hda// is used as hard disk for the virtual machine, size
+      being 12 GB.
+    * //--cdrom// is essential to provide the installation iso image.
+    * use //--virt-type=kvm// to get maximum performance.
+    * //path// provides the disk image file. //size// attribute of //path
+      provides the size of the disk in GB.
+
+=== Ubuntu 10.04
+
+Install using //virt-install// commmand line tool, 
+
+{{{ Code sh
+    virt-install --connect qemu:///system --name ubuntu1004 --ram 1024 --disk path=/home/zetavm/images/ubuntu1004_hda.img,size=12 --network network=default --virt-type=kvm --vnc --os-variant ubuntu --cdrom /home/zetavm/bootiso/ubuntu-10.04-server-i386.iso
+}}}
+
+where,
+    * //ubuntu1004// is the name of the virtual machine.
+    * //ram// is 1024 MB.
+    * //ubuntu1004_hda// is used as hard disk for the virtual machine, size
+      being 12 GB.
+    * //--cdrom// is essential to provide the installation iso image.
+    * use //--virt-type=kvm// to get maximum performance.
+    * //path// provides the disk image file. //size// attribute of //path
+      provides the size of the disk in GB.
+
+=== Setup virtual manager
+
+Virtual manager is setup on a different desktop, preferably ubuntu.
+
+{{{ Code sh
+    sudo apt-get install virt-manager
+}}}
+
+Use virt-manager and connect to Ubuntu Server,
+
+{{{ Code sh
+    virt-manager -c qemu+ssh://<virt_server>/system
+}}}
+
+where <virt_server> is hostname or IP address of the server.
+
+=== Setting up networking
+
+Every standard libvirt installation provides NAT based connectivity to virtual
+machines out of the box. This is the so called 'default virtual network'. You
+can verify that it is available with,
+
+{{{ Code sh
+# virsh net-list --all
+Name                 State      Autostart 
+-----------------------------------------
+default              active     yes
+}}}
+
+
+On the host side,
+First take down the interface you wish to bridge
+
+{{{ Code sh
+ ifdown eth0
+}}}
+
+Edit /etc/network/interfaces and find the config for the physical interface,
+which looks something like
+
+{{{ Code conf
+   auto eth0
+   iface eth0 inet static
+        address 192.168.2.4
+        netmask 255.255.255.0
+        network 192.168.2.0
+        broadcast 192.168.2.255
+        gateway 192.168.2.2
+}}}
+
+Remove the [<PRE allow-hotplug eth0 >] line, replacing it with
+[<PRE auto br0 >], and change the next line with iface name to //br0//, so it
+now looks like,
+
+{{{ Code conf
+    auto br0
+    iface br0 inet static
+        address 192.168.2.4
+        netmask 255.255.255.0
+        network 192.168.2.0
+        broadcast 192.168.2.255
+        gateway 192.168.2.2
+        bridge_ports eth0
+        bridge_stp on
+        bridge_maxwait 0
+}}}
+
+The interface can now be started with
+
+{{{ Code sh
+ ifup br0
+}}}
+
+Finally add the '/etc/sysctl.conf' settings
+
+{{{ Code conf
+ net.bridge.bridge-nf-call-ip6tables = 0
+ net.bridge.bridge-nf-call-iptables = 0
+ net.bridge.bridge-nf-call-arptables = 0
+}}}
+
+And then load the settings with
+
+{{{ Code sh
+ sysctl -p /etc/sysctl.conf
+}}}
+
+You should now have a //shared physical device//, to which guests can be
+attached and have full LAN access.
+
+{{{ Code sh
+bridge name     bridge id               STP enabled     interfaces
+br0             8000.001cc0b28dd2       yes             eth0
+virbr0          8000.000000000000       yes
+}}}
+
+Setting up interface for guest,
+
+The interface file for guest will be located at
+/etc/libvirt/qemu/<vmname>.xml, you might find something like,
+
+{{{ Code xml
+<interface type='network'> 
+    <mac address='52:54:00:4e:05:b3'/> 
+    <source network='default'/> 
+    <model type='virtio'/> 
+</interface> 
+}}}
+
+Change it to,
+
+{{{ Code xml
+<interface type='bridge'> 
+    <mac address='52:54:00:4e:05:b3'/> 
+    <source bridge='br0'/>
+</interface>
+}}}
+
+To reconfigure the virtual machine, like change the virtual-CPUs, network,
+etc ... use the xml file created under, /etc/libvirt/qemu/<vmname>.xml
+
+=== References 
+
+https://help.ubuntu.com/10.04/serverguide/C/libvirt.html
+http://wiki.libvirt.org/page/Networking
+
+/* vim: set filetype=zwiki : */

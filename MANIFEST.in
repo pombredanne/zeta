@@ -1,0 +1,15 @@
+include ACKNOWLEDGEMENT
+include AUTHORS
+include CHANGELOG
+include LICENSE
+include README
+include RELEASE
+include UPGRADE
+include zeta/config/deployment.ini_tmpl
+include development.ini
+include production.ini
+
+recursive-include defenv *
+recursive-include docs *
+recursive-include bin *
+recursive-include zeta/templates-dojo *

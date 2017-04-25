@@ -1,0 +1,185 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="attchart2(chart2_data, payload, fcount)">
+    <%
+        topupld    = sorted( chart2_data, key=lambda x : x[1], reverse=True )
+        toppyld    = sorted( chart2_data, key=lambda x : x[2], reverse=True )
+    %>
+    <div name="chart2" class="floatl p10" style="width: 70%">
+        ${charts.chart2( chart2_data, width="100%" )}
+    </div>
+    <div class="floatl p10" style="width: 25%">
+        <div class="fntbold fgcrimson">
+            Around 
+            <span class="fgblack">${payload/(1024*1024)} MB</span>
+            in
+            <span class="fgblack">${fcount}</span> files
+        </div>
+        <div class="p5 mt10 br5" style="border: 2px solid LightSteelBlue">
+            <div class="fntbold">Top uploaders, by files </div>
+            <table>
+            % for x in topupld[:10] :
+                <tr>
+                    <td class="fggray ralign p3" style="width: 60%;">
+                        <a href="${c.cntlrobj.url_user(x[0])}">${x[0]}</a>
+                    </td>
+                    <td class="fggray p3"> ${x[1]} files</td>
+                </tr>
+            % endfor
+            </table>
+        </div>
+        <div class="p5 mt10 br5"
+             style="border: 2px solid LightSteelBlue">
+            <div class="fntbold">Top uploaders, by payload </div>
+            <table>
+            % for x in toppyld[:10] :
+                <tr>
+                    <td class="fggray ralign p3" style="width: 60%;">
+                        <a href="${c.cntlrobj.url_user(x[0])}">${x[0]}</a>
+                     </td>
+                    <td class="fggray p3"> ${x[2]} b</td>
+                </tr>
+            % endfor
+            </table>
+        </div>
+    </div>
+</%def>
+
+<%def name="attchart3(chart3_data)">
+    <%
+        topdwnd = sorted( chart3_data, key=lambda x : x[2], reverse=True )
+    %>
+    <div name="chart2" class="floatl p10" style="width: 70%">
+        ${charts.chart3( chart3_data, width="100%" )}
+    </div>
+
+    <div class="p10 floatl" style="width: 25%">
+        <div class="br5 p5 ml20" style="border: 2px solid LightSteelBlue">
+            <div class="fntbold">Top downloads : </div>
+            % for x in topdwnd[:10] :
+                <div class="p3">
+                    <span class="fggray">${x[1]}, </span>
+                    <span class="fgblue">${x[2]}</span>
+                </div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="attchart4(chart4_data, tagnames)">
+    <%
+    %>
+    <div name="chart4" class="floatl p10" style="width: 70%">
+        ${charts.chart4( chart4_data, width="100%" )}
+    </div>
+
+    <div class="p10 floatl" style="width: 25%">
+        <div class="br5 p5 ml20" style="border: 2px solid LightSteelBlue">
+            <div class="fntbold pb5">Tagnames : </div>
+            ${ ', '.join([ '<a href="%s">%s</a>' % ( c.cntlrobj.url_tag(tag), tag )
+                           for tag in tagnames ]) | n}
+        </div>
+    </div>
+</%def>
+
+<%def name="attchart5(chart5_data, fromdate)">
+    <%
+    %>
+    <div name="chart5" class="p10"
+         style="width: 70%; margin: 0 auto;">
+        ${charts.chart5( chart5_data, fromdate, width="100%" )}
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Charts & Analytics for uploaded files"
+        attachs = '<span class="ml10 fwnormal fntsmall">' +\
+                  ('<a href="%s">Attachments</a></span>' % h.url_attachments)
+        addattachs = '<span class="ml10 fwnormal fntsmall">' +\
+                     ('<a href="%s">Add</a></span>' % h.url_addattachment)
+        tline = capture( elements.iconlink, h.url_attachtline,
+                         'timeline', title="Attachment Timeline",
+                         classes="ml20" )
+
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, [ attachs, addattachs, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy" style="height: 600px;">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                <span class="fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart2' :
+                <div style="margin : 0 auto;">
+                ${attchart2(c.chart2_data, c.chart2_payld, c.chart2_fcnt)}
+                </div>
+            % elif c.selectedchart[0] == 'chart3' :
+                <div style="margin : 0 auto;">
+                ${attchart3(c.chart3_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart4' :
+                <div style="margin : 0 auto;">
+                ${attchart4(c.chart4_data, c.chart4_tags)}
+                </div>
+            % elif c.selectedchart[0] == 'chart5' :
+                <div style="margin : 0 auto;">
+                ${attchart5(c.chart5_data, c.chart5_frmdt)}
+                </div>
+            % else :
+                <div style="margin : 0 auto;"></div>
+            % endif
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        % if c.selectedchart[0] == 'chart2' :
+            dojo.addOnLoad( setup_chart2 );
+        % elif c.selectedchart[0] == 'chart3' :
+            dojo.addOnLoad( setup_chart3 );
+        % elif c.selectedchart[0] == 'chart4' :
+            dojo.addOnLoad( setup_chart4 );
+        % elif c.selectedchart[0] == 'chart5' :
+            dojo.addOnLoad( setup_chart5 );
+        % endif
+    </script>
+</%def>
+
+

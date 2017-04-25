@@ -1,0 +1,281 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+<%namespace name="tag" file="/forms/tag.html"/>
+
+## ------------------------ Ticket -------------------------------------
+
+<%def name="ticket( user_id=None, project_id=None, ticket_id=None, summary='', description='',
+                    ticket_types=[], deftype='',  ticket_severity=[], defseverity='' )">
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+    % if ticket_id :
+    <div class="input">${lib.input_hidden( name='ticket_id', value=str(ticket_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'tsumm', 'Summary' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='summary', id='tsumm', value=summary, maxlength=h.LEN_SUMMARY )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_SUMMARY} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'tdesc', 'Description' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_textarea( name='description', rows=20, cols=80, id='tdesc', text=description )}
+        <br></br>
+        <span class="frmhlp">Mininum 6 characters, Maximum ${h.LEN_DESCRIBE} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'ttype', 'Type' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_typename" size="1" id="ttype">
+            % for tt in ticket_types :
+                % if tt == deftype :
+                    ${lib.input_option( tt, value=tt, selected="selected" )}
+                % else :
+                    ${lib.input_option( tt, value=tt )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'tsevr', 'Severity' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_severityname" size="1" id="tsevr">
+            % for tsev in ticket_severity :
+                % if tsev == defseverity :
+                    ${lib.input_option( tsev, value=tsev, selected="selected" )}
+                % else :
+                    ${lib.input_option( tsev, value=tsev )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+</%def>
+
+<%def name="ticket_deps( user_id=None, project_id=None, ticket_id=None, blockingtcks=[],
+                         blockedbytcks=[], children=[], parent='')" >
+    <%  blockingtcks  = ', '.join( blockingtcks )
+        blockedbytcks = ', '.join( blockedbytcks )
+        children      = ', '.join( children )
+    %>
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+    % if ticket_id :
+    <div class="input">${lib.input_hidden( name='ticket_id', value=str(ticket_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'blking', 'Blocking' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='blocking', id='blking', value=blockingtcks, maxlength=256, size=32 )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Enter the ticket ids blocked by this ticket.</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'blkby', 'Blockedby' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='blockedby', id='blkby', value=blockedbytcks, maxlength=256, size=32 )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Enter the ticket ids blocking this ticket.</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'chldrn', 'Child tickets' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='children', id='chldrn', value=children, maxlength=256, size=32 )}
+        <br></br>
+        <span class="frmhlp">Enter the child tickets.</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'prnt', 'Parent ticket' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='parent', id='prnt', value=parent, maxlength=16, size=8 )}
+        <br></br>
+        <span class="frmhlp">Enter the parent ticket id.</span>
+    </div>
+    </td>
+    </tr>
+
+</%def>
+
+<%def name="ticket_prjattr( user_id=None, project_id=None, ticket_id=None, comps=[], defcomp='',
+                            mstns=[], defmstn='', vers=[], defver='')">
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+    % if ticket_id :
+    <div class="input">${lib.input_hidden( name='ticket_id', value=str(ticket_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'tcomp', 'Component' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_component" size="3" id="tcomp" multiple="multiple" >
+            % for comp in comps :
+                % if comp == defcomp  :
+                    ${lib.input_option( comp, value=comp, selected="selected" )}
+                % else :
+                    ${lib.input_option( comp, value=comp )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'tmstn', 'Milestone' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_milestone" size="3" id="tmstn" multiple="multiple" >
+            % for mstn in mstns :
+                % if mstn == defmstn  :
+                    ${lib.input_option( mstn, value=mstn, selected="selected" )}
+                % else :
+                    ${lib.input_option( mstn, value=mstn )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'tver', 'Version' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_version" size="3" id="tver" multiple="multiple" >
+            % for ver in vers :
+                % if ver == defver  :
+                    ${lib.input_option( ver, value=ver, selected="selected" )}
+                % else :
+                    ${lib.input_option( ver, value=ver )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+</%def>
+
+## ---------------------------- Ticket Status --------------------------------
+
+<%def name="ticket_status( user_id=None, project_id=None, ticket_status_history_id=None,
+                           ticket_status=[], defstatus='', due_date='',
+                           pmtusernames=[], defuser='' )">
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+    % if project_id :
+    <div class="input">${lib.input_hidden( name='project_id', value=str(project_id) )}</div>
+    % endif
+    % if ticket_status_history_id :
+    <div class="input">${lib.input_hidden( name='ticket_status_history_id', value=str(ticket_status_history_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'tstat', 'Status' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="tck_statusname" size="1" id="tstat">
+            % for tst in ticket_status :
+                % if tst == defstatus :
+                    ${lib.input_option( tst, value=tst, selected="selected" )}
+                % else :
+                    ${lib.input_option( tst, value=tst )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'pmtusr', 'Prompt User' )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="promtuser" size="1" id="pmtusr">
+            % for username in pmtusernames :
+                % if username == devuser :
+                    ${lib.input_option( username, value=username, selected="selected" )}
+                % else :
+                    ${lib.input_option( username, value=username )}
+                % endif
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'ddate', 'Due date' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='due_date', id='ddate', value=due_date, maxlength=16 )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Enter the date in DD/MM/YYYY format</span>
+    </div>
+    </td>
+    </tr>
+
+</%def>
+
+## ---------------------------------- Ticket comments ------------------------
+
+<%def name="ticket_comment( user_id=None, project_id=None, ticket_id=None, comment='' )">
+</%def>
+

@@ -1,0 +1,213 @@
+{{ Toc( float='right' ) }}
+
+h3. Upgrades to existing Deployments
+
+Upgrades where started sometime during 0.43dev release, and some form of
+upgrades have started for database from version 0.8
+
+Also refer to
+[[ http://dev.discoverzeta.com/help/upgradeInstallation | uprade guide ]]
+that accompanies every zeta deployment.
+
+h4. Upgrading Zeta and Zwiki via egg
+
+Obtain latest zeta and zwiki egg-packages. First install Zwiki and then
+install Zeta. Installation should take care of the dependant packages as
+well.
+
+h4. Upgrading Database
+
+When ever database related files, (which are under ''zeta/model/*'') are changed
+make sure to add an entry in this file and corresponding ''upgrade_*'' function
+under ''zeta/model/upgrade.py''. Also change the dbversion in 
+''zeta/config/environment.py'' to the next version.
+
+:  Schema changes ::
+    If the table schema has changed. Or new tables added, existing tables
+    deleted etc ...
+
+:  Transformed data ::
+    If data is transformed before being stored into the database, or if the
+    transformation algorithm has changed, then its effect should be replicated on
+    older versions of database as well.
+
+Always push the latest standard file under staticfiles into the `staticwiki`
+table
+
+h4. Upgrading environment directory
+
+Should be handled by the application automatically, when the latest
+version of application is restarted. Otherwise, make sure to add an entry in
+this file, and corresponding ''upgrade_*'' function under
+
+''zeta/lib/upgradeenv.py''
+
+Changes to standard files in enviroment directory,
+    * Standard files under the environement directory is changed.
+    * Clean the <env-path>/data/* directories and when doing so, dont forget to
+      re-index the database for searching, build analytics for charting and
+      reports.
+
+Changes to configuration files,
+    * Changes to configuration files need to be updated manually.
+
+Always copy the latest standard file under staticfiles into deployment's
+environment directory
+
+-----
+
+h4. UPGRADE 0.61b1 to 0.7b1
+
+''Upgrading eggs''
+   * Zeta, Zwiki
+
+''Upgrading Database''
+   * // None //
+
+''Upgrading enviroment directory''
+  * staticfiles/*
+  * staticfiles/help/*
+  * public/zdojo/*
+  * Cleanup data/cache directory (-rf)
+
+''Changes to configuration files''
+  * zeta.zetalink = http://discoverzeta.com
+  * email_to = support@discoverzeta.com
+
+h3. UPGRADE 0.6b2 to 0.61b1
+
+//(database 1.0 to 1.1)//
+
+''Upgrading eggs''
+  * Zeta, Zwiki,
+  * make sure to remove the older packages.
+
+''Upgrading Database''
+  * Added tables for ticket-filters, reviewset
+  * Change permission name from ZETA_ADMIN to SITE_ADMIN
+  * `bzr` vcs type added to `system` table, and `vcs_type` table
+  * Upgraded guest-wiki pages.
+
+''Upgrading enviroment directory''
+  * staticfiles/*
+  * staticfiles/help/*
+  * staticfiles/help/zwiki/*
+  * public/highcharts/*
+  * public/zdojo/release/*
+  * public/screenshots/*
+  * public/zetaicons/*
+  * public/tckfilters.pyd
+  * public/mstnccodes.json
+  * public/favicon.ico
+  * public/zenofzeta.png
+  * public/zhighcharts.js
+  * public/jquery-1.4.2.min.js
+  * public/zdojo/build/zdojo.profile.js
+  * public/zdojo/zdojo.css
+  * public/zdojo/zlib.js
+  * public/zdojo/zwidgets.js
+  * Cleanup data/cache directory (-rf)
+
+''Changes to configuration files''
+   * zeta.sitelogo      = /sitelogo
+   * zeta.zetalink      = http://discoverzeta.com
+   * zeta.zetalogo      = /zeta-110x45.png
+   * zeta.vcstypes      = svn,bzr
+   * zeta.googlemaps    =
+   * zeta.webanalytics  = 
+   * debug              = false
+   * full_stack         = false
+   * `webanalytics` should now point to a file which contains the analytics
+      snippet. The snippet will directly be included in every pages.
+   * zeta.smtp_serverip          = <ip-address>
+   * zeta.smtp_user              = <email-id for site>
+   * zeta.smtp_password          = <password for email-id>
+   * zeta.smtpmysql.url          = mysql://mail_admin:smtp321@127.0.0.1:3306/mailprovider
+   * zeta.smtpmysql.pool_recycle = 3600
+   * zeta.smtpmysql.echo         = False
+   * zeta.smtpmysql.encoding     = utf-8
+   * zeta.smtpmysql.pool_size    = 5
+ 
+   * Added authkit configuration for cookie, but commented.
+     [<PRE
+        #authkit.cookie.params.expires = 10
+        #authkit.cookie.enforce = True >]
+   * Re-arranged configuration options for [app:zetapylons]
+
+h3. UPGRADE 0.6b1 to 0.6b2
+
+''Upgrading eggs''
+  * Zeta, Zwiki
+
+''Upgrading enviroment directory''
+  * public/zdojo/zwidgets.js,
+
+h3. UPGRADE 0.5b2 to 0.6b1
+
+//(database 0.9 to 1.0)//
+
+''Upgrading eggs''
+  * Zeta, Zwiki
+
+''Upgrading Database''
+   * // None //
+
+''Upgrading enviroment directory''
+   * // None //
+
+''Changes to configuration files''
+  * Moved `zeta.strictauth` to system table
+  * Added `zeta.googlemaps`
+
+h3. UPGRADE 0.5b1 to 0.5b2
+
+''Upgrading eggs''
+  * Zeta, Zwiki
+
+''Upgrading Database''
+  * // None //
+
+''Upgrading enviroment directory''
+  * zdojo related files and directories.
+
+''Changes to configuration files''
+  * // None //
+
+
+h3. UPGRADE 0.43dev to 0.5b1
+
+//(database 0.8 to 0.9)//
+
+''Upgrading eggs''
+  * Zeta, Zwiki
+
+''Upgrading Database''
+  * p_frontpage staticwiki file is changed to p_homepage.
+  * help/* staticwiki are pushed.
+
+''Upgrading enviroment directory''
+  * new file, defenv/public/zetaicons/arrow_refresh.png
+  * rename defenv/staticfiles/p_frontpage to defenv/staticfiles/p_homepage
+  * copied defenv/staticfiles/help/*
+
+''Changes to configuration files''
+  * // None //
+
+
+h3. UPGRADE 0.42dev to 0.43dev
+
+//(database 0.7 to 0.8)//
+
+''Upgrading eggs''
+  * Zeta, Zwiki
+
+''Upgrading Database''
+  * user.password value is hash digested and stored
+
+''Upgrading enviroment directory''
+  * // None //
+
+''Changes to configuration files''
+  * // None //
+
+/* vim: set filetype=zwiki : */

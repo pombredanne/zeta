@@ -1,0 +1,84 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements"  file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Downloads available for project"""
+],
+
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <%
+        fav  = capture( elements.favoriteicon, 'favproj', classes="ml10" )
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        ctxt_title = '<span class="fggray fntbold ml10 mr10">%s - downloads</span>' \
+                     % c.project.projectname 
+        attachs = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project attachmens"> \
+                    Attachments</a></span>' % h.url_projattachs )
+        roadmap = '<span class="ml20 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Past, current and future milestones">\
+                    Roadmap</a></span>' % h.url_projroadmap )
+        mountpt = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Mounted repository directories"> \
+                    Mountpoints</a></span>' % h.url_projmounts )
+        charts  = capture( elements.iconlink, h.url_projectcharts,
+                           'barchart', title="Project analytics",
+                           classes="ml20" )
+        tline   = capture( elements.iconlink, h.url_projtimeline,
+                           'timeline', title="Project timeline",
+                           classes="ml10" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ fav, ctxt_title, roadmap, mountpt, attachs, charts,
+                              tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+            % if c.authorized :
+                ${forms.form_projfav(
+                    c.authuser, c.project, h.suburl_projfav,
+                    c.isfavorite and 'delfavuser' or 'addfavuser'
+                )}
+            % endif
+            <div class="m10">
+                ${elements.attachdownloads(
+                    c.authuser, c.attachments, c.cntlrobj
+                )}
+            </div>
+        </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojoaddOnLoad( 'initform_projfav' );
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+
+

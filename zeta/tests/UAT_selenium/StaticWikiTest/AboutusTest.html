@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AboutusTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AboutusTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=aboutus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>=== Why we engineered this tool<br /><br />There are several reasons why we wanted a tool like this. A few of<br />them I will list here,<br /><br />* A generic bug / effort tracking tool that can be tailored to our needs.<br />* We wanted a flexible, version controlled document application,&nbsp;&nbsp;\<br />enabling multiple users to collaborate in writing documents.<br />* Support for multiple projects without complicating user's participation with \<br />&nbsp;&nbsp;projects.<br />* A permission system, that is simple yet flexible.<br />* Full integration with your favorite editors, email server(s) and version \<br />&nbsp;&nbsp;control system.<br />* Data analytics, for projects as well as for your source code.<br /><br />We hope to cover all our needs in near future along with yours. So do send an<br />[[ mailto:support@discoverzeta.com | email ]] letting us know what you want.<br />And yes, we know that there are several similar tools out there in the market. For us,<br />there were reasons for not picking one of them, but for you, we hope there<br />will be a reason to pick ours for yourself.<br /><br />=== People<br /><br />: Pratap :: <br />&nbsp;&nbsp;&nbsp;&nbsp;Principal developer, started this activity and running this for <br />&nbsp;&nbsp;&nbsp;&nbsp;{{ YearsBefore('past %s', '2008') }}.<br /><br />=== Test Header<br />Line added for testing<br /><br />/* vim: set filetype=zwiki : */</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>aboutus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='bdy']/div/div/div/div/h3[3]</td>
+	<td>Test Header</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>=== Why we engineered this tool<br /><br />There are several reasons why we wanted a tool like this. A few of<br />them I will list here,<br /><br />* A generic bug / effort tracking tool that can be tailored to our needs.<br />* We wanted a flexible, version controlled document application,&nbsp;&nbsp;\<br />enabling multiple users to collaborate in writing documents.<br />* Support for multiple projects without complicating user's participation with \<br />&nbsp;&nbsp;projects.<br />* A permission system, that is simple yet flexible.<br />* Full integration with your favorite editors, email server(s) and version \<br />&nbsp;&nbsp;control system.<br />* Data analytics, for projects as well as for your source code.<br /><br />We hope to cover all our needs in near future along with yours. So do send an<br />[[ mailto:support@discoverzeta.com | email ]] letting us know what you want.<br />And yes, we know that there are several similar tools out there in the market. For us,<br />there were reasons for not picking one of them, but for you, we hope there<br />will be a reason to pick ours for yourself.<br /><br />=== People<br /><br />: Pratap :: <br />&nbsp;&nbsp;&nbsp;&nbsp;Principal developer, started this activity and running this for <br />&nbsp;&nbsp;&nbsp;&nbsp;{{ YearsBefore('past %s', '2008') }}.<br /><br />/* vim: set filetype=zwiki : */</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Line added for testing</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

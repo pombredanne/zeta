@@ -1,0 +1,44 @@
+Debugging a compiler is typically not an easy task. PLY provides some advanced diagonistic capabilities through the use of Python's logging module. The next two sections describe this:
+9.1 Debugging the lex() and yacc() commands
+
+Both the lex() and yacc() commands have a debugging mode that can be enabled using the debug flag. For example:
+
+    lex.lex(debug=True)
+    yacc.yacc(debug=True)
+
+Normally, the output produced by debugging is routed to either standard error or, in the case of yacc(), to a file parser.out. This output can be more carefully controlled by supplying a logging object. Here is an example that adds information about where different debugging messages are coming from:
+
+    # Set up a logging object
+    import logging
+    logging.basicConfig(
+        level = logging.DEBUG,
+        filename = "parselog.txt",
+        filemode = "w",
+        format = "%(filename)10s:%(lineno)4d:%(message)s"
+    )
+    log = logging.getLogger()
+
+    lex.lex(debug=True,debuglog=log)
+    yacc.yacc(debug=True,debuglog=log)
+
+If you supply a custom logger, the amount of debugging information produced can be controlled by setting the logging level. Typically, debugging messages are either issued at the DEBUG, INFO, or WARNING levels.
+
+PLY's error messages and warnings are also produced using the logging interface. This can be controlled by passing a logging object using the errorlog parameter.
+
+    lex.lex(errorlog=log)
+    yacc.yacc(errorlog=log)
+
+If you want to completely silence warnings, you can either pass in a logging object with an appropriate filter level or use the NullLogger object defined in either lex or yacc. For example:
+
+    yacc.yacc(errorlog=yacc.NullLogger())
+
+9.2 Run-time Debugging
+
+To enable run-time debugging of a parser, use the debug option to parse. This option can either be an integer (which simply turns debugging on or off) or an instance of a logger object. For example:
+
+    log = logging.getLogger()
+    parser.parse(input,debug=log)
+
+If a logging object is passed, you can use its filtering level to control how much output gets generated. The INFO level is used to produce information about rule reductions. The DEBUG level will show information about the parsing stack, token shifts, and other details. The ERROR level shows information related to parsing errors.
+
+For very complicated problems, you should pass in a logging object that redirects to a file where you can more easily inspect the output after execution. 

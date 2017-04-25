@@ -1,0 +1,27 @@
+When setting up project's content and intellectual property open in a
+central server, it becomes important to decide who should have access to those
+information. Espeically when third party suppliers and clients are to
+take part in your project.
+
+Our permission system, as visible (or enforced) among users are at two
+levels. One, authentication, where the user and the server comes to
+an agreement on who the user is. Two, authorization, where the
+server can impose access restrictions on the identified users, based on
+administrator settings.
+
+While underneath, we abstract our entire permission system by making two
+basic assumptions. One, every resource or group of resources are to be tagged
+with a permission-name based on access type. Two, permissions are always
+hierarchical.
+
+Enigneers are victims of eternal abstractions, we are no different. When we
+attempted to remove the second assumption and some how abstract them into a
+consistent framework we hit up a problem, what we call as "overriding
+paradox". It is the situation, where one user is partially submissive to
+another, while at the same time can override him or her. It is like asking
+who can override whom, among the judicial, executive, electoral and
+parlimentary mandates of a democratic constitution.
+
+With this framework and its two assumptions, it is possible to implement a
+permission system that is suitable for your project needs and can be plugged
+into the application.

@@ -1,0 +1,296 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="element"  file="/component/elements.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="proj"     file="/forms/proj.html"/>
+<%namespace name="attc"     file="/forms/attc.html"/>
+<%namespace name="tag"      file="/forms/tag.html"/>
+
+<%!
+    projadminmenu     = []
+    submit_project    = None
+    submit_notific    = None
+    submit_components = None
+    submit_milestones = None
+    submit_versions   = None
+    submit_userperms  = None
+    submit_teams      = None
+    submit_teamperms  = None
+%>
+
+<%def name="init()">
+    <%
+    global projadminmenu, submit_project, submit_notific, \
+           submit_components, submit_milestones, submit_versions, \
+           submit_userperms, submit_teams, submit_teamperms
+
+    projadminmenu    =[ (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='project',
+                                    form='request' ),
+                         'Edit project details',
+                         'project',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='notification',
+                                    form='request' ),
+                         'Manage project notification',
+                         'notifications',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='components',
+                                    form='request' ),
+                         'Manage project components',
+                         'components',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='milestones',
+                                    form='request' ),
+                         'Manage project milestones',
+                         'milestones',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='versions',
+                                    form='request' ),
+                         'Manage project versions',
+                         'versions',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='userpermissions',
+                                    form='request' ),
+                         'Assign project-wise permissions for users',
+                         'user-permissions',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='teams',
+                                    form='request' ),
+                         'Manage project teams',
+                         'teams',
+                        ),
+                        (h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='teampermissions',
+                                    form='request' ),
+                         'Assign Team Permissions',
+                         'team-permissions',
+                        ),
+                      ]
+
+    submit_project     = h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='project',
+                                    form='submit',
+                                  )
+    submit_notific     = h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='notification',
+                                    form='submit',
+                                  )
+    submit_components  = h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='components',
+                                    form='request' )
+    submit_milestones  = h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='milestones',
+                                    form='request' )
+    submit_versions    = h.url_for( h.r_projadmin,
+                                    projectname=c.projectname,
+                                    action='versions',
+                                    form='request' )
+    submit_userperms   = h.url_for( h.r_siteadmin,
+                                    projectname=c.projectname,
+                                    action='userpermissions',
+                                    form='submit',
+                                  )
+    submit_teams       = h.url_for( h.r_siteadmin,
+                                    projectname=c.projectname,
+                                    action='teams',
+                                    form='submit',
+                                  )
+    submit_teamperms   = h.url_for( h.r_siteadmin,
+                                    projectname=c.projectname,
+                                    action='teampermissions',
+                                    form='submit',
+                                  )
+    %>
+</%def>
+
+
+<%def name="bd_mainnav()">
+    ${element.mainnav()}
+</%def>
+
+<%def name="project_form( u, p, usernames, licnames )">
+    <form action="${submit_project}" method="post">
+    <table>
+        <%
+            tagnames = [ t.tagname for t in p.tags ]
+        %>
+        ${proj.project( u.id, p.id, p.projectname, p.summary, p.admin_email )}
+        ${proj.projectadmin( u.id, p.id, adminname=p.admin.username, usernames=c.usernames )}
+        ${proj.project_license( u.id, p.id, p.license.licensename, licensenames=c.licensenames )}
+        ${proj.project_info( u.id, p.id, p.project_info.description )}
+        ${attc.addattach( 'prjlogo', 'prjlogo', 'Project Logo :', \
+            'Must be 100x75 sized thumbnail image file.' )}
+        ${attc.addattach( 'prjicon', 'prjicon', 'Project Icon :', \
+            'Must be 16x16 ICON file.')}
+        ${tag.addtags()}
+        ${tag.removetags( tagnames=tagnames )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="notification_form( u, p )">
+    <form action="${submit_notific}" method="post">
+    <table>
+        <%
+            mlists   = [ m.mailing_list for m in p.mailinglists ]
+            ircch    = [ m.ircchannel for m in p.ircchannels ]
+        %>
+        ${proj.project_add_mlist( u.id, p.id )}
+        ${proj.project_remove_mlist( u.id, p.id, mlists )}
+        ${proj.project_add_ircchannel( u.id, p.id )}
+        ${proj.project_remove_ircchannel( u.id, p.id, ircch )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="comp_form( u, p, usernames, defusername, componentnames )">
+    <form action="${submit_components}" method="post">
+    <table>
+        ${proj.prjcomp_create( u.id, p.id, usernames, defusername, componentnames )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="mstn_form( u, p, milestonenames )">
+    <form action="${submit_milestones}" method="post">
+    <table>
+        ${proj.prjmstn_create( u.id, p.id, milestonenames )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="ver_form( u, p, versionnames )">
+    <form action="${submit_versions}" method="post">
+    <table>
+        ${proj.prjver_create( u.id, p.id, versionnames )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="userperms_form( u, p, usernames, projectname, permissions )">
+    <form action="${submit_userperms}" method="post">
+    <table>
+        ${proj.project_userpermissions( u.id, p.id, usernames, projectname, permissions )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="teams_form( u, p, teams, projectname, usernames )">
+    <form action="${submit_userperms}" method="post">
+    <table>
+        ${proj.project_teams( u.id, p.id, teams, projectname, usernames )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+<%def name="teamperms_form( u, p, teams, projectname, permissions )">
+    <form action="${submit_notific}" method="post">
+    <table>
+        ${proj.project_teampermissions( u.id, p.id, teams, projectname, permissions )}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit( value="Save Changes" )}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+</%def>
+
+
+<%def name="bd_body()">
+    ${init()}
+    <div class="gbrdr">
+    <div class="ctxtnav" style="margin-left : 1px;">
+        ## Context items
+        % for m in projadminmenu :
+            % if c.action == m[2] :
+            <div class="ctxtitem" style="background: #FFFFFF">
+                <span class="tab">${m[2]}</span>
+            </div>
+            % else :
+            <div class="ctxtitem">
+                <a class="tab nodec" title="${m[1]}" href="${m[0]}">${m[2]}</a>
+            </div>
+            % endif
+        % endfor
+    </div>
+    </div>
+
+    <div class="gbrdr">
+    <div class="cont form">
+        <table style="width: 100%;"><tr>
+        <td style="width: 80%;">
+            % if c.action == 'project' :
+                ${project_form( c.user, c.project, c.usernames, c.licensenames)}
+            % elif c.action == 'notification' :
+                ${notification_form( c.user, c.project )}
+            % elif c.action == 'components' :
+                ${comp_form( c.user, c.project, c.usernames, c.username, c.componentnames )}
+            % elif c.action == 'milestones' :
+                ${mstn_form( c.user, c.project, c.milestonenames )}
+            % elif c.action == 'versions' :
+                ${ver_form( c.user, c.project, c.versionnames )}
+            % elif c.action == 'user-permissions' :
+                ${userperms_form( c.user, c.project, c.projusernames, c.projectname, c.permissions )}
+            % elif c.action == 'teams' :
+                ${teams_form( c.user, c.project, c.teams, c.projectname, c.projusernames )}
+            % elif c.action == 'team-permissions' :
+                ${teamperms_form( c.user, c.project, c.teams, c.projectname, c.permissions )}
+            % endif
+        </td>
+        <td style="width: 20%;">
+            Tips and  help
+        </td>
+        </tr></table>
+    </div>
+    </div>
+</%def>

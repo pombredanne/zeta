@@ -1,0 +1,693 @@
+1. Server-Prerequisites :
+
+    * Install via apt-get,
+        python python-dev python-svn python-subversion python-setuptools python-virtualenv
+        python-xapian python-mysqldb wget
+        build-essential apache2 apache2-utils apache2-threaded-dev
+        apache2-mpm-prefork
+        mysql-common mysql-client mysql-admin mysql-server mysql
+        htmldoc, html2text, graphviz, graphviz-doc
+
+    * 'user' deploying zeta must be part of 'www-data' group.
+
+2. Packaging :
+    * Checkout zwiki and zeta branches as 'peer' directories.
+            zwiki/
+            zeta/
+
+  1.1 Packaging Zwiki :
+
+    > ./bin/cleanzwiki.sh
+    > ./bin/pkgzwiki.sh
+
+    will do 'bdist_egg' the current revision of the repository. Versioning
+    will be taken from setup.py. Before running the package command checkout a
+    fresh branch of the latest 'release-tag'.
+
+  1.2. Packaging Zeta :
+
+    > ./bin/cleanzeta.sh
+    > ./bin/pkgzeta.sh
+
+    will do 'bdist_egg' the current revision of the repository. Versioning
+    will be taken from setup.py. Before running the package command checkout a
+    fresh branch of the latest 'release-tag'.
+
+    The egg files (for zeta and zwiki) and './bin/deployzeta.py' file will be
+    tar-balled, which can be used for distribution.
+
+
+3. Database Setup :
+    ( for fresh installation )
+
+    * Create a database in MySQL eg, zetadev,
+
+        CREATE DATABASE zetadev;
+
+    * Create a user eg. 'zetadev' in mysql and grant permissions.
+
+        GRANT ALL ON zetadev.* TO zetadev@localhost IDENTIFIED BY 'password';
+
+      where 'password' is the password, granting all permission under for
+      database 'zetadev'.
+
+    * The database is already initialized or setup.
+
+        DROP DATABASE zetadev;
+        CREATE DATABASE zetadev;
+
+      commands will enable the administrator to re-setup the application.
+
+4. Fresh Deployment :
+
+    * Untar,
+
+        > tar -zxvf <packaged file>
+
+      will yield an egg file and a script file 'deployzeta.py' in the current 
+      directory. Run the script file,
+
+    * Deploy,
+
+        > deployzeta.py <deploy-name> <zetaegg-file> <zwikiegg-file>
+
+      Above script will accomplish the following things.
+
+        - Creates a directory by name <deploy-name> in the current directory and
+          populates it with files required for the virtual environment.
+
+        - Enters into the virtual environment and installs the zeta package and
+          all its dependancies in the virtual environment.
+
+        - Generates script by name, 'virtz-<deployname>.sh' in the current
+          directory, which can be used by the administrator to enter into the
+          deployment's virtual environment. 
+
+        - Automatically executes,
+            > paster make-config zeta production.ini
+
+          to create the configuration file for the production environment.
+          The initial template for production.ini should be updated only after
+          'setup-app' from paster.
+
+      Note : 
+        1. If in case, there is version conflict between packages in python
+           system environment and virtual environment, check with the system 
+           administrator to upgrade the package in the system version or
+           remove the package.
+
+    * Use,
+
+        > source virtz-<deployname>.sh
+
+      to enter to the deployments virtual environment.
+
+      All the administrative commands on a given deployment should be executed
+      in its virtual environment.
+
+    * Setup database.
+
+    * Once the production.ini file is created adjust the configuration option
+      to suite the deployment needs.
+      Refer to 'configuration' option section for more details.
+
+    * Application setup,
+
+        > paster setup-app production.ini#zetapylons
+
+      Which will,
+        - Initialize the database,
+        - Copy the environment tree to the path
+        - Adjust the defenv/mod_wsgi/dispatch.wsgi file for,
+          sitedir, eggcache, and application config
+
+      If the database is already initialized, setup-app will fail. Thus
+      forcing the administrator to know what he / she is about to do.
+
+    * Optionally, If you want to index the database from command line,
+
+        > paster request production.ini /pasteradmin/search do=index
+
+    * Adjust the os-group of egg-cache/ directory and defenv/ directory to
+      the os-group to which the web server belongs too.
+      And,
+            chgrp www-data .                // To allow the web server
+            chgrp -R www-data egg-cache     // To allow the web server
+            chgrp -R www-data defenv        // To allow the web server
+            chmod -R g+w egg-cache
+            chmod -R g+w defenv
+            chmod g+w .
+
+5. Apache Configuration :
+
+    Note that, instead of python2.5, you can use any of the python version for
+    which you have downloaded zeta.
+
+    Install apache packages,
+
+    > sudo apt-get install build-essential python2.5 python2.5-dev
+    > sudo apt-get install apache2 apache2-utils apache2-threaded-dev apache2-mpm-prefork
+
+    Download and build mod_wsgi
+
+    > wget http://modwsgi.googlecode.com/files/mod_wsgi-2.3.tar.gz
+    > tar zxfv mod_wsgi-2.3.tar.gz
+    > cd mod_wsgi-2.3
+    > ./configure --with-python=/usr/bin/python2.5
+    > make
+
+    Check that it can share the Python library by looking for libpython2.5.so
+    in the output from the following commands,
+
+    > cd .libs
+    > ldd mod_wsgi.so | grep python2.5
+        libpython2.5.so.1.0 => /usr/lib/libpython2.5.so.1.0 (0x00002b081a2e1000)
+
+    You can then install it,
+
+    > cd ../
+    > sudo make install
+
+    With mod_wsgi installed, you’ll need to enable it so that Apache can use
+    it. Create an /etc/apache2/mods-available/wsgi.load file with the
+    following content,
+
+        LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
+
+    Now enable the mod_wsgi module,
+
+    > sudo a2enmod force-reload
+    > sudo a2enmod wsgi
+
+    At this point, mod_wsgi is installed. To make debugging Apache easier, it
+    is useful to set the log level to info so that you get all the mod_wsgi
+    information. You do this by adding the following line to Apache’s
+    'httpd.conf',
+
+        LogLevel info
+
+    You’ll need to restart Apache,
+
+    > sudo /etc/init.d/apache2 restart
+
+    Check the error logs to ensure mod_wsgi has loaded:
+
+    > cat /var/log/apache2/error.log | grep wsgi
+
+    Then when you restart, you see the following:
+
+    [Sun Jun 29 04:54:44 2008] [info] mod_wsgi: Initializing Python.
+    [Sun Jun 29 04:54:44 2008] [info] mod_wsgi (pid=4237): Attach interpreter ''.
+    [Sun Jun 29 04:54:44 2008] [info] mod_wsgi (pid=4239): Attach interpreter ''.
+    [Sun Jun 29 04:54:44 2008] [notice] Apache/2.2.8 (Ubuntu) mod_wsgi/2.3
+                                        Python/2.5.2 configured
+                                        -- resuming normal operations
+
+    Now that mod_wsgi is installed, you’ll need to create a virtual host.
+    Create a new file called /etc/apache2/sites-available/simplesite_mod_wsgi
+    with the following content,
+
+    <VirtualHost 192.168.0.131:5000>
+        ServerName 192.168.0.131
+        ServerAlias 192.168.0.131
+        ErrorLog  /home/pratap/dev/deploy/error.log
+        CustomLog /home/pratap/dev/deploy/access.log combined
+
+        # Setup mod_wsgi
+        WSGIDaemonProcess zetadev5000 processes=2 display-name=apache5000
+        WSGIProcessGroup zetadev5000
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIScriptAlias / /home/pratap/dev/deploy/defenv/mod_wsgi/dispatch.wsgi
+    </VirtualHost>
+
+    simplified GIL state API, refer, 
+    http://code.google.com/p/modwsgi/wiki/ApplicationIssues#Python_Simplified_GIL_State_API
+
+        WSGIApplicationGroup %{GLOBAL}
+
+    Enable the virtual host,
+
+    > sudo a2dissite simplesite
+    > sudo a2ensite simplesite_mod_wsgi
+
+    Restart Apache,
+
+    > sudo /etc/init.d/apache2 restart
+
+    To enable debugging, disable apache's multiprocess mode, by adding the
+    following in /etc/apache2/httpd.conf
+
+        ServerLimit 1
+
+
+6. Configuration :
+
+    All the configuration options available for the deployment is provided via
+    the 'production.ini' file created by the 'deployzeta.py' script.
+
+    zeta.envpath should be set only when the defpath/ is changed to something
+    else.
+
+    Mandatory fields : 
+
+      zeta.envpath       =            ( as per your choosing )
+      sqlalchemy.url     =            ( as per your choosing )
+
+      debug              = false
+
+      [handler_file]
+      args = ('%(here)s/defenv/log/application.log', 'a')
+
+    Optional fields : 
+
+      zeta.sitelogo      =            ( as per your choosing )
+      zeta.public_dir    =            ( as per your choosing )
+      zeta.template_dir  =            ( as per your choosing )
+
+      zeta.webanalytics  = [google]
+
+    Other fields : 
+
+7. Upgrade :
+
+    Full upgrade : 
+
+      * Pull the latest release, for zeta and zwiki.
+      * clean and package zeta and zwiki
+      * Fetch the .tar file and untar it under ./pkgs/ directory
+      * Copy ./pkgs/deployzeta.py to <deployment-root>
+      * Enter virual environment,
+            source ./virtz-<name>
+      * Run,
+          > deployzeta.py --upgrade <deployment-name> <zetaegg> <zwikiegg>
+
+    Upgrading beta versions alone : 
+
+      * Pull the latest release where the beta version number has alone
+        changed, like, from 0.6b1 to 0.6b2
+      * clean and package zwiki and zeta.
+      * Enter into virtual environment,
+            source ./virtz-<name>
+        do,
+            easy_install -U <zetaegg>
+            easy_install -U <zwikiegg>
+      * Update the environment
+
+    Upgrading to pylons 1.0 : 
+
+      http://pylonshq.com/docs/en/1.0/upgrading/
+      http://dev.discoverzeta.com/p/zeta/t/119
+
+8. Setting up mail-server :
+
+    Install packages : 
+
+      > sudo apt-get install postfix postfix-mysql postfix-doc
+      >                      libsasl2 libsasl2-modules libsasl2-modules-sql
+      >                      sasl2-bin libpam-mysql openssl metamail telnet
+
+      > sudo apt-get install courier-authdaemon courier-authlib-mysql 
+      >                      courier-pop courier-pop-ssl courier-imap courier-imap-ssl
+
+      > sudo apt-get install amavisd-new spamassassin clamav clamav-daemon zoo unzip unarj
+
+      lha (in non-free!)
+
+    MySQL setup : 
+
+      * Create database,
+            
+              CREATE DATABASE mailprovider;
+
+      * Create 'mail_user' in mysql, with appropriate 'password'
+
+              GRANT SELECT, INSERT, UPDATE, DELETE ON mailprovider.*
+                    TO 'mail_admin'@'localhost' IDENTIFIED BY 'password';
+
+              GRANT SELECT, INSERT, UPDATE, DELETE ON mailprovider.*
+                    TO 'mail_admin'@'localhost.localdomain' IDENTIFIED BY 'password';
+
+              GRANT SELECT, INSERT, UPDATE, DELETE ON mailprovider.*
+                    TO 'mail_admin'@'127.0.0.1' IDENTIFIED BY 'password';
+
+              FLUSH PRIVILEGES;
+
+
+      * Setup tables
+
+              USE mailprovider;
+
+        Virtual domains,
+
+              CREATE TABLE domains ( domain varchar(50) NOT NULL,
+                                     PRIMARY KEY (domain) )
+                     TYPE=MyISAM;
+
+        Forwardings from source-emailid -> destination-emailid,
+
+              CREATE TABLE forwardings ( source varchar(80) NOT NULL,
+                                         destination TEXT NOT NULL,
+                                         PRIMARY KEY (source) )
+                     TYPE=MyISAM;
+
+        User / email Authentication,
+
+              CREATE TABLE users ( email varchar(80) NOT NULL,
+                                   password varchar(20) NOT NULL,
+                                   PRIMARY KEY (email) )
+                     TYPE=MyISAM;
+
+      * Add the following in /etc/mysql/my.cnf,
+
+            bind-address    = 127.0.0.1
+
+        This is required for Postfix to be able to communicate with the
+        database server. If you have MySQL set up to run on another IP address
+        (such as an internal IP), you will need to substitute this IP address
+        in place of 127.0.0.1 in later Postfix configuration steps. Please
+        note that it is not advisable to run MySQL on a publicly-accessible IP
+        address.
+
+        If you changed MySQL's configuration, restart the database server with
+        the following command,
+
+            > sudo /etc/init.d/mysql restart
+
+
+    Postfix Database mapping definitions : 
+
+      Use 127.0.0.1 as hosts, since postfix will be running in a chrooted
+      environment.
+
+      * Add the following lines in /etc/postfix/mysql-virtual_domains.cf,
+            user = mail_admin
+            password = password
+            dbname = mailprovider
+            table = domains
+            select_field = domain
+            where_field = domain
+            hosts = 127.0.0.1
+
+      * Add the following lines in /etc/postfix/mysql-virtual_forwardings.cf,
+            user = mail_admin
+            password = password
+            dbname = mailprovider
+            table = forwardings
+            select_field = destination
+            where_field = source
+            hosts = 127.0.0.1
+
+      * Add the following lines in /etc/postfix/mysql-virtual_mailboxes.cf,
+            user = mail_admin
+            password = password
+            dbname = mailprovider
+            table = users
+            select_field = CONCAT(SUBSTRING_INDEX(email,'@',-1),'/',SUBSTRING_INDEX(email,'@',1),'/')
+            where_field = email
+            hosts = 127.0.0.1
+
+      * Add the following lines in /etc/postfix/mysql-virtual_email2email.cf,
+            user = mail_admin
+            password = password
+            dbname = mailprovider
+            table = users
+            select_field = email
+            where_field = email
+            hosts = 127.0.0.1
+
+      * Change permissions to postfix configuration files, to avoid visibility
+        to system users,
+            > sudo chmod u=rw,g=r,o= /etc/postfix/mysql-virtual_*.cf
+            > sudo chgrp postfix /etc/postfix/mysql-virtual_*.cf
+
+    Create vmail user : 
+
+      * Create 'vmail' system user, to store all the mailboxes,
+        make sure that '5000' uid is availiable for free, if not use a
+        different uid and set them up in postfix configuration as well.
+            > sudo groupadd -g 5000 vmail
+            > sudo useradd -g vmail -u 5000 vmail -d /home/vmail -m
+
+    Postfix configuration : 
+
+      * Configurations that go into /etc/postfix/main.cf,
+
+            inet_interfaces = all
+            myhostname = devwhiz.net
+
+          Only local domains, dont list virtual domain,
+
+            mydestination = K2-AMDX2-1, localhost.localdomain, , localhost
+            (or)
+            mydestination =
+
+        "trusted" SMTP clients that have more privileges than "strangers",
+        like relaying mail,
+
+            mynetworks = 127.0.0.0/8, 192.168.0.28
+
+        configuring for virtual hosts and users,
+
+            virtual_alias_domains =
+            virtual_alias_maps = mysql:/etc/postfix/mysql-virtual_forwardings.cf,
+                                 mysql:/etc/postfix/mysql-virtual_email2email.cf
+
+            virtual_mailbox_base = /home/vmail
+            virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual_domains.cf
+            virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual_mailboxes.cf
+
+            virtual_uid_maps = static:5000
+            virtual_gid_maps = static:5000
+
+        SASL configuration,
+
+            smtpd_sasl_auth_enable = yes
+            broken_sasl_auth_clients = yes
+            smtpd_sasl_authenticated_header = yes
+            smtpd_use_tls = yes
+            smtpd_sasl_security_options = noanonymous
+            smtpd_sasl_path = smtpd
+            smtpd_sasl_local_domain =
+            smtpd_tls_cert_file = /etc/postfix/smtpd.cert
+            smtpd_tls_key_file = /etc/postfix/smtpd.key
+
+            proxy_read_maps = $local_recipient_maps $mydestination $virtual_alias_maps
+                              $virtual_alias_domains $virtual_mailbox_maps
+                              $virtual_mailbox_domains $relay_recipient_maps $relay_domains
+                              $canonical_maps $sender_canonical_maps $recipient_canonical_maps
+                              $relocated_maps $transport_maps $mynetworks
+
+        Recipient restriction
+
+            smtpd_recipient_restrictions = permit_mynetworks,
+                                           permit_sasl_authenticated,
+                                           reject_unauth_destination
+
+        Optional debuggin settings
+
+            debug_peer_list = 127.0.0.1, 192.168.0.101
+            smtpd_tls_loglevel = 5
+
+      * Restart postfix and make sure the configurations are OK,
+
+            > sudo /etc/init.d/postfix restart
+            > sudo /etc/init.d/postfix check
+
+    Postfix configuration to use SASL, Mysql : 
+
+      * Postfix access details to fetch refert to usernames and passwords, in,
+        /etc/postfix/sasl/smtpd.conf,
+
+            pwcheck_method: auxprop
+            auxprop_plugin: sql
+            mech_list: plain login digest-md5
+            sql_engine: mysql
+            sql_hostnames: 127.0.0.1
+            sql_user: mail_admin
+            sql_passwd: password
+            sql_database: mailprovider
+            sql_select: select password from users where email='%u@%r'
+            loglevel: 5
+
+      * Make the file secure,
+
+            > sudo chown root:postfix /etc/postfix/sasl/smtpd.conf 
+            > sudo chmod u=rw,g=r,o= /etc/postfix/sasl/smtpd.conf
+
+      * Make your mail server as the certifying authority to encrypt and transmit
+        username / password,
+
+            > openssl req -new -outform PEM -out /etc/postfix/smtpd.cert
+                          -newkey rsa:2048 -nodes 
+                          -keyout /etc/postfix/smtpd.key -keyform PEM -days 3650 -x509
+
+        You will then be asked a few question about the fields of the certificate.
+        It does not matter what you enter. Just fill the fields. One exception
+        though - the "Common Name" must be the hostname of your mail server.
+        Example session:
+
+            Country Name (2 letter code) [AU] : IND
+            State or Province Name (full name) [Some-State] : Tamil Nadu
+            Locality Name (eg, city) [] : CHN
+            Organization Name (eg, company) [Internet Widgits Pty Ltd] : SKR
+            Organizational Unit Name (eg, section) [] : Zeta
+            Common Name (eg, YOUR name) [] : devwhiz.net
+            Email Address [] : postmaster@devwhiz.net
+
+        After a short moment you will get two files,
+            "smtpd.key" (the private key file),
+            and,
+            "smtpd.cert" (the certificate)
+
+        Make the files secure,
+
+          > sudo chmod u=rw,g=r,o= /etc/postfix/smtpd.key 
+          > sudo chown root:postfix /etc/postfix/smtpd.key
+
+      * Issue the following command to create a directory for saslauthd,
+
+          > mkdir -p /var/spool/postfix/var/run/saslauthd
+
+      * Edit the file /etc/default/saslauthd,
+
+            START=yes
+            DESC="SASL Authentication Daemon"
+            NAME="saslauthd"
+            MECHANISMS="pam"
+            MECH_OPTIONS=""
+            THREADS=5
+            OPTIONS="-c -r -m /var/spool/postfix/var/run/saslauthd"
+
+      * Next, create the file /etc/pam.d/smtp and copy in the following two
+        lines. For display purposes, each line is broken up into two lines, but these
+        should be combined in your configuration file so that you have two lines
+        beginning with "auth" and "account". Be sure to change
+        "mail_admin_password" to the password you chose for your mail
+        administration MySQL user earlier.
+
+        auth    required   pam_mysql.so user=mail_admin passwd=mail_admin_password
+                           host=127.0.0.1 db=mailprovider table=users usercolumn=email
+                           passwdcolumn=password crypt=1
+        account sufficient pam_mysql.so user=mail_admin passwd=mail_admin_password
+                           host=127.0.0.1 db=mailprovider table=users usercolumn=email
+                           passwdcolumn=password crypt=1
+
+            > sudo chmod u=rw,g=r,o= /etc/pam.d/smtp
+
+      * Add `postfix` user to `sasl` group and restart postfix and saslauthd
+
+            > sudo adduser postfix sasl
+            > sudo /etc/init.d/postfix restart
+            > sudo /etc/init.d/saslauthd restart
+
+      * Insert some sample entries into the database,
+      
+            USE mailprovider;
+            INSERT INTO domains (domain) VALUES ('example.com');
+            INSERT INTO users (email, password) VALUES ('sales@example.com','password');
+
+
+    Configure Mail Aliases Link : 
+
+      * Edit the file /etc/aliases, making sure the "postmaster" and "root"
+        directives are set properly for your organization.
+
+            postmaster: root
+            root: postmaster@yourdomain.com
+
+        After modifying this file, you must run the following commands to update
+        aliases and restart Postfix,
+
+        newaliases
+        /etc/init.d/postfix restart
+
+
+    Setting Courier and configuring it for POP3 and IMAP : 
+
+      * Edit the file /etc/courier/authdaemonrc and set the directive,
+
+            authmodulelist="authmysql"
+
+      * Define the fields of the MySQL database table in
+        /etc/courier/authmysqlrc,
+
+            MYSQL_SERVER 127.0.0.1
+            MYSQL_USERNAME mail_admin
+            MYSQL_PASSWORD password
+            MYSQL_PORT 0
+            MYSQL_DATABASE mailprovider
+            MYSQL_USER_TABLE users
+            #MYSQL_CRYPT_PWFIELD (comment this out)
+            MYSQL_CLEAR_PWFIELD password
+            MYSQL_UID_FIELD 5000
+            MYSQL_GID_FIELD 5000
+            MYSQL_LOGIN_FIELD email
+            MYSQL_HOME_FIELD "/home/vmail"
+            #MYSQL_NAME_FIELD (comment this out)
+            MYSQL_MAILDIR_FIELD CONCAT(SUBSTRING_INDEX(email,'@',-1),'/',SUBSTRING_INDEX(email,'@',1),'/')
+
+      * Make the files secure
+
+            > sudo chmod u=rw,g=r,o= /etc/courier/authmysqlrc
+            > sudo chown root:postfix /etc/courier/authmysqlrc
+
+      * Delete the original certificates created by Courier by issuing the
+        following commands,
+
+            > rm -f /etc/courier/imapd.pem
+            > rm -f /etc/courier/pop3d.pem
+
+      * Edit the files /etc/courier/imapd.cnf and /etc/courier/pop3d.cnf,
+        replacing the "CN=localhost" lines with the fully qualified domain name
+        you used for your system mailname. You may also wish to edit other
+        lines in these configuration files to set values appropriate for your
+        organization,
+
+      * Regenerate the certificates for Courier and restart its daemons by
+        issuing the following commands,
+
+            > cd /etc/courier
+            > sudo mkimapdcert
+            > sudo mkpop3dcert
+            > sudo /etc/init.d/courier-authdaemon restart
+            > sudo /etc/init.d/courier-imap restart
+            > sudo /etc/init.d/courier-imap-ssl restart
+            > sudo /etc/init.d/courier-pop restart
+            > sudo /etc/init.d/courier-pop-ssl restart
+
+      * You can test your POP3 server to make sure it's running properly by
+        issuing the following command,
+
+            > telnet localhost pop3
+
+            You should see output similar to the following in your terminal:
+
+            Trying 127.0.0.1...
+            Connected to localhost.localdomain.
+            Escape character is '^]'.
+            +OK Hello there.
+
+        Enter the command "quit" to return to your shell. This completes Courier
+        configuration. Next, we'll make sure aliases are configured properly.
+
+9. Deployments :
+
+  * For each version of zeta, fetch all the eggs and store them under,
+
+    > deployzeta.sh --eggs /home/keeper/pratap/eggs-<ver> <name> <zeta-egg> <zwiki-eg>
+
+  * Do the deployment,
+
+    > deployzeta.sh -f /home/keeper/pratap/eggs-<ver>/lib/python-<ver>/site-packages <name> <zeta-egg> <zwiki-eg>
+
+  * Enter virtual environment,
+
+    source virtz-<deployname>.sh
+
+
+
+Note : 
+    * All the administrative commands on a given deployment should be executed
+      in its virtual environment.
+
+    * Make sure that Apache has read, write access to the deployment directory.

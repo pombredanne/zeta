@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="AnonFrontpage.html">AnonFrontpage</a></td></tr>
+<tr><td><a href="NewUserRegister.html">NewUserRegister</a></td></tr>
+<tr><td><a href="StaticWiki.html">StaticWiki</a></td></tr>
+<tr><td><a href="License.html">License</a></td></tr>
+<tr><td><a href="CreateProj.html">CreateProj</a></td></tr>
+<tr><td><a href="ProjTickets.html">ProjTickets</a></td></tr>
+<tr><td><a href="ProjReviews.html">ProjReviews</a></td></tr>
+<tr><td><a href="ProjVcs.html">ProjVcs</a></td></tr>
+<tr><td><a href="ProjWiki.html">ProjWiki</a></td></tr>
+</tbody></table>
+</body>
+</html>

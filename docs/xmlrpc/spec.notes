@@ -1,0 +1,54 @@
+                        Specification of XMLRPC interface by Zeta
+                        -----------------------------------------
+
+1. APIs :
+
+  1.1 StaticWiki :
+
+    'STATICWIKI_CREATE' permission is required.
+
+    list_sw
+    create_sw
+    read_sw
+    update_sw
+
+  1.2 Project :
+    
+    ListMyprojects
+    
+  1.3 Wiki :
+
+    'WIKI_VIEW',  'WIKI_CREATE',  'WIKICOMMENT_CREATE' permissions are required.
+
+    ListWiki
+    CreateWiki
+    ReadWiki
+    UpdateWiki
+    CommentWiki
+    ConfigWiki 
+    Favorite
+    Vote
+    Tag
+
+  1.4 Ticket :
+
+    'TICKET_VIEW',  'TICKET_CREATE',  'TICKET_COMMENT_CREATE' permissions are required.
+
+    ListTicket
+    CreateTicket
+    ConfigTicket
+    ReadTicket
+    CommentTicket
+    Favorite
+    Vote
+    Tag
+
+  1.5 Review :
+
+    'REVIEW_VIEW',  'REVIEW_CREATE'  permissions are required.
+    
+    ListReview
+    ReadReview
+    CommentReview
+    Favorite
+    Tag

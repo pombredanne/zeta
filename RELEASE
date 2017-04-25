@@ -1,0 +1,83 @@
+Release Checklist :
+-------------------
+
+  PreRelease :
+  
+    * Change the release versions,
+        product_version, database_version, ...
+      in,
+        ./setup.py, ./zeta/websetup.py, ./zeta/config/environment.py,
+        ./zeta/lib/upgradeenv.py, ./zeta/model/upgrade.py
+    
+    * Clean-up the development environment and do,
+        > cd zeta
+        > python ./setup.py develop
+        > cd zwiki
+        > python ./setup.py develop
+
+      this will re-install all the dependencies for zeta / zwiki, based on the
+      latest versions of dependency packages, re-run unit-testing and
+      User-Emulation testing.
+
+      Update setup.py dependency rules on '==' basis.
+
+    * If development.ini file is updated, most probably deployment.ini_tmpl
+      needs to be updated as well. Check !
+
+    * Re-run unit-testing and User-Emulation testing on test-VM (virtual
+      machines).
+
+    * utcnow() function in 'helpers' module to be instrumented to generate the
+      demo database.
+      Generate sample database.
+
+    * Go to zeta/tests/testDB/
+        > mysqldump zetadev -u zetadev -p >| small-zetadevsql.bkp 
+      Commit the sample database to repository.
+
+    * Check for upgrades to database and environment directory.
+
+    * Update bin/regrupgrade.py
+
+    * Execute release-upgrade-regression testing.
+
+    * Execute release-upgrade-regression testing on test Virtual Machines.
+
+    * Run the CSS packager to make all the CSS files referenced by tundra.css
+      as a single 'ztundra.css'
+        * While packaging the CSS files, the url() macro might relatively refer
+          to other files. Take care of them as well.
+    
+  Release :
+  
+    * utcnow() function in 'helpers' module is instrumented for generating demo
+      database. Make sure to revert to the original function.
+    
+    * The database might be seeded with previous version of zeta. Check the
+      database before release.
+
+    * Update ./CHANGELOG, ./UPGRADE files for the current release
+
+    * Update CronJobs on target deployments.
+  
+
+To run the application directly from the repository branch via paster
+---------------------------------------------------------------------
+
+* Create the virtual environment for pylons using `setuppylon.cmd` script.
+* Add the ZWiki package to the environment manually
+* Change the IP address and port address in development.ini file.
+* Create setup mysql database. Refere to zeta/docs/models.notes for more
+  information.
+* Edit the development.ini,
+    * To setup the correct directories.
+* Run,
+        touch defenv/log/application.log
+* Run,
+        paster serve --reload development.ini
+
+Notes :
+-------
+
+* Use MySQLdb_python version 1.2.2 instead of 1.2.3c1, have some version
+  conflict with libmysqlclient_r.so

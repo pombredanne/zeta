@@ -1,0 +1,149 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+## -*- coding: utf-8 -*-
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        ${self.hd_title()}
+        ${self.hd_meta()}
+        ${self.hd_links()}
+        ${self.hd_styles()}
+        ${self.hd_script()}
+    </head>
+    <body>
+        ${self.bd_metanav()}
+        ${self.bd_header()}
+        ${self.bd_breadcrumbs()}
+        ${self.bd_mainnav()}
+        ${self.bd_contextnav()}
+        ${self.bd_body()}
+        ${self.bd_footer()}
+    </body>
+</html>
+
+## Title
+<%def name="hd_title()" >
+    % if c.title :
+        <title>${c.title}</title>
+    % endif
+</%def>
+
+## Meta Tags and Attibutes
+<%def name="hd_meta()">
+    ## Fill up this function with meta tags and attributes.
+</%def>
+
+## CSS Link
+<%def name="hd_links()" >
+    <link href="/style1.css" rel="stylesheet" type="text/css"></link>
+</%def>
+
+<%def name="hd_styles()"></%def>
+
+<%def name="hd_script()">
+    <script src="/jquery.js" type="text/javascript"></script>
+    <script src="/zetaclient.js" type="text/javascript"></script>
+</%def>
+
+
+## Meta Navigation
+<%def name="bd_metanav()" >
+    <div id="mnav">
+        % if c.metanavs :
+            % if c.username :
+                ${c.username} |
+            % endif
+            <% bar = ' ' %>
+            % for menlink in c.metanavs :
+                % if menlink :
+                    <% name, link, title = menlink %>
+                    ${bar} <a title="${title}" href="${link}">${name}</a>
+                    <% bar = '|' %>
+                % else :
+                    &#9830;
+                    <% bar = ' ' %>
+                % endif
+            % endfor
+        % endif
+    </div>
+</%def>
+
+## View Header
+<%def name="bd_header()" >
+    <div id="logo">
+    <table "align: right;" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+        % if c.sitelogo :
+            <a href=${c.sitelink}><img width="100" height="75" src=${c.sitelogo} /></a>
+        % else :
+            <span style="font : caption;">No Site Logo</span>
+        % endif
+        </td>
+        <td style="padding-left: 1.5em;">
+        % if c.prjlogo :
+            <a href=${c.prjlink}><img width="100" height="75" src=${c.prjlogo}></a>
+        % else :
+            <span style="font : caption;"><pre>No Project Logo</pre></span>
+        % endif
+        </td>
+        <td style="min-width : 400px; text-align: center">
+            ## Flash messages
+            <% messages = h.flash.pop_messages() %>
+            % if messages:
+            % for message in messages:
+            <div class="flash-messages">${message}</div>
+            <br/>
+            % endfor
+            % endif
+        </td>
+        <td id="search" style="text-align: right;">
+        <form action="" method="post" name="basicsearch">
+            <input name="sr" size="32"/><br/>
+            <input type="submit" value="Search ${c.sitename}" name="top_search"/>
+        </form>
+        </td>
+    </tr>
+    </table>
+    </div>
+</%def>
+
+## Display Bread Crumb line
+<%def name="bd_breadcrumbs()">
+    <div>
+        % if c.breadcrumbs :
+            % for bd in c.breadcrumbs :
+                Breadcrumbs;
+            % endfor
+        %endif
+    </div>
+</%def>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_contextnav()">
+</%def>
+
+<%def name="bd_body()"></%def>
+
+<%def name="bd_footer()">
+    <div id="footer">
+        <hr></hr>
+        <table>
+        <tr>
+            <td rowspan="2">
+                <a href=${c.zetalink}><img width="110" height="45" src=${c.zetalogo} /></a>
+            </td>
+            <td valign="bottom">${c.zetaversion}</td>
+        </tr>
+        <tr>
+            <td valign="top">${c.zetacreators}</td>
+        </tr>
+        </table>
+    </div>
+</%def>

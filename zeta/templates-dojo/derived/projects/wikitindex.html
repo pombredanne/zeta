@@ -1,0 +1,85 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Index of all wiki pages (for this project) displayed like directory listing
+"""
+],
+
+]
+
+%>
+
+<%def name="hd_links()">
+    ${parent.hd_links()}
+</%def>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <%
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        wsearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchwiki', 'Search-wiki',
+                        h.suburl_search, c.searchfaces, classes="ml10"
+                    )
+
+        sel_wp  = capture( forms.form_selectwikipage, c.authuser,
+                           c.wikipagenames, c.wikipagename or '' )
+
+        attachs= '<span class="ml20 fwnormal fntsmall">' + \
+                 ( '<a href="%s" title="Attachments to wiki pages"> \
+                   Attachments</a></span>' % h.url_wikiattachs )
+
+        charts = capture( elements.iconlink, h.url_wikicharts,
+                          'barchart', title="Wiki charts", classes="ml20" )
+        tline  = capture( elements.iconlink, h.url_wikitimeline,
+                         'timeline', title="Timeline for all wiki pages",
+                         classes="ml10" )
+
+        projname = c.project.projectname
+        url_for  = lambda u : c.cntlrobj.url_wikiurl( projname, u )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ wsearchbox, sel_wp, attachs, charts, tline ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+            <div class="ml20 mr20 pt10">
+                ${elements.titleindex( c.titlepages, url_for, c.wsnippets )}
+            </div>
+        </div> 
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+    dojo.addOnLoad( function () {
+        /* Setup the wiki goto list */
+        select_goto( dojo.query( '#selectwikipage' )[0] );
+    });
+    dojo.addOnLoad( setup_userpanes );
+    dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

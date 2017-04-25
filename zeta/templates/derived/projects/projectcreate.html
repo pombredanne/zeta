@@ -1,0 +1,49 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="proj"     file="/forms/proj.html"/>
+<%namespace name="attc"     file="/forms/attc.html"/>
+<%namespace name="tag"      file="/forms/tag.html"/>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_body()">
+    <% submit_prjcreate  = h.url_for( h.r_projectcreate,
+                                      action='createproject',
+                                      form='submit'
+                                    )
+    %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 1px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">Create new project</div>
+        </div>
+    </div>
+
+    <div class="pbarcont form" id="prjcrform">
+    <form enctype="${c.enctype}" action="${submit_prjcreate}" method="post">
+    <table>
+        ${proj.project()}
+        ${proj.projectadmin( adminname=c.username, usernames=c.usernames )}
+        ${proj.project_license( licensenames=c.licensenames )}
+        ${proj.project_info()}
+        ${proj.project_add_mlist()}
+        ${proj.project_add_ircchannel()}
+        ${attc.addattach( 'prjlogo', 'prjlogo', 'Project Logo :', \
+            'Must be 100x75 sized thumbnail image file.' )}
+        ${attc.addattach( 'prjicon', 'prjicon', 'Project Icon :', \
+            'Must be 16x16 ICON file.')}
+        ${tag.addtags()}
+        <tr><td colspan="2" style="text-align: center;">
+            ${libform.input_submit()}
+            ${libform.input_reset()}
+        </td></tr>
+    </table>
+    </form>
+    </div>
+</%def>

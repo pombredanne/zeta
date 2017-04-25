@@ -1,0 +1,75 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Mount one or more repository directory onto zeta site."""
+],
+
+]
+
+%>
+
+<%def name="hd_links()">
+    ${parent.hd_links()}
+</%def>
+
+<%def name="hd_styles()">
+    ${parent.hd_styles()}
+</%def>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <%
+        if c.mnt :
+            vcsname = c.mnt.vcs.name
+            mntname = c.mnt.name
+        else :
+            vcsname = ''
+            mntname = ''
+
+        title = '<span class="ml10 fntbold fggray">Mounted repository path' + \
+                (' `%s` from repository `%s` as `%s` </span>' % \
+                    (c.repospath, vcsname, mntname) )
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox, [ title ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+            <div class="ml10">
+                % if c.rendertype == 'dir' :
+                    <ul class="ml20 wsnowrap">${c.content | n}</ul>
+                % else :
+                    ${c.content | n}
+                % endif
+            </div>
+        </div> 
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

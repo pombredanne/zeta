@@ -1,0 +1,789 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+    sel_charts = {
+        'chart1'  : 'tagged-resource-pie',
+        'chart2'  : 'By Uploaders',
+        'chart3'  : 'files-downloaded',
+        'chart4'  : 'tagged-files',
+        'chart5'  : 'uploaded-timeline',
+        'chart6'  : 'license-projects',
+        'chart7'  : 'tagged-license',
+        'chart8'  : 'user activity',
+        'chart9'  : 'user-site-permissions',
+        'chart10' : 'project-administrators',
+        'chart11' : 'component-owners',
+        'chart12' : 'project-activities',
+        'chart13' : 'milestone-tickets',
+        'chart14' : 'project-activity',
+        'chart15' : 'roadmap',
+        'chart16' : 'wiki-edits',
+        'chart17' : 'wiki-votes',
+        'chart18' : 'wiki-authors',
+        'chart19' : 'wiki-commenters',
+        'chart20' : 'wiki-tags',
+        'chart21' : 'project-tickets',
+        'chart22' : 'ticket-owners',
+        'chart23' : 'ticket-components',
+        'chart24' : 'ticket-milestones',
+        'chart25' : 'ticket-versions',
+        'chart26' : 'ticket-commenters',
+        'chart27' : 'reviewers',
+    }
+%>
+
+<%def name="selectcharts( options, default )">
+    <% options = [ [ opt, sel_charts[opt] ] for opt in options ] %>
+    <div class="ralign pb3 pr10" style="border-bottom: 1px solid gray">
+        <span class="fgcrimson fntbold">Select chart : </span>
+        ${forms.select( id="selchart", options=options, opt_selected=default )}
+    </div>
+</%def>
+
+## ---------------------------- Tag charts ----------------------------
+
+<%def name="chart1( chart1_data, width='400px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tagged items by category
+                </div>
+            </div>
+            <div id="chart1" style="height: 300px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart1() {
+        var data = ${ h.json.dumps( chart1_data )  | n}
+        chart1_tagchart( data, 'chart1' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- Attachment charts ----------------------------
+
+<%def name="chart2( chart2_data, width='500px' )">
+    <%
+        chart2_data = chart2_data
+        chartwidth = h.computechartwidth( len(chart2_data), 20, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Number of files uploaded by registered users, and its payload
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart2" style="width: ${chartwidth}%; height: 400px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart2() {
+        var chart2_data = ${ h.json.dumps(chart2_data) | n};
+        chart2_user_vs_attach( chart2_data, 'chart2' );
+    }
+    </script>
+</%def>
+
+<%def name="chart3(chart3_data, width='500px')">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Files downloaded
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart3" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart3() {
+        var chart3_data  = ${ h.json.dumps(chart3_data) | n};
+        chart3_attach_vs_download( chart3_data, 'chart3' );
+    }
+    </script>
+</%def>
+
+<%def name="chart4( chart4_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart4_data), 50, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tagged files
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart4" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart4() {
+        var chart4_data  = ${ h.json.dumps(chart4_data) | n}
+        chart4_attach_vs_tags( chart4_data, 'chart4' );
+    }
+    </script>
+</%def>
+
+<%def name="chart5( chart5_data, fromdate, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Timeline of uploaded files 
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart5" style="height: 400px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart5() {
+        var chart5_data  = ${ h.json.dumps(chart5_data) | n}
+        chart5_attach_vs_time( Date.UTC( ${','.join(fromdate)} ),
+                               chart5_data, 'chart5' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- license charts ----------------------------
+
+<%def name="chart6( chart6_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Projects under license
+                </div>
+            </div>
+            <div id="chart6" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart6() {
+        var chart6_data  = ${ h.json.dumps(chart6_data) | n }
+        chart6_license_projects( chart6_data, 'chart6' );
+    }
+    </script>
+</%def>
+
+<%def name="chart7( chart7_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tagged license
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart7" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart7() {
+        var chart7_data  = ${ h.json.dumps(chart7_data) | n}
+        chart7_license_vs_tags( chart7_data, 'chart7' );
+    }
+    </script>
+</%def>
+
+
+## ---------------------------- users charts ----------------------------
+
+<%def name="chart8( chart8_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart8_data), 25, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    User activity
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart8" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart8() {
+        var chart8_data  = ${ h.json.dumps(chart8_data) | n}
+        chart8_users_activity( chart8_data, 'chart8' );
+    }
+    </script>
+</%def>
+
+<%def name="chart9( chart9_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart9_data), 25, 95 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Site-wide permissions granted to each user
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and select vertical block
+                </div>
+            </div>
+            <div id="chart9" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart9() {
+        var chart9_data  = ${ h.json.dumps(chart9_data) | n}
+        chart9_users_siteperm( chart9_data, 'chart9' );
+    }
+    </script>
+</%def>
+
+<%def name="chart10( chart10_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Project administrators
+                </div>
+            </div>
+            <div id="chart10" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart10() {
+        var chart10_data  = ${ h.json.dumps(chart10_data) | n}
+        chart10_project_admins( chart10_data, 'chart10' );
+    }
+    </script>
+</%def>
+
+<%def name="chart11( chart11_data, components_no, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Pie chart of component-owners
+                </div>
+            </div>
+            <div id="chart11" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart11() {
+        var chart11_data  = ${ h.json.dumps(chart11_data) | n}
+        chart11_component_owners( ${components_no}, chart11_data, 'chart11' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- user charts ----------------------------
+
+<%def name="chart12( chart12_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Project wise user activity
+                </div>
+            </div>
+            <div id="chart12" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart12() {
+        var chart12_data  = ${ h.json.dumps(chart12_data) | n}
+        chart12_userproject_activity( chart12_data, 'chart12' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- milestone charts ----------------------------
+
+<%def name="chart13( id, reslved, unreslved )">
+    <% 
+        total       = reslved + unreslved
+        res_width   = total and int( (reslved/float(total)) * 40 )
+        unres_width = total and int( (unreslved/float(total)) * 40 )
+    %>
+    <div style="width: 600px; margin: 0 auto; border: 1px solid #DDD;"
+         class="bgwhite">
+        <div class="calign bgblue1 fntbold fggray p5 mb10">
+            Milestone tickets
+        </div>
+        % if total :
+        <div class="pl50 m10 br2" style="width: 600px; height: 1.2em; margin: 0 auto;">
+            <div class="compbar posr floatl brtl4 brbl4"
+                 style="background-color: #9cdfb9; width: ${res_width}%; height: 1.2em;
+                        border-left: 2px solid #b2ffd4; border-top: 2px solid #b2ffd4;
+                        border-bottom: 2px solid #83bc9c;">
+                <div class="tooltip dispnone posa br4 p3 bggray1"
+                     style="left: 20%; bottom: -50%; width: 7em; height: 1.2em; border: 2px solid green;
+                            opacity: 0.6; filter:alpha(opacity=60); z-index : 1">
+                    <span><b>resolved, ${reslved}</b></span>
+                </div>
+            </div>
+            <div class="compbar posr floatl brtr4 brbr4"
+                 style="background-color: #df9c9c; width: ${unres_width}%; height: 1.2em;
+                        border-right: 2px solid #ae7a7a; border-top: 2px solid #ffc9c9;
+                        border-bottom: 2px solid #ae7a7a;">
+                <div class="tooltip dispnone posa br4 p3 bggray1"
+                    style="left: 20%; bottom: -50%; width: 8em; height: 1.2em; border: 2px solid red;
+                           opacity: 0.6; filter:alpha(opacity=60); z-index : 1">
+                   <span><b>unresolved, ${unreslved}</b></span>
+                </div>
+            </div>
+            <span class="pl10 vmiddle disptcell fntbold" style="height: 1.2em;">
+                ${int(reslved/float(total)*100)} % complete
+                <span class="fggray">(${total} tickets)</span>
+            </span>
+        </div>
+        % endif
+        <div name="chart13" class="mt10">
+            <div id="chart13_${id}" class="chart" style="width: 600px; height: 210px;">
+            </div>
+        </div>
+    </div>
+</%def>
+
+## ---------------------------- project charts ----------------------------
+
+<%def name="chart14( chart14_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Function wise project activities
+                </div>
+            </div>
+            <div id="chart14" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart14() {
+        var chart14_data  = ${ h.json.dumps(chart14_data) | n}
+        chart14_project_activity( chart14_data, 'chart14' );
+    }
+    </script>
+</%def>
+
+<%def name="chart15( chart15_data, startdt, width='500px' )">
+    <%
+        chart_height = (len(chart15_data) * 50) + 50
+        chart_height = 400 if chart_height < 400 else chart_height
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Project roadmap - timeline
+                </div>
+            </div>
+            <div id="chart15" style="height: ${chart_height}px;">
+        </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+    function setup_chart15() {
+        var chart15_data  = ${ h.json.dumps(chart15_data) | n}
+        chart15_roadmap( Date.UTC( ${','.join(startdt)} ), chart15_data,
+                         'chart15' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- wiki charts ----------------------------
+
+<%def name="chart16( chart16_data, width='500px')">
+    <%
+        chartwidth = h.computechartwidth( len(chart16_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Edits and Comments to project wikipages
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and drag select vertical block
+                </div>
+            </div>
+            <div id="chart16" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+    function setup_chart16() {
+        var chart16_data = ${ h.json.dumps(chart16_data) | n}
+        chart16_wiki_cmtsvers( chart16_data, 'chart16');
+    }
+    </script>
+</%def>
+
+<%def name="chart17( chart17_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart17_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Votes to wikipages
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and drag select vertical block
+                </div>
+            </div>
+            <div id="chart17" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart17() {
+        var chart17_data  = ${ h.json.dumps(chart17_data) | n}
+        chart17_wikivotes( chart17_data, 'chart17' );
+    }
+    </script>
+</%def>
+
+<%def name="chart18( chart18_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart18_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Wikipage authors
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and drag select vertical block
+                </div>
+            </div>
+            <div id="chart18" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart18() {
+        var chart18_data  = ${ h.json.dumps(chart18_data) | n}
+        chart18_wikiauthors( chart18_data, 'chart18' );
+    }
+    </script>
+</%def>
+
+<%def name="chart19( chart19_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart19_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Wikipage comments
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and drag select vertical block
+                </div>
+            </div>
+            <div id="chart19" style="width: ${chartwidth}%; height: 500px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart19() {
+        var chart19_data  = ${ h.json.dumps(chart19_data) | n}
+        chart19_wikicommentors( chart19_data, 'chart19' );
+    }
+    </script>
+</%def>
+
+<%def name="chart20( chart20_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart20_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tagged wikipages
+                </div>
+                <div style="font-style : italic;">
+                    To zoom - click and drag select vertical block
+                </div>
+            </div>
+            <div id="chart20" style="width: ${chartwidth}%; height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart20() {
+        var chart20_data  = ${ h.json.dumps(chart20_data) | n}
+        chart20_wiki_vs_tags( chart20_data, 'chart20' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- ticket charts ----------------------------
+
+<%def name="chart21( chart21_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    No. of tickets by type, severity and status
+                </div>
+            </div>
+            <div id="chart21" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart21() {
+        var chart21_data  = ${ h.json.dumps(chart21_data) | n};
+        chart21_projtickets( chart21_data, 'chart21' );
+    }
+    </script>
+</%def>
+
+<%def name="chart22( chart22_data, forowner, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tickets on
+                    <span class="fgcrimson">${forowner}</span>
+                    by type, severity and status
+                </div>
+            </div>
+            <div id="chart22" style="height: 400px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart22() {
+        var chart22_data  = ${ h.json.dumps(chart22_data) | n};
+        chart22_ticketowners( chart22_data, 'chart22' );
+    }
+    </script>
+</%def>
+
+<%def name="chart23( chart23_data, forcomp, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tickets on
+                    <span class="fgcrimson">${forcomp}</span>
+                    by type, severity and status
+                </div>
+            </div>
+            <div id="chart23" style="height: 400px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart23() {
+        var chart23_data  = ${ h.json.dumps(chart23_data) | n}
+        chart23_ticketcomponents( chart23_data, 'chart23' );
+    }
+    </script>
+</%def>
+
+<%def name="chart24( chart24_data, formstn, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tickets on
+                    <span class="fgcrimson">${formstn}</span>
+                    by type, severity and status
+                </div>
+            </div>
+            <div id="chart24" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart24() {
+        var chart24_data  = ${ h.json.dumps(chart24_data) | n}
+        chart24_ticketmilestones( chart24_data, 'chart24' );
+    }
+    </script>
+</%def>
+
+<%def name="chart25( chart25_data, forver, width='500px' )">
+    <% chartheight = (320 * len(chart25_data)) + 100 %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Tickets on
+                    <span class="fgcrimson">${forver}</span>
+                    by type, severity and status
+                </div>
+            </div>
+            <div id="chart25" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart25() {
+        var chart25_data  = ${ h.json.dumps(chart25_data) | n}
+        chart25_ticketversions( chart25_data, 'chart25' );
+    }
+    </script>
+</%def>
+
+<%def name="chart26( chart26_data, width='500px' )">
+    <%
+        chartwidth = h.computechartwidth( len(chart26_data), 15, 100 )
+    %>
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Ticket comments
+                </div>
+            </div>
+            <div id="chart26" style="width: ${chartwidth}%; height: 500px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart26() {
+        var chart26_data  = ${ h.json.dumps(chart26_data) | n}
+        chart26_ticketcommentors( chart26_data, 'chart26' );
+    }
+    </script>
+</%def>
+
+## ---------------------------- review charts ----------------------------
+
+<%def name="chart27( chart27_data, width='500px' )">
+    <div style="width: ${width}; overflow: auto; margin: 0 auto;
+                border: 1px solid gray; padding: 5px;">
+        <div style="border: 1px solid #DDD;">
+            <div style="background-color: #E5ECF9; padding: 5px;
+                        text-align: center; color: gray;">
+                <div style="font-weight : bold">
+                    Users associated with project reviews
+                </div>
+            </div>
+            <div id="chart27" style="height: 400px;">
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function setup_chart27() {
+        var chart27_data  = ${ h.json.dumps(chart27_data) | n}
+        chart27_reviewusers( chart27_data, 'chart27' );
+    }
+    </script>
+</%def>

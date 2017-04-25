@@ -1,0 +1,35 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%def name="bd_mainnav()">
+</%def>
+
+<%def name="bd_body()">
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 1px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">Sign In</div>
+        </div>
+    </div>
+
+    <div class="form" id="siform">
+        <h3>Please Sign In</h3>
+        <form action="%s" method="post">
+            <dl>
+            <dt>Username:</dt>
+            <dd><input name="username" type="text"></input></dd>
+            <dt>Password:</dt>
+            <dd><input name="password" type="password"></input></dd>
+            </dl>
+            <input name="authform" value="Sign In" type="submit"></input>
+        </form>
+        <br/>
+        <a style="font-size: 0.9em;" href="${h.url_for( h.r_accounts, action='forgotpass')}">
+            forgot-password
+        </a></div>
+    </div>
+</%def>

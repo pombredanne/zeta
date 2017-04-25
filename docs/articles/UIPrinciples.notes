@@ -1,0 +1,127 @@
+Reference : 
+    http://carsonified.com/blog/design/10-user-interface-design-fundamentals/
+
+1. Know your user :
+
+    “Obsess over customers: when given the choice between obsessing over
+    competitors or customers, always obsess over customers. Start with
+    customers and work backward.” – Jeff Bezos
+
+    Your user’s goals are your goals, so learn them. Restate them, repeat
+    them. Then, learn about your user’s skills and experience, and what they
+    need. Find out what interfaces they like and sit down and watch how they
+    use them. Do not get carried away trying to keep up with the competition
+    by mimicking trendy design styles or adding new features. By focusing on
+    your user first, you will be able to create an interface that lets them
+    achieve their goals.
+
+2. Pay attention to patterns :
+
+    Users spend the majority of their time on interfaces other than your own
+    (Facebook, MySpace, Blogger, Bank of America, school/university, news
+     websites, etc). There is no need to reinvent the wheel. Those interfaces
+    may solve some of the same problems that users perceive within the one you
+    are creating. By using familiar UI patterns, you will help your users feel
+    at home.
+
+    Graphic comparing an email inbox with CoTweet's inbox
+    CoTweet uses a familiar UI pattern found in email applications.
+
+3. Stay consistent :
+
+    “The more users’ expectations prove right, the more they will feel in
+    control of the system and the more they will like it.” – Jakob Nielson
+
+    Your users need consistency. They need to know that once they learn to
+    do something, they will be able to do it again. Language, layout, and
+    design are just a few interface elements that need consistency. A
+    consistent interface enables your users to have a better understanding
+    of how things will work, increasing their efficiency.
+
+4. Use visual hierarchy :
+
+    “Designers can create normalcy out of chaos; they can clearly communicate
+    ideas through the organizing and manipulating of words and pictures.”
+                        – Jeffery Veen, The Art and Science of Web Design
+
+    Design your interface in a way that allows the user to focus on what is most
+    important. The size, color, and placement of each element work together, 
+    creating a clear path to understanding your interface. A clear hierarchy 
+    will go great lengths in reducing the appearance of complexity 
+    (even when the actions themselves are complex).
+
+5. Provide feedback :
+
+    Your interface should at all times speak to your user, when his/her
+    actions are both right and wrong or misunderstood. Always inform your
+    users of actions, changes in state and errors, or exceptions that occur.
+    Visual cues or simple messaging can show the user whether his or her
+    actions have led to the expected result.
+
+    Screenshot of BantamLive's interface showing that it provides feedback
+    with a loading action BantamLive provides inline loading indicators for
+    most actions within their interface.
+
+6. Be forgiving :
+
+    No matter how clear your design is, people will make mistakes.  Your UI
+    should allow for and tolerate user error. Design ways for users to undo
+    actions, and be forgiving with varied inputs (no one likes to start over
+    because he/she put in the wrong birth date format). Also, if the user does 
+    cause an error, use your messaging as a teachable situation by
+    showing what action was wrong, and ensure that she/he knows how to prevent
+    the error from occurring again.
+
+    A great example can be seen in How to increase signups with easier
+    captchas.
+
+7. Empower your user :
+
+    Once a user has become experienced with your interface, reward him/her and
+    take off the training wheels. The breakdown of complex tasks into simple
+    steps will become cumbersome and distracting.  Providing more abstract
+    ways, like keyboard shortcuts, to accomplish tasks will allow your design
+    to get out of the way.
+
+8. Speak their language :
+
+    “If you think every pixel, every icon, every typeface matters,
+    then you also need to believe every letter matters. ”
+                                    – Getting Real
+
+    All interfaces require some level of copywriting. Keep things
+    conversational, not sensational. Provide clear and concise labels for
+    actions and keep your messaging simple. Your users will appreciate it,
+    because they won’t hear you – they will hear themselves and/or their
+    peers.
+
+9. Keep it simple :
+
+    “A modern paradox is that it’s simpler to create complex
+    interfaces because it’s so complex to simplify them.”
+                                        – Pär Almqvist
+
+    The best interface designs are invisible. They do not contain UI-bling or
+    unnecessary elements. Instead, the necessary elements are succinct and
+    make sense. Whenever you are thinking about adding a new feature or
+    element to your interface, ask the question, “Does the user really need
+    this?” or “Why does the user want this very clever animated gif?” Are you
+    adding things because you like or want them? Never let your UI ego steal
+    the show.
+
+10. Keep moving forward :
+
+    Grandpa Bud: If I gave up every time I failed, I would
+                 never have invented my fireproof pants!
+                 [Pants burn up, revealing his underwear]
+    Grandpa Bud: Still working the kinks out a bit.
+
+                                    - from Meet the Robinsons
+
+    Meet the Robinsons is one of my all time favorite movies. Throughout the
+    movie Lewis, the protagonist, is challenged to “keep moving forward.” This
+    is a key principle in UI design.
+
+    It is often said when developing interfaces that you need to fail fast,
+    and iterate often. When creating a UI, you will make mistakes. Just keep
+    moving forward, and remember to keep your UI out of the way.

@@ -1,0 +1,71 @@
+EULA - End User License Agreement
+DMCA - 
+Safe Harbour - Safe guarding ourselves from mis-use of our tools and deployments.
+
+Terms of Service for Service (SaaS) model :
+
+    * The licensee will get a full featured (latest version) of the product
+      deployed and maintained by SKR Farms.
+    * 2 GB limit on disk space will be enforced on the deployment.
+    * Deployment will be on a server of our choosing.
+    * The network bandwidth and latency will be limited by the VPS provider's
+      efficiencies.
+    * We retain the rights to deploy multiple installations of the same
+      product to service our other licensees, though we will pay due
+      considerations to network congession.
+    * Any content generated or entered by the client into their installation
+      of the tool (in database / environment) will be kept private and will
+      not be disclosed.
+    * End users can take backup from the server using their network
+      connections. 
+      ( Explore the possibilities of sending the backup as a CD via mail to
+        end-user address ).
+
+Deployment License :
+
+    * The licensee can deploy a single copy of the product on a server of their
+      choosing. 
+    * The administration and maintanance of the server and service will be
+      licensee's responsibility.
+    * We will be providing a gauranteed support via email, while we cannot
+      commit ourselves for on-site support and help-line support.
+      Nevertheless, all the on-site support request will be registered and
+      addressed as early as possible for us.
+    * If and when the server is migrated to a different machine, the product
+      must be removed from the previous server. Though backup of data /
+      product package can be preserved elsewhere (which again cannot be
+      deployed).
+
+Development License :
+
+    * The licensee can deploy as mancy copies of the product onto as many
+      servers as required and choosen.
+    * Moreover, the licensee will get a complete source package of the
+      product.
+    * Licensee can modify, remove, add to the source code and use it for their
+      purpose.
+    * The licensee will also have access to up-stream development team, to
+      which they can make releases. Licensee can also take part in development
+      effort of the up-stream team.
+
+Distribution License :
+
+    * This License is an augmenting document to the 'Development License'.
+    * The Licensee here is the one who posses both 'Development License' and
+      'Distribution License'
+    * Distribution license will be composed for each licensee
+      based on -
+        distribution, development, deployment and revenue sharing agreements.
+
+Copyright :
+
+    * All the source code provided to the licensee (either in binary form or
+      source form) will be owned and copyrighted by SKR Farms.
+
+Tools copyright :
+
+    Linux, python, ...
+
+Content copyright :
+
+    1. famfamfam.com for icons

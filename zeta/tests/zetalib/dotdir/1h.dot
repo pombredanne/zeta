@@ -1,0 +1,32 @@
+
+digraph G {
+node [ fontname="Terminus", fontsize=16, width=0.5, height=0.5 ];
+
+1 -> 2 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+1 -> 3 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+1 -> 4 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+
+1 -> 5 [color="#1FDBFD", style="setlinewidth(0.3)" ];
+
+/* Node attributes */
+
+1 [ color="black", shape="ellipse", style="filled,rounded", fillcolor="white", URL="", tooltip="1", target="_top" ];
+
+
+2 [ color="#ffe1e1", shape="box", style="filled,rounded", fillcolor="#ffe1e1", URL="/p/denethor/t/2", tooltip="REOPEN -  Like its Unix counterpart, yacc.py provides most ...", target="_top" ];
+
+
+3 [ color="#fafafa", shape="box", style="filled,rounded", fillcolor="#fafafa", URL="/p/denethor/t/3", tooltip="OPEN -  This document provides an overview of lexing and ...", target="_top" ];
+
+
+4 [ color="#ffe1e1", shape="box", style="filled,rounded", fillcolor="#ffe1e1", URL="/p/denethor/t/4", tooltip="OPEN -  If you do this, the occurrence of input text such...", target="_top" ];
+
+
+5 [ color="#ffe1e1", shape="box", style="filled,rounded", fillcolor="#ffe1e1", URL="/p/denethor/t/5", tooltip="REVIEW -  If no state name is supplied, as is normally the ...", target="_top" ];
+
+}

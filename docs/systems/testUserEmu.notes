@@ -1,0 +1,58 @@
+Profiles : 
+
+'admin'
+    Has unrestricted access
+
+'anonymous'
+    Un-registered user. But some deployments might want to grant varying
+    degree of permissions to anonymous users.
+
+'user'
+    Registered user. Now, every registered user has site-level permissions and
+    project-level permissions (for projects with which the user is associated)
+    A user can be associated with a project as,
+        1. Project administrator
+        2. Project team member
+
+    Each profile (except the 'admin' profile) can be tried out with different
+possible fixtures.
+
+Possible list of URLs (or catogaries of URLs) : 
+
+/aboutus
+/accounts/newaccount?form=request
+/accounts/newaccount?form=submit&formname=createuser
+/accounts/signin
+/
+/u/{username}/preference?form=request
+/u/{username}/preference?form=submit&formname=updateuser&view=js
+/siteadmin?form=request
+/siteadmin?form=request&formname=system&view=js
+/siteadmin?form=request&formname=adduserperms&view=js
+/siteadmin?form=request&formname=deluserperms&view=js
+/siteadmin?form=request&formname=userenb&view=js
+/siteadmin?form=request&formname=userdis&view=js
+/siteadmin?form=request&formname=projenb&view=js
+/siteadmin?form=request&formname=projdis&view=js
+/siteadmin?form=request&formname=createpg&view=js
+/siteadmin?form=request&formname=updatepg&view=js
+/siteadmin?form=request&formname=addpntopg&view=js
+/siteadmin?form=request&formname=delpnfrompg&view=js
+/license?form=request&formname=createlic
+/p
+/p?form=request&formname=createprj
+/p{projectname}
+/p{projectname}/timeline
+/p{projectname}/milestone
+/p{projectname}?form=submit&formname=projfav&view=js
+/siteadmin?jsonobj=pgmap?view=js
+/u?jsonobj=userphoto?view=js
+/u?jsonobj=usericon?view=js
+/u?jsonobj=userperms?view=js
+/u?jsonobj=userstatus?view=js
+/p?jsonobj=projectstatus?view=js
+
+Query parameters : 
+
+Profile fixtures : 
+

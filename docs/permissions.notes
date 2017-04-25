@@ -1,0 +1,182 @@
+Permission abstractions : 
+
+    The permission system is implemented via mapping and hierarchy. And all
+access are abstracted into one of the following, Create, Read, Update,
+Delete (CRUD)
+
+    Mapping is essentially an object which acts as a route via which an user
+can access one or more resources. In essence, the mapping object will be an
+array of permissions, indexed using a n-tuple. For example, the index here can
+be 2-tuple ( project, team ).
+
+    A Mapping System is a collection of mapping objects that connects users
+with resources.
+
+    Since the mapping object itself is a resource, CRUD access to the object
+can again be controlled using a mapping object. Having this mapping object
+part of the same mapping system,
+    1. Might lead to cyclic permission checks.
+    2. Or could lock the resource(s), preventing any user to access the
+       resource.
+To avoid this problem the CRUD access to the mapping object (considering the
+objects as resources) can be controlled via a different Mapping system.
+By linking these mapping systems in hierarchical way, it is easy to check for
+permissions.
+
+Overriding Paradox : 
+
+    A permission system is essentially a overriding mechanism, of CRUD access
+to resources. Given the complex nature of user interaction (who normally want
+to override each others decisions) it very easy to slip into a cyclic
+permission overriding.
+
+Permission Mapping System : 
+
+  Permissions are implemented at the Controller level. Permissions are divided
+  into basic permissions and permission groups. Permission groups are
+  collection of basic permissions.
+
+  Basic-permissions should all be in CAPITAL letters. and permission-groups
+  should start with grp_ name with the rest of the name being in small case.
+
+  Though there is a permission group, its only purpose is to manage user
+  permission en-masse.
+
+Permission Names : 
+
+    Basic permissions defined by components and used across different parts of
+the application. Permissions are enforced only via permission-name(s) (other
+than special permissions like site-administrator, project-administrator etc ...
+refer to permission objects for more details ). Permission Names are always in
+Capital letters.
+     
+
+Permission Groups : 
+
+    Permission-Group(s) are mainly intended to group Permission-Name(s), thus making
+it easier to assign permissions to project teams (and users). Permission-Group
+should be made up of small case letters.
+
+Permission Objects : 
+
+Permissions to access database : 
+    
+  C - Create
+  R - Read
+  U - Update
+  D - Delete
+
+  The following restrictions are made irrespective of permission_maps. 
+
+  Tables,
+    at_user_permissions,
+  can be used to restrict the user permissions further more.
+
+
+  t_system, t_permission_name, t_userrelation_type, t_projectteam_type : 
+  t_ticket_status, t_ticket_type, t_ticket_severity : 
+
+    * CUD is done by 'siteadmin' during deployment and upgradation.
+    * R is done by user independent code.
+
+  t_permission_group : 
+
+    * CUD is done by 'siteadmin' and 'project admin'.
+    * R is done by user independent code.
+
+  at_user_permissions, t_license : 
+
+    * CUD is done by 'siteadmin' at any point of time.
+    * R id done by user independent code.
+
+  t_user, t_user_info, at_userphotos, at_user_icons : 
+
+    * C is done by any newly registering user.
+    * R is done by user independent code.
+    * U is done by only the user who created the entry.
+      for [t_user] table, 'siteadmin' can update the 'disabled' field of the user
+      entry.
+    * D is done by 'siteadmin' for [t_user] and [t_user_info].
+      for [at_userphotos] and [at_user] user who created the entry can delete.
+
+  t_user_relation : 
+
+    * C is done any registered user.
+    * R is done by users independent code.
+    * U is done by the user who is identified by 'usertoid', for updating the
+      'approved' field
+    * D is allowed only by the user who created the entry.
+
+  t_tag : 
+    
+    * CR is done by any registered user.
+    * U is not allowed. 
+    * D is allowed only for 'siteadmin'.
+
+    Note : CRUD permission for at_*_tags tables are generally derived from the
+           table id to which the tag is added.
+
+  t_attachment : 
+
+    * CU is allowed for any registered user.
+    * D is allowed only for 'siteadmin'.
+
+    Note : CRUD permission for at_*_attachments tables are generally derived
+           from the table id to which the attachment is added.
+
+  at_attachment_tags : 
+
+    * CRD is done by any registered user.
+    * U is not allowed.
+
+  t_project, t_project_info, at_project_logs, at_project_icons : 
+
+    * C can be done by any registered user ('projectadmin').
+    * R is done by user independent code.
+    * U can be done only by 'projectadmin'.
+      for [t_project] table, 'siteadmin' can update the 'disabled' field of
+      the project entry.
+    * D is done by 'siteadmin' for [t_project] and [t_project_info].
+      for [at_project_logos] and [at_project_icons] 'projectadmin' can delete.
+
+  t_mailinglist, t_ircchannel, t_component, t_milestone, t_version : 
+
+    * CUD is done by any approved project_team member.
+    * R is done by user independent code.
+
+  t_project_perms, t_projectgroup_perms : 
+
+    * CUD id done only by 'projectadmin'
+    * R is done by user independent code.
+
+  t_project_team : 
+    
+    * C can be done by any registered user.
+    * R can be done by user independent code.
+    * U can be done by 'projectadmin' or 'projectowner' to modify the approved
+      field.
+    * D is allowed for user who created the entry or 'projectadmin' or
+      'projectowner'.
+
+  t_ticket, t_comment : 
+
+    * C can be done by any registered user or by 'anonymous' user.
+    * R can be done by user independent code.
+    * U for [t_ticket] can be done only by the user who is owning the ticket as per the
+      latest ticket status entry.
+      for [t_comment] can be done by the user who authored the comment.
+    * D is allowed only for 'siteadmin'
+
+  t_ticket_status_history : 
+   
+    * C can be done by any registered user.
+    * R can be done by user independent code.
+    * U can be done by the user who created the entry.
+    * D is allowed only for 'siteadmin'.
+
+  at_ticket_versions, at_ticket_milestones, at_ticket_components : 
+  at_ticket_blockers, at_ticket_hier : 
+    
+    * CD can be done by any project team members.
+    * R can be done by user independent code.
+    * U is not allowed.

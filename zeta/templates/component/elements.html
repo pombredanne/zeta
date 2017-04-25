@@ -1,0 +1,61 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%def name="pagebar( text )" >
+    <div class="pbar">${text}</div>
+    <div class="curvy4"></div>
+    <div class="curvy2"></div>
+    <div class="curvy1"></div>
+</%def>
+
+<%def name="mainnav( active='' )" >
+    <div class="mainnav" >
+    <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+        % for name, href, title, tabstatus in c.mainnavs :
+            <th>
+                <div class="curvy4 gbrdr"></div>
+                <div class="curvy2 gbrdr">
+                    <div class="${tabstatus}" style="height : 1px ; margin: 0px 2px 0px 2px;" ></div>
+                </div>
+                <div class="curvy1 gbrdr">
+                    <div class="${tabstatus}" style="height : 1px ; margin: 0px 1px 0px 1px;"></div>
+                </div>
+                <div class="gbrdr">
+                <div class="tab ${tabstatus}" style="margin : 0px 1px 0px 1px;">
+                    <div class="manlink"><a class="nodec bb" href="${href}" title="${title}">${name}</a></div>
+                </div>
+                </div>
+            </th>
+            <td colspan=0></td>
+            <td colspan=0></td>
+            <td colspan=0></td>
+        % endfor
+        </tr>
+    </table>
+    </div>
+</%def>
+
+<%def name="curvyborder()">
+    <div class="curvy4 gbrdr"></div>
+    <div class="curvy2 gbrdr">
+        <div style="height : 1px ; margin: 0px 2px 0px 2px; background-color : #B4E0B4;"></div>
+    </div>
+    <div class="curvy1 gbrdr">
+        <div style="height : 1px ; margin: 0px 1px 0px 1px; background-color : #B4E0B4;"></div>
+    </div>
+</%def>
+
+<%def name="menulist( itemlist )"> 
+    % for item in itemlist :
+    <div class="mitem"><a title="${item[1]}" href="${item[0]}">${item[2]}</a></div>
+    % endfor 
+</%def>
+
+<%def name="infoheading( heading )">
+    <div class="hd">${heading}</hd>
+</%def>

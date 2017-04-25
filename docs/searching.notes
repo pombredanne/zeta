@@ -1,0 +1,95 @@
+Document types : 
+
+  - The database is converted into documents.
+        
+  user document :           Create, Update
+
+    content    := firstname + middlename + lastname + addressline1 +
+                  addressline2 + city + pincode + state + country
+    attributes := id, users, email, timezone, city, state, country, pincode
+    metadata   := {doctype,'user'}, {id,'user_id'}
+
+  attachment document :     Create, Update
+
+    content    := *summary + content
+    attributes := id, tag, filename
+    metadata   := {doctype,'attachment'}, {id,'attach_id'}
+
+  license document :        Create, Update, <Remove>
+
+    content    := *summary + *source + text
+    attributes := id, tag, licensename
+    metadata   := {doctype,'license'}, {id,'license_id'}
+
+  staticwiki document :     Create, Update
+
+    content    := *path + text
+    attributes := id
+    metadata   := {doctype,'staticwiki'}, {id,'staticwiki_id'}
+
+  project document :        Create, Update
+
+    content    := *summary + description + *componentname + c_description +
+                  *milestone_name + m_description + closingremarks +
+                  *version_name + v_description + 
+                  *mailinglists + *ircchannels
+    attributes := id, project, license, tag, email,
+                  users (admin+comp.owner+teamusers)
+    metadata   := {doctype,'project'}, {id,'project_id'}
+
+  ticket document :         Create, Update
+
+    content    := *summary + description + comment.text + component +
+                  milestone + version
+    attributes := id, project, tag, users (status.owners+commentors)
+    metadata   := {doctype,'ticket'}, {id,'ticket_id'}
+
+  review document :         Create, Update
+
+    content    := commenttext
+    attributes := id, project, users (author+moderator+participants+commentors), tag
+    metadata   := {doctype,'review'}, {id,'review_id'}
+
+  wiki document :           Create, Update
+
+    content    := *summary + texts + comments.text
+    attributes := id, project, user (creator+author+commentors), tag
+    metadata   := {doctype,'wiki'}, {id,'wiki_id'}
+
+  
+Query Format : 
+
+  - Query string is formed as a sequence of 'terms' seperated by whitespace.
+  - To match exact phrase surround the terms with quotes like,
+        "hello world"
+  - To search multiple terms use '+' where all terms will be matched.
+  - To search any of the terms, just provide them with white space.
+  - Filter matched documents using fields, which are like key:value pairs,
+    avaliable fields are,
+
+        user:<term>
+            term can be one of the valid username
+        project:<term>
+            term can be one of the valid projectname
+        tag:<term>
+            term can be one of the valid tagname
+        license:<term>
+            term can be one of the valid licensename
+        email:<term>
+            term can be one of the valid email-id
+        tzone:<term>
+            term can be one of the valid timezone
+        city:<term>
+            term can be one of the valid city
+        state:<term>
+            term can be one of the valid state
+        country:<term>
+            term can be one of the valid country
+        pincode:<term>
+            term can be one of the valid pincode
+        filename:<term>
+            term can be one of the valid attachment filename
+
+Faces of search : 
+
+  - Site level search 

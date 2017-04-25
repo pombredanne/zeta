@@ -1,0 +1,124 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements"  file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Timeline for project, shows all updates done in the context of a project
+except project-administrative logs, which is available under admin/timeline."""
+],
+[ 'Project homepage',
+"""Home page can be constructed using wiki markup. To change home page
+content edit project's <b>'homepage'</b> wiki document.
+"""
+],
+[ 'Roadmap',
+"""Use the Roadmap page to view project's progress and achievements.
+Milestones are grouped into catagories <em>closed</em> and <em>opened</em>,
+and chronologically sorted.<br/>
+<b>Background color coding</b> : 
+<span class="bgblue1">open milestones</span>
+<span class="bggrn2">closed milestones</span>
+<span class="bggray1">cancelled milestones</span>
+<br/><br/>
+Milestone-id is displayed along with the milestone name in paranthesis, use
+this where ever the milestone needs to be referenced.
+<b>Report Card</b> gives a visual segmentation of milestone tickets in terms
+of 'ticket-types', 'ticket-status', 'ticket-severity'.
+"""
+],
+[ 'Mountpoints',
+"""Repository directories can be mounted on-to site's url path, so that
+contents of its directory, including its sub-directory can be published as
+web pages"""
+],
+[ 'Favorites',
+"""Registered users can pick project(s) as their favorite, provided the user
+has 'PROJECT_VIEW' permission"""
+],
+[ 'Downloads',
+"""Downloable files for this project."""
+],
+
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+
+    <script type="text/javascript">
+    function setup_charts() {
+        var datatline = ${ h.json.dumps(c.datatline) | n}
+        timelinechart( datatline, Date.UTC( ${','.join(c.startdt)} ),
+                       'chart_tline', 'Users Activity' );
+    }
+    </script>
+</%def>
+
+<%def name="bd_body()">
+    <%
+        fav  = capture( elements.favoriteicon, 'favproj', classes="ml10" )
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                     )
+        ctxt_title = '<span class="fggray fntbold ml10 mr10">%s - timeline</span>' \
+                     % c.project.projectname 
+        attachs = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project attachmens"> \
+                    Attachments</a></span>' % h.url_projattachs )
+        downlds = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Project downloads"> \
+                    Downloads</a></span>' % h.url_projdownloads )
+        roadmap = '<span class="ml20 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Past, current and future milestones">\
+                    Roadmap</a></span>' % h.url_projroadmap )
+        mountpt = '<span class="ml10 fwnormal fntsmall">' + \
+                  ( '<a href="%s" title="Mounted repository directories"> \
+                    Mountpoints</a></span>' % h.url_projmounts )
+        charts  = capture( elements.iconlink, h.url_projectcharts,
+                           'barchart', title="Project analytics", classes="ml20" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ fav, ctxt_title, roadmap, mountpt, attachs, downlds,
+                              charts ],
+                            tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+            % if c.authorized :
+                ${forms.form_projfav(
+                    c.authuser, c.project, h.suburl_projfav,
+                    c.project in c.authuser.favoriteprojects and \
+                    'delfavuser' or 'addfavuser'
+                )}
+            % endif
+            <div>
+                ${elements.timeline_view( c.logs, c.fromoff, c.tooff, c.links,
+                                          chartid='chart_tline' )}
+            </div>
+        </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+        dojoaddOnLoad( 'initform_projfav' );
+
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

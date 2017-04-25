@@ -1,0 +1,209 @@
+This document specifies the requirement to interface with Zeta using XMLRPC.
+
+Almost all the text format is divided into what is called as, head and body
+seperated by a delimiter, so, you can imagine the text as,
+
+    head
+    delimiter
+    body
+
+`head` should always be single continuous paragraph.
+
+`delimiter` can be empty.
+
+`body` will always be interpreted as is, and will not be parsed, while head
+will be parsed to extract (key, value) pairs.
+
+1. Modules that needs to be interfaced :
+    staticwiki
+    attachment
+    wiki
+    ticket
+    review
+
+  1.1 static wiki pages :
+  
+      * Create a new static wiki page
+      * Fetch list of existing static wiki pages and its contents
+      * Update an existing static wiki page
+  
+      text formats and processing : 
+  
+        * `path` of static wiki page
+        * `text` of static wiki page
+        * Whether to create a new page.
+  
+  1.2 attachment :
+  
+      * Upload attachments
+      * Fetch list of attachments
+      * Update attachment summary and tags
+  
+      text formats and processing : 
+  
+        * `summary`, `tags` for new attachments.
+        * `summary`, `tags` for existing attachments identified by `id`.
+  
+  1.3 wiki :
+  
+      In a project's context, that can be either set globally or be set while
+      invoking a `wiki` command.
+  
+      * Create a new wiki page, for current project
+      * Fetch list of wiki pages, for current project
+      * Update existing wiki page
+      * Add comments to wiki page
+      * Vote fow wiki page
+      * Add or remove wiki page from favorite
+  
+      text formats and processing : 
+  
+        * `wikiurl`, `type`, `summary`, `wiki-text`, `tags`, `favorite`
+           for newly creating wiki page
+  
+        * `wikiurl`, `type`, `summary`, `wiki-text`, `tags`, `favorite`, `vote`,
+          while updating wiki page identified by `wikiurl`
+  
+        * `wikiurl`, `comment-text`
+          while adding comments to wiki page
+  
+  1.4 ticket :
+  
+      In a project's context, that can be either set globally or be set while
+      invoking a `ticket` command.
+  
+      * Create a new ticket, for current project
+      * Fetch list of ticket, for current project
+      * Update an existing ticket
+      * Add comments to ticket
+      * Vote for ticket
+      * Add or remove ticket from favorite
+  
+      text formats and processing : 
+  
+        * `type`, `severity`, `summary`, `description`,
+          `due_date`,
+          `promptuser`, `components`, `milestones`, `versions`, `blockedby`, `blocking`, `parent`,
+          `tags`, `favorite`
+  
+          for newly creating ticket
+  
+        * `id`, `type`, `severity`, `status`, `summary`, `description`,
+          `status`, `due_date`,
+          `promptuser`, `components`, `milestones`, `versions`, `blockedby`, `blocking`, `parent`,
+          `tags`, `ticket-comment`, `vote`, `favorite`
+  
+          for updating exisiting ticket identified by `id`
+      
+        * `id`, `comment-text`
+  
+          for adding comments to ticket
+      
+  1.5 review :
+  
+      In a project's context, that can be either set globally or be set while
+      invoking a `review` command.
+  
+      * Fetch list of review, for current project
+      * Map resource to review id
+      * Fetch review comments, for _this_ review
+      * Add comments to review
+      * Add or remove review from favorite
+
+      text formats and processing : 
+       
+        * `tags`, `favorite`,
+          for updating review details
+
+        * `nature`, `position`, `comment-text`
+          while creating review comments
+
+2. With editor :
+
+3. With E-mail :
+
+  There is no intermediate phase of fetching the list of existing resources.
+  It is always a single text bundle with following consumable fields,
+
+    * recepient address
+    * subject
+    * body
+
+  `recepient address`, domain name of the recepient address must match the
+  application's hosted domain name address. Domain name can also be virtual
+  domain name.
+
+  `subject` line will always be identifying the resource, if so, and if 
+  the resource is indeed present, then the mail will be interpreted as an
+  update command, otherwise it will be interpreted as create command.
+  
+  `subject` will always be sanitized to remove leading spaces, reply, forward
+  prefixes and subsequently will be concatenated with head.
+
+    3.1 static wiki :
+
+      recepient-address : 
+        * domain name must match application's hosted domain name,
+        * user name can be anything.
+      subject : 
+        static wiki pathname
+      body : 
+        static wiki text
+
+    3.2 attachment :
+
+      recepient-address : 
+        * domain name must match applications hosted domain name,
+        * if user name matches a valid project name, then the attachments will
+          be added to the project, otherwise, the attachments are simply added
+          to the site.
+      subject : 
+        attachmentid - identifying the attachment.
+      body : 
+        contains (key, value) pairs attributed to all the attachments in the
+        email, else if `attachmentid` is present in the subject, then the
+        (key,value) pairs will be attribute to the identified attachment.
+
+    3.3 wiki :
+
+      recepient-address : 
+        * domain name must match applications hosted domain name,
+        * if user name matches a valid project name, then the wiki text will
+          interpreted under the project's context, otherwise, the body of the
+          email is expected to have the projectname.
+      subject : 
+        wikiid or wikiurl
+      body : 
+        (key, value) pairs attributed to the wiki page.
+        
+        delimiter
+
+        wiki text
+
+        (or) 
+        
+        delimiter 
+
+        just-wiki-comment
+
+    3.4 ticket :
+
+      recepient-address : 
+        * domain name must match applications hosted domain name,
+        * if user name matches a valid project name, then the ticket text will
+          interpreted under the project's context, otherwise, the body of the
+          email is expected to have the projectname.
+      subject : 
+        ticketid, projectname
+      body : 
+        (key, value) pairs attributed to ticket.
+        
+        delimiter
+
+        ticket description
+
+        (or) 
+        
+        delimiter 
+
+        just-ticket-comment

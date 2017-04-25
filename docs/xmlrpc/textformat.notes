@@ -1,0 +1,105 @@
+
+    This writeup explains plain text format in which users can interact with
+    zeta-app via third party applications.
+
+Text format : 
+
+  * Comprises two blocks 'header' and 'body' separated by empty line.
+
+  * There should not be any emtpy line in the header, though empty line are
+    acceptable before the header and after the header.
+
+  * In case of text being recieved from email, subject and the body of the
+    email will be merged together, after the subject part is stripped off
+    're', 'fwd' etc ... and treated as whole.
+
+  [header],
+    Header explains the 'attributes' and 'commands', each line of the header,
+    is of the form,
+        <attribute> : <value>
+
+  [body],
+    Plain Text or wiki markup.
+
+  for staticwiki : 
+
+    path : <path-url>
+    static Wiki text
+
+    * If path-url already exist, it will be updated with new wiki-text,
+      otherwise, a new static wiki page will be created.
+
+  for ticket : 
+
+    ticket      : <id>
+    type        : <ticket-type>
+    severity    : <ticket-severity>
+    status      : <statusname>
+    duedate     : <duedate>
+    summary     : <text>
+    promptuser  : <username>|<userid>
+    component   : <compid>
+    milestone   : <mstnid>
+    version     : <verid>
+    blocking    : <ticketids>
+    blockedby   : <ticketids>
+    parent      : <ticketid>
+    tags        : <tagnames>
+    favorite    : "yes" | "true" | "no" | "false"
+    vote        : "up" | "down"
+
+    Ticket description (or) Ticket comment in wiki text.
+
+    * If a valid ticket-id is mentioned, the ticket will be configured with
+      specified parameters.
+    
+    * To create a new ticket, specify the 'ticket' attribute, but leave its
+      value as empty. Also valid summary, type, severity attributes must be
+      specified, since they are mandatory for a new ticket.
+
+    * 'blocking', 'blockedby', 'tags' is specified as comma seperated value.
+
+    * Body is seperated from the head part by a line containing,
+
+        'Head'
+        Decription
+        'body'
+
+        'Head'
+        Comment
+        'body'
+
+  for wiki : 
+
+    wikiid  : <wiki-id>
+    pagename: <wiki-pagename>
+    path    : <wiki-pathurl>
+    project : <projectname> | <project-id>
+    type    : <typename>
+    summary : <text>
+    tags    : <tagnames>
+    favorite: "yes" | "true" | "no" | "false"
+    vote    : "up" | "down"
+
+    Wiki text (or) Wiki Comment
+
+    * An existing wiki page can be specified using attributes,
+        'wikiid' or,
+        'path' or,
+        'pagename'&'project'
+
+    * To create a new wiki page, identify the wiki page, wiki
+        'path' or,
+        'pagename'&'project'
+
+    * 'tags' is specified as comma seperated value.
+
+    * Body is seperated from the head part by a line containing,
+
+        'Head'
+        Wiki text
+        'body'
+
+        'Head'
+        Comment
+        'body'

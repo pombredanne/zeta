@@ -1,0 +1,362 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+
+## ----------------------------------- User ----------------------------------
+
+<%def name="user_acc( user_id=None, username='', emailid='', timezone='' )">
+    ## POST : (user_id), username, emailid, timezone
+
+    <% timezone = timezone or 'UTC' %>
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'usrnm', 'User Account Name :')}</td>
+    <td class="formitem">
+    <div class="input req">
+        % if username :
+            ${lib.input_text( name='username', id='usrnm', value=username, maxlength=h.LEN_NAME, readonly='readonly' )}
+        % else :
+            ${lib.input_text( name='username', id='usrnm', value=username, maxlength=h.LEN_NAME )}
+        % endif
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+    </div>
+    </td>
+    </tr>
+    
+    <tr>
+    <td class="label">${lib.label_input( 'email', 'User Email ID :')}</td>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_text( name='emailid', id='email', value=emailid, size=32, maxlength=h.LEN_EMAILID )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 10 characters, Maximum ${h.LEN_EMAILID} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'tz', 'Time Zone :')}</td>
+    <td class="formitem">
+    <div class="input req">
+        <select name="timezone" size="1" id="tz">
+            % for tz in h.all_timezones :
+                % if tz == timezone :
+                    ${lib.input_option( tz, value=tz, selected="selected" )}
+                % else :
+                    ${lib.input_option( tz, value=tz )}
+                % endif
+            % endfor
+        </select>
+        <span class="mandt"><sup>*</sup></span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="user_pass( user_id=None )">
+    ## POST : (user_id), password, confpass
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'pass', 'Password :' )}</td>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_password( name='password', id='pass', maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Enter your password</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'cpass', 'Confirm Password :' )}</td>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_password( name='confpass', id='cpass', maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Confirm your password</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="user_disable( enabledusers )">
+    ## POST : disableusr
+    <tr>
+    <td class="label">Disable Users : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for username in enabledusers :
+            <div class="chkitem">
+            ${username}
+            ${lib.input_checkbox( name='disableusr', value=username, id='usrdis' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="user_enable( disabledusers )">
+    ## POST : enableusr
+    <tr>
+    <td class="label">Enable users : </td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for username in disabledusers :
+            <div class="chkitem">
+            ${username}
+            ${lib.input_checkbox( name='enableusr', value=username, id='usren' )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="user_info( user_id=None, fn='', mn='', ln='', al1='', al2='', city='', pcode='', state='', country='' )">
+    ## POST : (user_id), firstname, middlename, lastname, addressline1,
+
+    ##        addressline2, city, pincode, state, country
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'usrfn', 'First Name :' )}</td>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_text( name='firstname', id='usrfn', value=fn, maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'usrmn', 'Middle Name :' )}</td>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_text( name='middlename', id='usrmn', value=mn, maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'usrln', 'Last Name :' )}</div>
+    <td class="formitem">
+    <div class="input req">
+        ${lib.input_text( name='lastname', id='usrln', value=ln, maxlength=h.LEN_NAME )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">Mininum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'addr1', 'Addressline 1 :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='addressline1', id='addr1', value=al1, maxlength=h.LEN_ADDRLINE )}
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'addr2', 'Addressline 2 :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='addressline2', id='addr2', value=al2, maxlength=h.LEN_ADDRLINE )}
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'city', 'City :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='city', id='city', value=city, maxlength=h.LEN_NAME )}
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'pcode', 'Pincode :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='pincode', id='pcode', value=pcode, maxlength=h.LEN_PINCODE )}
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'state', 'State :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='state', id='state', value=state, maxlength=h.LEN_NAME )}
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">${lib.label_input( 'cntry', 'Country :' )}</div>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_text( name='country', id='cntry', value=country, maxlength=h.LEN_NAME )}
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="user_tos( user_id=None, tos='' )">
+    ## POST : (user_id), tos, acctos
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'tos', 'Terms of Service :' )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_textarea( name='tos', rows=20, cols=80, id='tos', text=tos )}
+        <br></br>
+        ${lib.input_checkbox( name='acctos', value='accepted', id='acctos' )}
+        <span class="mandt"><sup>*</sup></span>
+        <br></br>
+        <span class="frmhlp">By clicking on 'Accept' below you are agreeing to the Terms of Service above and the Privacy Policy.</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## -------------------------------- User Relation ----------------------------
+
+<%def name="add_user_relation( reltype, user_id=None, tousers=[], )">
+    ## POST : (user_id), <reltypename>reltype
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">${lib.label_input( 'tousrs', 'Add users as `%s` :' % reltype )}</td>
+    <td class="formitem">
+    <div class="input">
+        <select name="${'%sto'%reltype}" multiple="multiple" size="4" id="tousrs">
+            % for u in tousers :
+                ${lib.input_option( u, value=u )}
+            % endfor
+        </select>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="approve_user_relation( user_id=None, approvelist=[] )">
+    ## POST : (user_id), approveurel
+    <% approvelist = sorted( approvelist, key=lambda x : x[2] ) %>
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">Approve relation request from other users :</td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for urel_id, userfrom, reltype in approvelist :
+            <div class="chkitem">
+            ${'%s from %s' % (reltype, userfrom)}
+            ${lib.input_checkbox( name='approveurel', value=str(urel_id), id=str(urel_id) )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+<%def name="remove_user_relation( user_id=None, removelist=[] )">
+    ## POST : (user_id), removeurel
+    <% removelist = sorted( removelist, key=lambda x : x[2] ) %>
+
+    % if user_id :
+    <div class="input">${lib.input_hidden( name='user_id', value=str(user_id) )}</div>
+    % endif
+
+    <tr>
+    <td class="label">Remove user relations that are approved by other users :</td>
+    <td class="formitem">
+        <div class="chkblk">
+        % for urel_id, userto, reltype in removelist :
+            <div class="chkitem">
+            ${'%s as %s' % (userto, reltype)}
+            ${lib.input_checkbox( name='removeurel', value=str(urel_id), id=str(urel_id) )}
+            </div>
+        % endfor
+        </div>
+    </td>
+    </tr>
+</%def>
+
+## ---------------------------- User Permission ------------------------------
+
+<%def name="user_permissions( usernames=[], permissions=[] )">
+    <tr>
+    <td class="label">Update site-wide user permission :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select user </td>
+            <td>
+            <select name="updtusr" size=1 id="updtusr">
+                % for u in [ '' ] + usernames :
+                    ${lib.input_option( u, value=u )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Remove permissions </td>
+            <td>
+            <select name="rmpg" multiple="multiple" size=6 id="rmpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Add permissions </td>
+            <td>
+            <select name="addpg" size=6 id="addpg" disabled="disabled">
+                % for p in permissions :
+                    ${lib.input_option( p, value=p )}
+                % endfor
+            </select>
+            </td>
+        <tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>

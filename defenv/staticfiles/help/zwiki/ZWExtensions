@@ -1,0 +1,203 @@
+[< <style type="text/css"> >]
+    h1, h2, h3, h4, h5 { 
+        margin : 0px;
+        padding: 5px 0px 2px 3px;
+        background-color : #EAEAFC;
+        border-bottom: 1px solid #CCCCCC;
+    }
+[< </style> >]
+
+{{ Toc( float='right' ) }}
+
+
+== ZWiki Extensions
+
+ZWiki Extension is a plugin like framework to extend wiki engine itself. One
+can define new markups, text formats etc ... and integrate it with ZWiki as an
+extension.
+
+=== Extension Framework
+
+Extented wiki text can be added into the main document by enclosing them within
+triple curly braces '' ~{~{{ ... ~}~}} ''. Everything between the curly braces
+are passed directly to the extension module, which, in most of the cases will
+return a translated HTML text. The general format while using a wiki extension
+is,
+
+> ~{~{~{''extension-name'' //space seperated parameter-strings//
+> # {
+> # ''property-name'' : //value//
+> # ''property-name'' : //value//
+> # ...
+> # }
+> 
+> ''wiki-text ...''
+> ~}~}~}
+
+* ''extension-name'', should be one of the valid extensions.
+* ''parameter-strings'', string values that will be passed as parameters.
+* ''property-name'', property name can be a property accepted by the extension
+  module or can be CSS property. Note that, the entire property block should
+  be marked by a beginning ''hash (#)''
+
+== Extension List
+
+
+== List of ZWiki extensions
+
+
+=== Box
+
+: Description ::
+    Generate a box with title and content. Text within the curly braces will be
+    interpreted as the content and can contain ZWiki text as well. If title
+    text is provided, then the extension can take parameter ''hide'' which
+    can be used to shrink/expand box content.
+
+:Example ::
+
+> [<PRE
+{{{ Box hide
+#{
+# 'title' : 'Building A Mnesia Database',
+# 'style' : { 'margin-left' : '5%', 'margin-right' : '5%' },
+# 'titlestyle' : 'color: brown;',
+# 'contentstyle' : 'color: gray;',
+#}
+
+This chapter details the basic steps involved when designing a Mnesia database
+and the programming constructs which make different solutions available to the
+programmer. The chapter includes the following sections,
+
+* defining a schema
+* the datamodel
+* starting Mnesia
+* creating new tables.
+
+}}} >]
+
+{{{ Box hide
+#{
+# 'title' : 'Building A Mnesia Database',
+# 'style' : { 'margin-left' : '5%', 'margin-right' : '5%' },
+# 'titlestyle' : 'color: brown;',
+# 'contentstyle' : 'color: gray;',
+#}
+
+This chapter details the basic steps involved when designing a Mnesia database
+and the programming constructs which make different solutions available to the
+programmer. The chapter includes the following sections:
+
+* defining a schema
+* the datamodel
+* starting Mnesia
+* creating new tables.
+
+}}}
+
+special property key-value pairs,
+
+|= title        | optional, title string
+|= titlestyle   | optional, title style string in CSS style format
+|= contentstyle | optional, content style string in CSS style format
+
+Default CSS styling for title,
+> [<PRE {'color': 'black', 'padding-right': '3px', 'background': '#EEEEEE', 'padding-bottom': '3px', 'padding-top': '3px', 'font-weight': 'bold', 'padding-left': '3px'} >]
+
+Default CSS styling for content,
+> [<PRE {'padding-top': '3px', 'padding-right': '3px', 'padding-left': '3px', 'padding-bottom': '3px'} >]
+
+Default CSS styling for the entire extension,
+> [<PRE {'color': 'gray', 'border-left': 'thin solid gray', 'border-top': 'thin solid gray', 'border-bottom': 'thin solid gray', 'border-right': 'thin solid gray'} >]
+
+
+=== Code
+
+: Description ::
+    Syntax highlighting for code-snippet. Highlighting is available for
+    [[ /help/pygments | several-dozen formats ]], refer to the //Alias// field
+    to invoke the correct highligher.
+
+'' Example ''
+
+> [<PRE  {{{ Code C
+    struct process {
+      struct process *next;
+      const char *name;
+      PT_THREAD((* thread)(struct pt *, process_event_t, process_data_t));
+      struct pt pt;
+      unsigned char state;
+    };
+  }}} >]
+
+{{{ Code C
+struct process {
+  struct process *next;
+  const char *name;
+  PT_THREAD((* thread)(struct pt *, process_event_t, process_data_t));
+  struct pt pt;
+  unsigned char state;
+};
+}}}
+
+To highlight a different syntax, supply the syntax name as a parameter like,
+> [<PRE {{{ Code <syntax-name> >]
+
+To disable line numbers while highlighting add parameter 'noln'. The default
+is to list the line numbers.
+> [<PRE {{{ Code <syntax-name> nonl >]
+
+
+
+=== Footnote
+:Description::
+    Generate footnotes that can be referenced. Note that each foot note block
+    should be aligned at the left side after the foot-note anchor name,
+    even if it is a multiline foot-note. And the foot-note anchor name should
+    be aligned with the begining of the line.
+
+:Example ::
+
+foot-note content can be specified like,
+> [<PRE
+{{{ Footnote footnote-title
+1 German-born Swiss-American theoretical physicist, philosopher and
+  author who is widely regarded as one of the most influential and best
+  known scientists and intellectuals of all time. He is often regarded as
+  the father of modern physics.
+
+2 American physicist known for his work in the path integral
+  formulation of quantum mechanics, the theory of quantum electrodynamics.
+}}} >]
+
+Note that inside the ''Footnote'' extension block, each footnote should be
+seperated by an empty line and each footnote's first word will be interpreted
+as its anchor name, which can be referenced else where like,
+
+> ... mentioned by Richard Feynman ~[<FN 1 ~>], initially proposed by Albert Einstein  ~[<FN 2 ~>]
+
+... mentioned by Richard Feynman [<FN 1 >], initially proposed by
+  Albert Einstein  [<FN 2 >]
+...
+
+{{{ Footnote footnote-title
+1 German-born Swiss-American theoretical physicist, philosopher and
+  author who is widely regarded as one of the most influential and best
+  known scientists and intellectuals of all time. He is often regarded as
+  the father of modern physics.
+
+2 American physicist known for his work in the path integral
+  formulation of quantum mechanics, the theory of quantum electrodynamics.
+}}}
+
+
+=== Html
+: Description :: Raw html text.
+
+
+=== Nested
+
+: Description ::
+    Simpley nest another ZWiki document / text within the current
+    document.
+

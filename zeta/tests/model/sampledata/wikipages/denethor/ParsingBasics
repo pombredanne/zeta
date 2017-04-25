@@ -1,0 +1,69 @@
+yacc.py is used to parse language syntax. Before showing an example, there are a few important bits of background that must be mentioned. First, syntax is usually specified in terms of a BNF grammar. For example, if you wanted to parse simple arithmetic expressions, you might first write an unambiguous grammar specification like this:
+
+     
+    expression : expression + term
+               | expression - term
+               | term
+
+    term       : term * factor
+               | term / factor
+               | factor
+
+    factor     : NUMBER
+               | ( expression )
+
+In the grammar, symbols such as NUMBER, +, -, *, and / are known as terminals and correspond to raw input tokens. Identifiers such as term and factor refer to grammar rules comprised of a collection of terminals and other rules. These identifiers are known as non-terminals.
+
+The semantic behavior of a language is often specified using a technique known as syntax directed translation. In syntax directed translation, attributes are attached to each symbol in a given grammar rule along with an action. Whenever a particular grammar rule is recognized, the action describes what to do. For example, given the expression grammar above, you might write the specification for a simple calculator like this:
+
+     
+    Grammar                             Action
+    --------------------------------    -------------------------------------------- 
+    expression0 : expression1 + term    expression0.val = expression1.val + term.val
+                | expression1 - term    expression0.val = expression1.val - term.val
+                | term                  expression0.val = term.val
+
+    term0       : term1 * factor        term0.val = term1.val * factor.val
+                | term1 / factor        term0.val = term1.val / factor.val
+                | factor                term0.val = factor.val
+
+    factor      : NUMBER                factor.val = int(NUMBER.lexval)
+                | ( expression )        factor.val = expression.val
+
+A good way to think about syntax directed translation is to view each symbol in the grammar as a kind of object. Associated with each symbol is a value representing its "state" (for example, the val attribute above). Semantic actions are then expressed as a collection of functions or methods that operate on the symbols and associated values.
+
+Yacc uses a parsing technique known as LR-parsing or shift-reduce parsing. LR parsing is a bottom up technique that tries to recognize the right-hand-side of various grammar rules. Whenever a valid right-hand-side is found in the input, the appropriate action code is triggered and the grammar symbols are replaced by the grammar symbol on the left-hand-side.
+
+LR parsing is commonly implemented by shifting grammar symbols onto a stack and looking at the stack and the next input token for patterns that match one of the grammar rules. The details of the algorithm can be found in a compiler textbook, but the following example illustrates the steps that are performed if you wanted to parse the expression 3 + 5 * (10 - 20) using the grammar defined above. In the example, the special symbol $ represents the end of input.
+
+    Step Symbol Stack           Input Tokens            Action
+    ---- ---------------------  ---------------------   -------------------------------
+    1                           3 + 5 * ( 10 - 20 )$    Shift 3
+    2    3                        + 5 * ( 10 - 20 )$    Reduce factor : NUMBER
+    3    factor                   + 5 * ( 10 - 20 )$    Reduce term   : factor
+    4    term                     + 5 * ( 10 - 20 )$    Reduce expr : term
+    5    expr                     + 5 * ( 10 - 20 )$    Shift +
+    6    expr +                     5 * ( 10 - 20 )$    Shift 5
+    7    expr + 5                     * ( 10 - 20 )$    Reduce factor : NUMBER
+    8    expr + factor                * ( 10 - 20 )$    Reduce term   : factor
+    9    expr + term                  * ( 10 - 20 )$    Shift *
+    10   expr + term *                  ( 10 - 20 )$    Shift (
+    11   expr + term * (                  10 - 20 )$    Shift 10
+    12   expr + term * ( 10                  - 20 )$    Reduce factor : NUMBER
+    13   expr + term * ( factor              - 20 )$    Reduce term : factor
+    14   expr + term * ( term                - 20 )$    Reduce expr : term
+    15   expr + term * ( expr                - 20 )$    Shift -
+    16   expr + term * ( expr -                20 )$    Shift 20
+    17   expr + term * ( expr - 20                )$    Reduce factor : NUMBER
+    18   expr + term * ( expr - factor            )$    Reduce term : factor
+    19   expr + term * ( expr - term              )$    Reduce expr : expr - term
+    20   expr + term * ( expr                     )$    Shift )
+    21   expr + term * ( expr )                    $    Reduce factor : (expr)
+    22   expr + term * factor                      $    Reduce term : term * factor
+    23   expr + term                               $    Reduce expr : expr + term
+    24   expr                                      $    Reduce expr
+    25                                             $    Success!
+
+When parsing the expression, an underlying state machine and the current input token determine what happens next. If the next token looks like part of a valid grammar rule (based on other items on the stack), it is generally shifted onto the stack. If the top of the stack contains a valid right-hand-side of a grammar rule, it is usually "reduced" and the symbols replaced with the symbol on the left-hand-side. When this reduction occurs, the appropriate action is triggered (if defined). If the input token can't be shifted and the top of stack doesn't match any grammar rules, a syntax error has occurred and the parser must take some kind of recovery step (or bail out). A parse is only successful if the parser reaches a state where the symbol stack is empty and there are no more input tokens.
+
+It is important to note that the underlying implementation is built around a large finite-state machine that is encoded in a collection of tables. The construction of these tables is non-trivial and beyond the scope of this discussion. However, subtle details of this process explain why, in the example above, the parser chooses to shift a token onto the stack in step 9 rather than reducing the rule expr : expr + term. 

@@ -1,0 +1,146 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Details about each repository revision listed in reverse chronological order.
+"""
+],
+
+]
+
+%>
+
+<%def name="hd_links()">
+    ${parent.hd_links()}
+</%def>
+
+<%def name="hd_styles()">
+    ${parent.hd_styles()}
+</%def>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="showrevlist()">
+    <div class="ml5 mr5" style="border: 5px solid #EBFCEB;">
+        <div class="calign pt10 pb10" 
+             style="overflow-x: auto;">
+            % for rp in c.revpages :
+                <a class="ml5" href=${rp[1]}>${rp[0]}</a>
+            % endfor
+        </div>
+        <div>
+            <div class="disptable w100">
+                <div class="disptrow w100 bggrn2 fntbold">
+                    <div class="disptcell p5" style="width: 6em;">
+                        Rev
+                    </div>
+                    <div class="disptcell p5" style="">
+                        Log
+                    </div>
+                    <div class="disptcell p5" style="">
+                        Author
+                    </div>
+                    <div class="disptcell p5" style="width: 12em;">
+                        Date
+                    </div>
+                </div>
+                % for log in c.revlist:
+                <div class="disptrow" name="revitem">
+                    <div class="disptcell vmiddle p5" 
+                         style="width: 6em; border-bottom: 1px solid #f2f2f2;">
+                        <a href="${log[4]}">${log[1]}</a>
+                    </div>
+                    <div class="disptcell vmiddle p5" 
+                         style="border-bottom: 1px solid #f2f2f2;">
+                        <div class="wspreline"
+                             style="font-family : Courier, Courier New">
+                            ${log[0] | n}
+                        </div>
+                    </div>
+                    <div class="disptcell vmiddle p5" 
+                         style="border-bottom: 1px solid #f2f2f2;">
+                        ${log[2]}
+                    </div>
+                    <div class="disptcell vmiddle p5" 
+                         style="width: 12em; border-bottom: 1px solid #f2f2f2;">
+                        ${log[3].strftime('%a, %b %d, %Y')}
+                    </div>
+                </div>
+                % endfor
+            </div>
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <%
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+
+
+        sel_vcs = capture( forms.form_selectvcs, c.authuser,
+                           c.vcslist, c.vcs and c.vcs.name or '' )
+
+        vcsbrowse = '<a class="ml20 fntsmall fwnormal" title="Browse latest version"' +\
+                    ( ' href="%s">Browse</a>' % h.url_vcsbrowse )
+        revlist = '<a class="ml10 fntsmall fwnormal" ' +\
+                  ( 'title="List of repository revisions" href="%s">Revisions</a>' % \
+                        h.url_revlist )
+
+        if c.vcseditable :
+            intgvcs  = '<span class="ml10 fwnormal fntsmall">' +\
+                      '<a href="%s" \
+                          title="Integrate a new repository">Integrate</a></span>' % \
+                               h.url_vcsintegrate
+        else :
+            intgvcs = ''
+
+        tline = capture( elements.iconlink, h.url_vcstimeline,
+                         'timeline', title="Timeline of vcs-integration",
+                         classes="ml20" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ sel_vcs, vcsbrowse, intgvcs, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            <div>
+                ${showrevlist()}
+            </div>
+        </div> 
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( function () {
+            /* Setup the vcs goto list */
+            select_goto( dojo.query( '#selectvcs' )[0] );
+        });
+        dojo.addOnLoad( function() {
+            dojo.forEach(
+                dojo.query( "tr[name=revitem]" ),
+                function( n ) { highlightbyclass( n, 'bggray1' ) }
+            );
+        });
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

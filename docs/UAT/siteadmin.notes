@@ -1,0 +1,99 @@
+Abstract : 
+
+    To test site-admistration functions via web.
+
+http://127.0.0.1:5000/accounts/signin
+
+  Sign-in as administrator.
+
+http://127.0.0.1:5000/siteadmin?form=request
+
+  Site Administration page.
+
+  Validation : 
+
+    1. Must contain the following metanav elements,
+        admin, projects, preference, signout, site-admin, aboutus, help
+    2. Search-site text box.
+    4. Tool-tips with following tabs,
+        Help, Site-Info, User-Management, Project-Management, Permissions
+    5. List all Hyper-links and check them.
+    6. Check for Footer. Image, version name, company name.
+
+  Validation (tab SiteInfo ) : 
+
+    1. Must contain 
+        database_version, envpath, product_name, product_version, siteadmin,
+        sitename, timezone, unicode_encoding
+
+  Validation (tab SiteConfig ) : 
+
+    1. Must contain 
+        def_wikitype, interzeta, projteamtype, reviewactions, reviewnatures, 
+        specialtags, ticketresolv, ticketseverity, ticketstatus, tickettypes,
+        userrel_types, vcstypes, welcomestring, wikitypes
+
+  Validation (tab Users ) : 
+
+    1. Must contain 
+            Add permission groups to user
+            Delete permission groups from user
+            Enable users
+            Disable Users
+
+    2. Under add permission groups to user, user-select options must list all
+       registered users.
+            list of registered users are available from,
+            http://127.0.0.1:5000/u?jsonobj=usernames&view=js
+
+    3. Under delete permission groups from user, user-select option must list
+       all registered users.
+            list of registered users are available from,
+            http://127.0.0.1:5000/u?jsonobj=usernames&view=js
+
+    4 .Enable users and Disable users, option list must be mutually exclusive
+       and the union of both list must be equal to all registered users.
+
+    5. For a given user, list of addable permissions and removable permissions
+       must be mutually exclusive and their union must be,
+            [ LICENSE_VIEW, LICENSE_CREATE, SITE_ADMIN, EMAIL_VIEW,
+              STATICWIKI_CREATE ]
+
+  Validation (tab Projects ) : 
+
+    1. Must contain 
+            Enable projects
+            Disable projects
+            
+    2. projects listed under enable projects and projects listed under disable
+       projects must be mutually exclusive. And the union of both list must be
+       equal to all registered users.
+
+  Validation (tab Permissions ) : 
+
+    1. Must contain 
+            Create permission group
+            Update permission group,
+
+    2. Under create permission group, list of permission names should equal
+       to,
+            [ EMAIL_VIEW, LICENSE_CREATE, LICENSE_VIEW, PROJECT_VIEW, 
+              REVIEW_CREATE, REVIEW_VIEW, SEARCH_VIEW, STATICWIKI_CREATE,
+              TICKET_COMMENT_CREATE, TICKET_CREATE, TICKET_STATUS_CREATE,
+              TICKET_VIEW, VCS_CREATE, VCS_VIEW, WIKICOMMENT_CREATE,
+              WIKI_CREATE, WIKI_VIEW, XMLRPC_VIEW, SITE_ADMIN
+            ]
+
+    3. Under update permission group, select-group must list all permission
+       groups under the test site.
+
+
+  Validation (tab License ) : 
+
+    1. Must contain 
+        def_wikitype, interzeta, projteamtype, reviewactions, reviewnatures, 
+        specialtags, ticketresolv, ticketseverity, ticketstatus, tickettypes,
+        userrel_types, vcstypes, welcomestring, wikitypes
+
+  Form combination ( for form 'siteconfig' ) : 
+

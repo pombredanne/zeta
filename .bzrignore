@@ -1,0 +1,12 @@
+.vim_maindev
+.vim_model
+.vim_tests
+yacctab.py
+lextab.py
+defenv/data/sessions
+defenv/data/templates
+.vim*
+*.pyc
+defenv/public/dojotoolkit
+defenv/templates-dojo/.vim_templates
+defenv/fileattach/*

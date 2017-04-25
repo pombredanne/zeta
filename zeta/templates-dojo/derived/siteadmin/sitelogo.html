@@ -1,0 +1,41 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+page_tooltips = [
+]
+helptext = """
+Upload your site's logo with image size 100x100 pixels.
+"""
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <div id="bdy" class="mt50">
+    <div id="slogo" class="brtr10 brtl10">
+        <div class="disptable w100">
+            <div class="disptrow">
+                <div class="distcell fntsmall p5">
+                    <div class="p10 bgblue1 calign fntbold">${helptext}</div>
+                    ${forms.form_sitelogo( c.authuser, h.suburl_sitelogo )}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+</%def>

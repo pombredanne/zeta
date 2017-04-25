@@ -1,0 +1,2220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.122.253:5001" />
+<title>ProjReviews</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ProjReviews</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>9000</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser1-->
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<!--Create project testreview1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New-project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>projectname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>projectname</td>
+	<td>testreview1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>summary</td>
+	<td>Test project created to exercise review features</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>licensename</td>
+	<td>label=Nokia Open Source License</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>This is for beta release testing. Hopefully it becomes a beginning for better test suite for production release</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>projectname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>document.forms[2].elements[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Tickets</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test project created to exercise review features</td>
+	<td></td>
+</tr>
+<!--Add teams to project testreview1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser2</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<!--Add premissions to testreview1 teams-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permissions to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=REVIEW_CREATE</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=REVIEW_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=REVIEW_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=REVIEW_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<!--Create a repository-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Integrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>testrepo_forrevw</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vcs_typename</td>
+	<td>label=svn</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rooturl</td>
+	<td>file:///home/pratap/dev/oss/svn-sync/mako</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='svn']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<!--Goto Review tab-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-project']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Tickets</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-review']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create</td>
+	<td></td>
+</tr>
+<!--Create a review-->
+<tr>
+	<td>waitForValue</td>
+	<td>resource_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>resource_url</td>
+	<td>/p/testreview1/s/19/mako/tags/rel_0_1_2/examples/bench/django/templatetags/bench.py</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>version</td>
+	<td>207</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>participant</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>participant</td>
+	<td>label=testuser4</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>participant</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>resource_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<!--Goto newly created review-->
+<tr>
+	<td>open</td>
+	<td>/p/testreview1/r/51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-review']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='iconadd']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//h3[@id='revtitle']/span</td>
+	<td>( /p/testreview1/s/19/mako/tags/rel_0_1_2/examples/bench/django/templatetags/bench.py, ver:207 )</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0 Pending</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>moderator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>participant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>closerev</td>
+	<td>Open : Close :</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New review comment</td>
+	<td></td>
+</tr>
+<!--Add author, moderator, manage participants-->
+<tr>
+	<td>select</td>
+	<td>author</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>moderator</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>participant</td>
+	<td>label=testuser2</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='listparts']/div[4]/span</td>
+	<td></td>
+</tr>
+<!--Tags-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tags</td>
+	<td>hello, world, how,</td>
+</tr>
+<tr>
+	<td>keyPress</td>
+	<td>tags</td>
+	<td>\13</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=how</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=hello</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=world</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/div[1]/div[3]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--Check attachments-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>attachments w100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>attachfile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/p/testreview1/r/51</td>
+	<td></td>
+</tr>
+<!--Add review comment-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New review comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='creatercmt_cntnr']/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='creatercmt_cntnr']/div[1]</td>
+	<td>cancel</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='creatercmt']/div/div[1]/div[2]/em/span</td>
+	<td>Line number</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dijit_form_ValidationTextBox_0</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reviewnature</td>
+	<td>label=document</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crrcmt_text</td>
+	<td>My first review comment</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='creatercmt_cntnr']/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New review comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Position : 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser1 on</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>My first review comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>My first review comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//select[@name='reviewaction']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//select[@name='reviewnature']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='reviewaction']</td>
+	<td>label=rectified</td>
+</tr>
+<!--Replying to comment-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='zeta_RComment_0']/div/div[1]/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rprcmt_text</td>
+	<td>Replying to the first comment</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='prjrevwcomments']/div[1]/span[4]</td>
+	<td>Pending</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Replying to the first comment</td>
+	<td></td>
+</tr>
+<!--Review with source-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=View-withsource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=View-withsource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>( /p/testreview1/s/19/mako/tags/rel_0_1_2/examples/bench/django/templatetags/bench.py, ver:207 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='prjrevwsource']/div[2]/div/div[2]/div[2]/table/tbody/tr[2]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='prjrevwsource']/div[2]/div/div[2]/div[2]/table/tbody/tr[2]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Line number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='reviewnature']</td>
+	<td>label=cosmetic</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crrcmt_text</td>
+	<td>via source</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=View-onlycomments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=View-onlycomments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>via source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Pending</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser2    -->
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<!--Try admin-->
+<tr>
+	<td>open</td>
+	<td>/p/testreview1/admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body</td>
+	<td>403 Forbidden Access was denied to this resource.<br /><br /> You are not the project administrator</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<!--Go to review page-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>resource_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Pending</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Comments</td>
+	<td></td>
+</tr>
+<!--Manage author, moderator, participants-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>moderator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>participant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>author</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>moderator</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>participant</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>moderator</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>author</td>
+	<td>label=testuser1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='listparts']/div[4]/span</td>
+	<td></td>
+</tr>
+<!--Tags-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='revwtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tags</td>
+	<td>booza</td>
+</tr>
+<tr>
+	<td>keyPress</td>
+	<td>tags</td>
+	<td>\13</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=booza</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>cosmetic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>via source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser3-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>moderator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>participant</td>
+	<td></td>
+</tr>
+<!--Approve comments-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Approve:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@type='checkbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='zeta_RComment_1']/div[1]/div[1]/div[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>( /p/testreview1/s/19/mako/tags/rel_0_1_2/examples/bench/django/templatetags/bench.py, ver:207 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0 Pending</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Comments</td>
+	<td></td>
+</tr>
+<!--Close review-->
+<tr>
+	<td>click</td>
+	<td>//input[@name='radiocommand' and @value='close']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>( /p/testreview1/s/19/mako/tags/rel_0_1_2/examples/bench/django/templatetags/bench.py, ver:207 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0 Pending</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//input[@name='radiocommand' and @value='close']</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser4-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div[1]/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<!--Make sure create elements are not present-->
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>moderator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//select[@id='participant']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testuser5</td>
+	<td></td>
+</tr>
+<!--Add comment-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New review comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='creatercmt_cntnr']/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Line number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dijit_form_ValidationTextBox_0</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reviewnature</td>
+	<td>label=document</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crrcmt_text</td>
+	<td>Use wiki markup to compose review comment. Zwiki reference</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='creatercmt_cntnr']/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser4 on</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Position : 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>1 Pending</td>
+	<td></td>
+</tr>
+<!--Try review create-->
+<tr>
+	<td>open</td>
+	<td>/p/testreview1/r/createrevw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body</td>
+	<td>403 Forbidden Access was denied to this resource.<br /><br /> User doesn't have the permissions ['REVIEW_CREATE']</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Sign-in as testuser5-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body</td>
+	<td>403 Forbidden Access was denied to this resource.<br /><br /> User doesn't have the permissions ['PROJECT_VIEW']</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--Add PROJECT_VEW but remove REVIEW_VIEW for testuser5-->
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permissions to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permissions to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add permissions to team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Remove permissions from team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Remove permissions from team :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projectteam_perm_id</td>
+	<td>label=REVIEW_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testreview1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=51</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/div/h3/u</td>
+	<td>Highlights</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,191 @@
+Abstract : 
+
+    To test user registration and login process in as many possible
+    combination as possible.
+
+http://127.0.0.1:5000/
+
+  Validation : 
+    1. Must contain the following metanav elements,
+        anonymous, signin, register, aboutus, help
+    2. Search-site text box.
+    3. Search-staticwiki text box.
+    4. Tool-tips with following tabs,
+        Help, Metanav, Page-Layout, Projects, StaticWiki
+    5. List all Hyper-links and check them.
+    6. Check for Footer. Image, version name, company name.
+
+http://127.0.0.1:5000/accounts/newaccount?form=request    
+  
+  All form fields are mandatory.
+
+  Form Combinations : 
+    1. Try username, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    2. Try username, registring with a name that already registered.
+    3. Try emailid, without '@' character.
+    4. Try password, inconsistent with confirm-password.
+    5. Try firstname, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    6. Try lastname, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    7. Try submitting form without filling either one or more of the following
+       fields,
+            username, email-id, password, confirm-password, firstname,
+            lastname
+
+  Validation : 
+    1. For successful form submission, should be possible to sign-in.
+    2. For un-succesful form submission, should get an appropriate error
+       message.
+    3. List all Hyper-links and check them.
+    4. Check for Footer. Image, version name, company name.
+
+http://127.0.0.1:5000/accounts/signin
+
+  All form fields are mandatory.
+
+  Form Combinations : 
+    1. Try with non-existing username.
+    2. Try with wrong password.
+    3. Try with correct username / password.
+
+  Validation : 
+
+    1. 
+    ( on un-successful sign-in )
+      a. Check for appropriate error message.
+
+    ( on successful sign-in )
+      a. Must contain the following metanav elements,
+            <username>, projects, preference, signout, aboutus, help
+
+         'projects' metanav element should contain hyper links for,
+            project-index,
+            new-project form,
+            <list of all projects to which the user is a member>
+
+      b. Search-site text box.
+      c. Search-staticwiki text box.
+      d. Tool-tips with following sections,
+          Help, Metanav, Page-Layout, Projects, StaticWiki
+
+    2. A newly registered user must be visible in,
+
+        http://127.0.0.1:5000/siteadmin?form=request (under 'Users' tab)
+
+    3. List all Hyper-links and check them.
+    4. Check for Footer. Image, version name, company name.
+
+http://127.0.0.1:5000/u/prataprc/preference?form=request
+
+  Tabbed forms for user to configure his or her preference.
+
+  Validation : 
+    1. Must contain the following metanav elements,
+          <username>, projects, preference, signout, aboutus, help
+
+       'projects' metanav element should contain hyper links for,
+          project-index,
+          new-project form,
+          <list of all projects to which the user is a member>
+
+    2. Search-site text box.
+    3. Search-staticwiki text box.
+    4. Tool-tips with following tabs,
+        Attachments.
+    5. List all Hyper-links and check them.
+    6. Check for Footer. Image, version name, company name.
+
+    7. Must contain the following preference tabs,
+        AccountInfo, ChangePassword
+    8. Must contain expected user photo file.
+    9. Must contain expected user icon file.
+
+  Form Combinations ( for formname 'accountinfo' ) : 
+    1. Try emailid, without '@' character.
+    2. Try firstname, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    3. Try middlename, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    4. Try lastname, with less than 3 characters or more than 32 characters or
+       non-alphanumeric characters. All of the above should fail.
+    5. Try addressline1, addressline2, city, pincode, state, country,
+       with less than 3 characters or more than 32 characters. All of the
+       above should fail.
+    6. Try deleting email-id, firstname, lastname field. All of the above
+       should fail.
+
+  Validation ( for formname 'accountinfo' ) : 
+    1. 
+    ( on successful submission )
+      a. On refreshing the form, each field must contain configured value.
+        
+    ( on un-successful submission )
+      a. Fail with expected error message.
+
+  Form Combinations ( for formname 'change-password' ) : 
+    1. Without filling one or more of the following fields, 'password',
+       'confirm-password', try submitting the form. Should fail.
+    2. Try with inconsistent passwords. Should fail.
+
+  Validation ( for formname 'change-password' ) : 
+    1. 
+    ( on successful submission )
+      a. Logout and sign-in with the changed password.
+
+    ( on un-successful submission )
+      a. Fail with expected error message.
+
+  Attachments (user photo) : 
+    1. Try to add an attachment.
+    2. Delete an added attachment.
+    3. Add a new attachment.
+    4. Download the attachment.
+    5. Refreshing the preference page, should show the latest added
+       attachment.
+
+  Attachments (user icon) : 
+    1. Try to add an attachment.
+    2. Delete added attachment.
+    3. Add a new attachment.
+    4. Download the attachment.
+    5. Refreshing the preference page, should show the latest added
+       attachment.
+
+http://127.0.0.1:5000/accounts/signout
+
+  Should logout the user and redirect to site-home-page.
+
+  Validation : 
+    1. Must contain the following metanav elements,
+        anonymous, signin, register, aboutus, help
+    2. Search-site text box.
+    3. Search-staticwiki text box.
+    4. Tool-tips with following tabs,
+        Help, Metanav, Page-Layout, Projects, StaticWiki
+    5. List all Hyper-links and check them.
+    6. Check for Footer. Image, version name, company name.
+
+http://127.0.0.1:5000/aboutus
+http://127.0.0.1:5000/help
+http://127.0.0.1:5000/help/
+http://127.0.0.1:5000/help/review
+http://127.0.0.1:5000/help/ticket
+http://127.0.0.1:5000/help/zwiki
+http://127.0.0.1:5000/help/pms
+http://127.0.0.1:5000/help/vcs
+http://127.0.0.1:5000/help/admin
+http://127.0.0.1:5000/help/features
+   
+  Checking access to static wiki pages.
+
+  Validation : 
+    1. Must contain the following metanav elements,
+        <username>, projects, preference, signout, aboutus, help
+    2. Search-site text box.
+    3. Search-staticwiki text box.
+    4. Tool-tips with following tabs,
+        Help, Metanav, Page-Layout, Projects, StaticWiki
+    5. List all Hyper-links and check them.
+    6. Check for Footer. Image, version name, company name.

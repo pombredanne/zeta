@@ -1,0 +1,314 @@
+Package requirements : 
+
+  Pylons, Paste, SQLAlchemy, AuthKit, Mako
+  (Check for more packages under pylons virtual environment)
+
+Architectural Requirements : 
+
+  1. The projects are all organised under a parent project, which can either
+     be a placeholder, or it can be a system level projects depending on its
+     child projects.
+
+  2. Each project can have task sheet which can help in organising milestones,
+     tracking requirements and grouping people.
+
+  3. Blogs space should be available for registered users. Project admin can 
+     track blogs from specific people and collect them under a url 'Blog' in
+     Main Navigation bar.
+
+  5. All the items in the meta navigation will be in the project context.
+
+  6. Users can have their pages organised under the URL -
+        http://host:port/users/*
+
+  8. The sequence of the links should be configurable through .ini file.
+
+  9. Portions of .ini file should editable via admin link
+
+  10. The Databases are managed as a bunch of sqlite files named as,
+        zeta.db     - Data tables for Zeta web-app
+        <parent>.db - Data tables for parent project
+        <child>.db  - Data tables for each child projects
+
+  11. Support Pagination for Wiki and Blogs.
+
+  12. Environments,
+
+      Package Default environment : 
+
+            ./docs
+            ./zeta/templates
+            ./zeta/public
+            ./devenv/
+                ./public/
+                ./templates/
+                ./content/
+                    ./wiki/
+                    ./blogs/
+                    ./attachment/
+                ./data/
+                ./db/
+                ./log/
+                ./<deploy>.ini
+
+      Deployment Environment : 
+
+        <deploy-dir>/
+            ./public/
+            ./templates/
+            ./content/
+                ./wiki/
+                ./blogs/
+                ./attachment/
+            ./data/
+            ./db/
+            ./log/
+            ./<deploy>.ini
+  
+  13. Option for using non-package 'template' and 'public' folders.
+
+  14. Ticket workflow. How it is tracked through status. Ownership definition 
+      for a ticket under different status.
+
+  15. Ticket types and its significance.
+
+  16. Ticket severity and its significance.
+
+  17. How to create and manage milestones / versions ?
+      Always have a place holder milestone called "future-milestone" or what
+      ever you prefer to name it and mark all the tickets to that milestone.
+      When you are sure about a tickets milestone, move them under that
+      milestone.
+      Same procedure can be followed for versions.
+
+  18. Featured tags should be highlighted in the project home page.
+      When a ticket is marked as a 'feature' it should be listed as project
+      feature.
+
+  19. Special Tags.
+
+  20. Special Wiki pages.
+
+  21. Context.
+        user id
+        project id
+        realm (wiki, ticket, source etc ...)
+        resource id (a tuple whose format is based on the realm)
+
+1. UI Frame :
+
+  'Favicon'
+
+                                  [Meta Navigation]
+  [Logo]+[prjLogo]                     [Search box]
+                [          Bread Crumbs           ]
+  <project name> ................ [Main Navigation]
+                               'Context Navigation'
+  
+  [Left-Column]         
+            
+                        <body>
+
+  ----------------------------------------------------------------------------
+
+  Search box : 
+    Box, Search Button.
+    
+  Meta Navigation : 
+    Login, Register, <Parent>, Projects, Help
+    Logged-in as <user>, <Parent>, Projects, Blogs, Users, Create-Project, Prefs, Signout
+
+  Main Navigation : 
+    Project-Home, Wiki, Task, Tickets, Source, RoadMap, Admin, Downloads
+
+  ----------------------------------------------------------------------------
+
+  Where ever home is mentioned it can also be read a index
+
+  The Left-Column, Body and Context navigation contents change based on the
+  Controllers and Front-Page Controllers (Home)
+
+  [Left-Column] 
+    User Context (List of links as menu)
+      My Todo
+      My Tasks and Tickets
+      My Tickets
+      My Projects
+      My Blogs
+      My Preference
+      My Wiki
+      My Activities
+
+  [Project-Boxes] (One the right side)
+    Project Details
+      Name, Summary, Licensing
+    Featured Downloads
+    Featured wiki
+    Links
+    Notification
+      Feeds
+      Mailing List
+      IRC Channels
+    Project Users
+      Owners
+      Members
+
+  1.1. Parent Project Home :
+    http://host:port/
+    [Context-Navigation-Bar]
+        Summary     Edit    Timeline
+      Summary
+        [Left-Column]
+            User Context
+        [Body]
+            Summary-wiki, Project-Boxes
+      Edit
+        Wiki Box
+        Project-Box Edits
+
+      Timeline
+        List of modifications in,
+        wiki, tickets, repository, tasks, milestones, Downloads
+
+
+  1.2. Search :
+    http://host:port/search?<query>
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.3. Login Page :
+    http://host:port/login
+    [Body]
+        User-Name, Password         Box
+        Login                       Button
+        Forgot Password ?           Link
+
+  1.4. Registration Page :
+    http://host:port/registration
+    [Body]
+        User-name, E-mail Address,  Box
+        Password, Confirm Password  Box
+        Location Address            Box
+        Capcha                      Box
+        Terms of Service            Scroll Window, Button
+
+  1.5. Create Project Page :
+    http://host:port/createproject
+    [Body]
+        Project Name                Box
+        Project Summary (one-line)  Box
+        Project Description         Box
+        Expose                      Check-Box
+        Source Code License         Drop-Down
+        Labels and Tag              Box
+        Owners                      Box
+        Members                     Box
+
+  1.6. User Preferences :
+    http://host:port/users/<user-name>/preference
+    [Context-Navigation-Bar]
+    [Body]
+
+  1.7. All Projects Home :
+    http://host:port/projects
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.8. All Users Home :
+    http://host:port/users
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.9. Blog Space :
+    http://host:port/blog
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.10. Help Home :
+    http://host:port/help
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.11. Child Project Home :
+    http://host:port/p/<project-name>
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.12. User Home :
+    http://host:port/user/<user-name>
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  Context dependent controllers,
+  
+  1.13. Wiki Home :
+    http://host:port/wiki
+    http://host:port/p/<project-name>/wiki
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+  1.14. Task Home :
+    http://host:port/task
+    http://host:port/p/<project-name>/task
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+  1.15. Tickets Home :
+    http://host:port/tickets
+    http://host:port/p/<project-name>/tickets
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+  1.16. Source :
+    http://host:port/source
+    http://host:port/p/<project-name>/source
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+  1.17. RoadMap :
+    http://host:port/roadmap
+    http://host:port/p/<project-name>/roadmap
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+  1.18. Admin :
+    http://host:port/admin
+    http://host:port/p/<project-name>/admin
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+  1.19. Downloads :
+    http://host:port/downloads
+    http://host:port/p/<project-name>/downloads
+    [Context-Navigation-Bar]
+    [Left-Column]
+    [Body]
+
+
+2. Database Models :
+
+
+Permission Policy : 
+
+  Permissions are stored in a 'permissions' table, which contains a list of
+  permissions and the permission policy is stored in a table 'permission_map'
+  table as a mapping between,
+    permission-group <-> permission-list
+    user <-> permission-list, permission-groups
+
+  When a user has a particular permission, the user can also grant the same 
+  permission to other users.
+  
+3. Wiki :
+
+  The commenting for wiki pages should be similar to, 
+    http://www.djangobook.com/en/1.0/chapter09/
+  The comments should be displayed as collection of conversations. 

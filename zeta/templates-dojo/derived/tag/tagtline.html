@@ -1,0 +1,54 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%!
+
+page_tooltips = [
+[ 'TagCloud',
+"""List of all tags. Bigger the font size for a tag, more the number resources
+tagged with it."""
+],
+[ 'Tag',
+"""List of all resources (like tickets, projects, etc ...) tagged with a 
+particular tag-name.
+"""
+],
+[ 'Timeline',
+"""Timeline gives a log of all updates done to Tag(s)."""
+],
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        if c.tag :
+            pagebartext = "Timeline for tag: %s" % c.tag.tagname
+        else :
+            pagebartext = "Tags Timeline"
+
+        tagcloud    = '<span class="ml10 fwnormal fntsmall">' + \
+                      ('<a href="%s">TagCloud</a></span>' % h.url_tagcloud)
+        pbar_spans  = [ tagcloud ]
+    %>
+    <div id="page" class="">
+        ${elements.pagebar( pagebartext, spans=pbar_spans,
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            ${elements.timeline_view( c.logs, c.fromoff, c.tooff, c.links )}
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+</%def>

@@ -1,0 +1,43 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <div id="bdy" class="mt50">
+    <div id="forgotpass" class="brtr10 brtl10">
+        % if c.errormsg :
+            <div class="fgcrimson fntbold calign p20" style="font-size : 120%">
+                ${c.errormsg}
+            </div>
+        % elif c.form == 'request' :
+            ${forms.form_forgotpass( h.suburl_forgotpass )}
+        % elif c.form == 'submit' :
+            <div class="fgblue fntbold calign p20" style="font-size : 120%">
+                Reset link sent to your emailid
+            </div>
+        % endif
+    </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+</%def>
+

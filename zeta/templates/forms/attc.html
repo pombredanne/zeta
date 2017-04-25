@@ -1,0 +1,30 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+
+<%def name="addattach( name, id, label, help )">
+    <tr>
+    <td class="label">${lib.label_input( id, label )}</td>
+    <td class="formitem">
+    <div class="input">
+        ${lib.input_file( name=name, id=id )}
+        <br></br>
+        <span class="frmhlp">${help}</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## -------------- Forms -------------------
+
+<%def name="form_add_attach( actionurl, id, enctype='multipart/form-data', method='post' )" >
+<form action="${actionurl}"  enctype="${enctype}" method="${method}" id=${id}>
+    <div class="row">
+        ${addattach( 'addatt', 'atta' )}
+        ${lib.form_submit_button()}
+        ${lib.form_resetbutton()}
+    </div>
+    </form>
+</%def>

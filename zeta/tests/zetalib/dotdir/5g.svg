@@ -1,0 +1,62 @@
+<svg width="98pt" height="116pt"
+ viewBox="0.00 0.00 98.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<polygon style="fill:white;stroke:white;" points="-4,4 -4,-112 94,-112 94,4 -4,4"/>
+<!-- 5 -->
+<g id="node1" class="node"><title>5</title>
+<a xlink:title="5" target="_top">
+<ellipse style="fill:white;stroke:black;" cx="45" cy="-90" rx="18" ry="18"/>
+<text text-anchor="middle" x="45" y="-84.1" style="font-family:Terminus;font-size:16.00;">5</text>
+</a>
+</g>
+<!-- 4 -->
+<g id="node3" class="node"><title>4</title>
+<a xlink:href="/p/denethor/t/4" xlink:title="OPEN &#45; &#160;If you do this, the occurrence of input text such..." target="_top">
+<polygon style="fill:#ffe1e1;stroke:#ffe1e1;" points="24,-36 12,-36 8.28967e-15,-24 5.92119e-15,-12 12,-7.10543e-15 24,-3.55271e-15 36,-12 36,-24 24,-36"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M12,-36C6,-36 9.4739e-15,-30 8.28967e-15,-24"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M5.92119e-15,-12C4.73695e-15,-6 6,-8.88178e-15 12,-7.10543e-15"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M24,-3.55271e-15C30,-1.77636e-15 36,-6 36,-12"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M36,-24C36,-30 30,-36 24,-36"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="24,-36 12,-36 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M12,-36C6,-36 9.4739e-15,-30 8.28967e-15,-24"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="8.28967e-15,-24 5.92119e-15,-12 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M5.92119e-15,-12C4.73695e-15,-6 6,-8.88178e-15 12,-7.10543e-15"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="12,-7.10543e-15 24,-3.55271e-15 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M24,-3.55271e-15C30,-1.77636e-15 36,-6 36,-12"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="36,-12 36,-24 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M36,-24C36,-30 30,-36 24,-36"/>
+<text text-anchor="middle" x="18" y="-12.1" style="font-family:Terminus;font-size:16.00;">4</text>
+</a>
+</g>
+<!-- 5&#45;&gt;4 -->
+<g id="edge2" class="edge"><title>5&#45;&gt;4</title>
+<path style="fill:none;stroke:#1fdbfd;stroke-width:0.3;" d="M39,-73C36,-65 32,-55 29,-45"/>
+<polygon style="fill:#1fdbfd;stroke:#1fdbfd;" points="32.2598,-43.7166 25,-36 25.8631,-46.5596 32.2598,-43.7166"/>
+</g>
+<!-- 2 -->
+<g id="node5" class="node"><title>2</title>
+<a xlink:href="/p/denethor/t/2" xlink:title="REOPEN &#45; &#160;Like its Unix counterpart, yacc.py provides most ..." target="_top">
+<polygon style="fill:#ffe1e1;stroke:#ffe1e1;" points="78,-36 66,-36 54,-24 54,-12 66,-7.10543e-15 78,-3.55271e-15 90,-12 90,-24 78,-36"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M66,-36C60,-36 54,-30 54,-24"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M54,-12C54,-6 60,-8.88178e-15 66,-7.10543e-15"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M78,-3.55271e-15C84,-1.77636e-15 90,-6 90,-12"/>
+<path style="fill:#ffe1e1;stroke:#ffe1e1;" d="M90,-24C90,-30 84,-36 78,-36"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="78,-36 66,-36 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M66,-36C60,-36 54,-30 54,-24"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="54,-24 54,-12 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M54,-12C54,-6 60,-8.88178e-15 66,-7.10543e-15"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="66,-7.10543e-15 78,-3.55271e-15 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M78,-3.55271e-15C84,-1.77636e-15 90,-6 90,-12"/>
+<polyline style="fill:none;stroke:#ffe1e1;" points="90,-12 90,-24 "/>
+<path style="fill:none;stroke:#ffe1e1;" d="M90,-24C90,-30 84,-36 78,-36"/>
+<text text-anchor="middle" x="72" y="-12.1" style="font-family:Terminus;font-size:16.00;">2</text>
+</a>
+</g>
+<!-- 5&#45;&gt;2 -->
+<g id="edge4" class="edge"><title>5&#45;&gt;2</title>
+<path style="fill:none;stroke:#1fdbfd;stroke-width:0.3;" d="M51,-73C54,-65 58,-55 61,-45"/>
+<polygon style="fill:#1fdbfd;stroke:#1fdbfd;" points="64.1369,-46.5596 65,-36 57.7402,-43.7166 64.1369,-46.5596"/>
+</g>
+</g>
+</svg>

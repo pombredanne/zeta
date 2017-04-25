@@ -1,0 +1,49 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%!
+
+page_tooltips = [
+]
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Timeline of modifications on uploaded files"
+        attachs = '<span class="ml10 fwnormal fntsmall">' +\
+                  ('<a href="%s">Attachments</a></span>' % h.url_attachments)
+        addattachs = '<span class="ml10 fwnormal fntsmall">' +\
+                     ('<a href="%s">Add</a></span>' % h.url_addattachment)
+        charts = capture( elements.iconlink, h.url_attachcharts,
+                          'barchart', title="Analytics on file attachments",
+                          classes="ml20" )
+    %>
+    <div id="page">
+        ${elements.pagebar( pagebartext, [ attachs, addattachs, charts ],
+                            tooltips=page_tooltips
+                          )}
+        <div id="bdy" class="">
+            ${elements.timeline_view( c.logs, c.fromoff, c.tooff, c.links )}
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+

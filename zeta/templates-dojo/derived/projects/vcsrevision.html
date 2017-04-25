@@ -1,0 +1,235 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""Details about each repository revision with log message, author, commit
+time-stamp, source diff and more ... """
+],
+
+]
+
+import xml.etree.cElementTree as et
+from   pygments.formatters    import HtmlFormatter
+%>
+
+<%def name="hd_links()">
+    ${parent.hd_links()}
+</%def>
+
+<%def name="hd_styles()">
+    ${parent.hd_styles()}
+    <style type="text/css">
+        ${HtmlFormatter().get_style_defs('.highlight')}
+        ## The following are for current pygmentation. When pygmentation and
+        ## annotations are merged, take a relook.
+        .highlighttable td.linenos { padding : 3px }
+        .highlighttable td.code { padding : 3px }
+    </style>
+</%def>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="changedfile( cf )">
+    <%
+        cf_ddurl = ''
+        if cf['mime_type'] == 'text/directory' :
+            cf_url   = '<span class="fggray">dir: '+cf['repos_path']+'</span>'
+        else :
+            cf_url   = '<a href="%s">file:%s</a>' % \
+                            ( cf['fileurl'], cf['repos_path'] )
+    %>
+    <tr class="cfrows">
+    % if cf['changetype']   == 'modified' :
+        <td class="pt10" style="width: 10em">
+            Modified
+            ( <span name="diff" class="fgblue pointer"> diff </span> )
+        </td>
+        <td class="pt10 pl10">
+            <span>${cf_url |n}</span>
+            <a class="ml10 fgIred" href="${cf['diffdownlurl'] | n}">download-diff</a>
+        </td>
+    % elif cf['changetype'] == 'added' :
+        <td class="pt10 fggreen">Added</td>
+        <td class="pl10 pt10 ">${cf_url |n}</td>
+    % elif cf['changetype'] == 'deleted' :
+        <td class="fgred">Deleted</td>
+        <td class="pl10 pt10 fggray">${cf['repos_path']}</td>
+    % elif cf['changetype'] == 'normal' :
+        <td class="fggray">Normal</td>
+        <td class="pl10 pt10">${cf_url |n}</td>
+    % endif
+    </tr>
+    <tr class="cfrows dispnone ml50 pt10 pl10">
+        <td class="pl20 pt10 pb10" colspan="3">
+            <div class="pl5 diffcont" diffurl="${cf['diffurl'] | n}"
+                 style="border-left: 2px solid gray;"></div>
+        </td>
+    </tr>
+</%def>
+
+<%def name="showrevision()">
+    <%
+        if c.revno_p != None :
+            prevrev = [ '&#8249; r'+str(c.revno_p) or '', h.url_revprev ]
+        if c.revno_n :
+            nextrev = [ 'r'+str(c.revno_n)+' &#8250;' or '', h.url_revnext ]
+    %>
+    <div class="disptable w100">
+    <div class="disptrow w100">
+        <div class="disptcell w100 bggray1">
+
+            <div class="disptable w100" style="border-bottom : 1px solid gray">
+            <div class="disptrow">
+                <div class="disptcell p3 pl5 vmiddle" style="width: 40em;">
+                    <span class="fntbold fggray">Revision: </span>
+                    <span class="fntbold fggreen">r${c.revision[1]} </span>
+                    <span class="pl10">on <span>
+                    <span class="fggreen">
+                        ${c.revision[3].strftime( '%a, %b %d, %Y' )}
+                    </span>
+                    <br/><span class="fntbold fggray">By </span>
+                    <span class="fggreen">${c.revision[2]}</span>
+                </div>
+
+                <div class="disptcell p5 vmiddle ralign"
+                     style="padding-right: 20px;">
+                    <a title="Review all modified / added files in this changeset"
+                       style="margin-left: 100px;" href="${h.url_reviewrev}"
+                       class="mr20">Review</a>
+                    % if c.revno_p != None :
+                        <a href="${prevrev[1]}" class="pl10">${prevrev[0] | n}</a>
+                    % endif
+                    <span class="fntbold pl10">r${c.revno}</span>
+                    % if c.revno_n :
+                        <a href="${nextrev[1]}" class="pl10">${nextrev[0] | n}</a>
+                    % endif
+                </div>
+            </div>
+            </div>
+
+            <div class="ml50 bgwhite pl10">
+                <br></br>
+                <div class="fnt100 fntbold">Log Message</div>
+                <br></br>
+                <pre class="wsprewrap" style="margin-left:1em;">${c.revision[0]}</pre>
+                <br></br>
+                <div class="fnt100 fntbold floatl">Affected Files</div>
+                <div class="ml10 fntsmall floatl">
+                <a class="fgIred" title="download it as patchfile"
+                   href="${c.revision[4]}">download-diff</a>
+                </div>
+                <br></br>
+                <table id="affectedfiles" class="ml20">
+                % for cf in c.changedfiles :
+                    ${changedfile( cf )}
+                % endfor
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript">
+        function fetchdiff( n_divdiff, e ) {
+            var url = dojo.attr(n_divdiff, 'diffurl');
+            var fetched = dojo.attr( n_divdiff, 'fetched' );
+            var n_tr = n_divdiff.parentNode.parentNode;
+            if( fetched ) {
+                dojo.hasClass(n_tr, 'dispnone') ?
+                    dojo.toggleClass( n_tr, 'dispnone', false ) 
+                    : dojo.toggleClass( n_tr, 'dispnone', true ) 
+            } else {
+                xhrget_obj(
+                    url, {}, 'text', false, null,
+                    function( resp ) {
+                        var n_tr = n_divdiff.parentNode.parentNode;
+                        dojo.toggleClass( n_tr, 'dispnone', false );
+                        n_divdiff.innerHTML = resp;
+                    },
+                    null
+                );
+                dojo.attr( n_divdiff, 'fetched', 'true' );
+            }
+            dojo.stopEvent( e );
+        };
+        function setup_diff() {
+            var n_tbl = dojo.byId( "affectedfiles" );
+            if( n_tbl ) {
+                var n_trs = dojo.query( "tr.cfrows", n_tbl );
+                for( i = 0; i < n_trs.length; i+=2 ) {
+                    var n_span = dojo.query( "span[name=diff]", n_trs[i] )[0];
+                    var n_divdiff = dojo.query( "div.diffcont", n_trs[i+1])[0];
+                    if( n_span && n_divdiff ) {
+                        dojo.connect( n_span, 'onclick',
+                                      dojo.partial(fetchdiff, n_divdiff) )
+                    }
+                }
+            }
+        };
+    </script>
+</%def>
+
+<%def name="bd_body()">
+    <%
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        sel_vcs = capture( forms.form_selectvcs, c.authuser,
+                           c.vcslist, c.vcs and c.vcs.name or '' )
+        vcsbrowse = '<a class="ml20 fntsmall fwnormal" title="Browse latest version"' +\
+                    ( ' href="%s">Browse</a>' % h.url_vcsbrowse )
+        revlist = '<a class="ml10 fntsmall fwnormal" ' +\
+                  ( 'title="List of repository revisions" href="%s">Revisions</a>' % \
+                        h.url_revlist )
+
+        if c.vcseditable :
+            intgvcs  = '<span class="ml10 fwnormal fntsmall">' +\
+                       '<a href="%s" \
+                          title="Integrate a new repository">Integrate</a></span>' % \
+                               h.url_vcsintegrate
+        else :
+            intgvcs = ''
+
+        tline = capture( elements.iconlink, h.url_vcstimeline,
+                         'timeline', title="Timeline of vcs-integration",
+                         classes="ml20" )
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ sel_vcs, vcsbrowse, revlist, intgvcs, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy" class="">
+            <div>
+                ${showrevision()}
+            </div>
+        </div> 
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( function() {
+            /* Setup the vcs goto list */
+            select_goto( dojo.query( '#selectvcs' )[0] );
+        });
+        dojo.addOnLoad( setup_diff );
+
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>

@@ -1,0 +1,11 @@
+In desktop era, where computer applications are meant to be personal, there is
+not much of a need for notifications. In the internet era, where application
+like Zeta acts as a central point interfacing with multiple users, co-ordinating
+their information, it is imperative that other users need to be notified on
+informations that matters to them.
+
+We have build quite a few notification methods for our users. Like, favorites
+where users can get changes that are done to their project, wiki, ticket etc.
+via email, syndication feeds in atleast a dozen variations consumed using
+your preferred RSS reader, user invitations, resetting forgotten passwords, and
+more ...

@@ -1,0 +1,10 @@
+While navigating through wiki pages, tickets, reviews, users can mark them as
+favorites. Back end logic remembers it and pushes information in your way.
+So abstractly speaking, favorites are tools that captures your wishes, using
+it to filter useful information from an avalanche of digital content for you,
+in real-time.
+
+Users can even mark an entire project as their favorite. Favorites are one of
+the many notification methods that we have built into Zeta. It is also
+possible to mark wiki pages and tickets as favorites while viewing or editing
+them in your editor.

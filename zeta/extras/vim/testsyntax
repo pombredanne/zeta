@@ -1,0 +1,148 @@
+some text '' bold ''    bold
+some text // italic //    italic
+some text __ underline __ underline
+some text x^^2^^  x2
+some text log,,2,,10  log210
+some text '/ bold and italic '/   bold and italic
+some text '/ bold and italic /'   bold and italic
+some text '_ bold and underline '_    bold and underline
+some text '_ bold and underline _'    bold and underline
+some text /_ italic and underline /_  italic and underline
+some text /_ italic and underline _/  italic and underline
+some text '/_ bold, italic and underline '/_  bold, italic and underline
+some text '/_ bold, italic and underline _/'  bold, italic and underline 
+
+some text ''{r} bold ''    bold
+some text //{r} italic //    italic
+some text __{r} underline __ underline
+some text '/{r} bold and italic '/   bold and italic
+some text '_{r} bold and underline '_    bold and underline
+some text /_{r} italic and underline /_  italic and underline
+some text '/_{r} bold, italic and underline '/_  bold, italic and underline
+
+------
+
+Monsoon ~'' is a blessing in disguise. \\ It's hard to describe emotions it brings
+to life. \\ When there is rainfall at night \\ I find in the morning, dews
+alight.
+
+-----
+
+ [[ http://www.google.com | Google site ]]
+hello world  [[ *http://www.google.com | Google site ]]
+ hello world [[ $anchor-here | Google site ]] how are you
+ [[ +http://www.google.com | Google site ]]
+ [[ mailto:prataprc@gmail.com | Google site ]]
+
+ hello http://google.com or www.google.com, how are you
+
+------
+
+ = heading 
+=={r} heading 
+  === heading ''something'' ===
+
+==== heading 
+===== he~''ading 
+
+-----
+
+
+>  ``{b} Nietzsche`` That which doesnt kill you makes you stronger.
+>> ``{t} Joker `` That which doesnt kill you make you a stranger.
+>  ``{b} Nietzsche `` Oh. Just look at my mustache doesn't it look strong.
+> ``{t} Joker `` Ha Ha. Look at my face, doesn't it look strange.
+
+> Visit ''{t} [[ *http://thedarkknight.warnerbros.com/dvdsite/ | Joker ]] '' \
+  to know more him \\ And search yourself in \
+  http://www.quotationspage.com/quotes/Friedrich_Nietzsche/
+
+-----
+
+* item1
+** level 2 item1
+ ** level 2 item2
+* item2
+
+# item1
+## level 2 item1
+## level 2 item2
+ # item2
+
+# item ``{c} one ``
+## Sub // ''item'' one //
+## Visit www.google.com to access a peta \\ flop computer. \
+   [[ mailto:hello.world@google.com | Mail ]] with gmail.
+** Sub item one
+** Sub item two
+# item three
+* item four
+** Sub item one
+** Sub item two
+## Sub item three
+## Sub item four
+
+-----
+
+|= fruit                           |={c} color
+ | [[ www.google.com | orange ]]   | www.orange.net
+| grape                            |{r} ''{t} light '' green
+|{B} mango                         | yellow \\ is so light
+
+-----
+
+||{{a} |
+||-{b} |
+||={c} | fruit
+||={d} | color
+||-{t} |
+|| {f} | ~'' orange ''
+|| orange
+||-
+|| grape \\ fruit
+|| {h} | ''``{i}light`` green''
+||-
+|| [[ www.google.com | orange ]]
+|| www.orange.net
+||}
+
+-----
+
+: dojo :: JavaScript [[ $http:tool-kit.net | tool ]] www.google.com supporting classes, widgets, data stored etc.
+
+: minix3 :: Supposedly a next generation operating system aimed at distributed computing \
+and fault-tolerance.
+
+-----
+
+[< <pre style="margin-left:50px"> >]
+[<
+    <style type="text/css">
+        h1, h2, h3, h4, h5 { 
+            margin : 0px;
+            padding: 5px 0px 2px 3px;
+            background-color : #EAEAFC;
+            border-bottom: 1px solid #CCCCCC;
+        }
+   </style>
+>]
+
+hello
+
+[< oh >]
+
+[<</pre>>]
+
+-------
+
+some text '/ bold and italic /'   bold and italic
+some text '_ bold and underline '_    bold and underline
+some {{ Toc(
+            text, )
+     }}
+'_ bold and underline _'    bold and underline
+some text /_ italic and underline /_  italic and underline
+some text /_ italic and underline _/  italic and underline
+some text '/_ bold, italic and underline '/_  bold, italic and underline
+some text '/_ bold, italic and underline _/'  bold, italic and underline 
+

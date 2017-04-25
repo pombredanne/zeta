@@ -1,0 +1,34 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%def name="bd_mainnav()" >
+</%def>
+
+<%def name="bd_body()" >
+    <% pagebartext = "%s" % c.welcomestring %>
+    ${elements.curvyborder()}
+    <div class="gbrdr">
+        <div style="margin : 0px 1px 1px 1px ; background-color : #B4E0B4;">
+            <div class="pbar">${pagebartext}</div>
+        </div>
+    </div>
+    <pre>
+    Front page notes, for the site.
+    </pre>
+    <pre>
+    Site-wide consolidated statistics.
+    Featured projects.
+    Newly created projects.
+    Get started,
+        create project.
+        register as user.
+        browse projects.
+        browse users.
+        Learn to use Zeta.
+    </pre>
+</%def>

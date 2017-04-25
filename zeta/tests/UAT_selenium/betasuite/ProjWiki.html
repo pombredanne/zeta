@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.182:5002" />
+<title>ProjWiki</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ProjWiki</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>9000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<!--Create a new project as testuser1-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>metanav</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=New-project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New-project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create a new project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>projectname</td>
+	<td>zwikitestproj</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>summary</td>
+	<td>Project created to test zwiki</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>licensename</td>
+	<td>label=Nokia Open Source License</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Test project license description</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>projectname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=List-all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Project list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=zwikitestproj</td>
+	<td>zwikitestproj</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=testuser1</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=zwikitestproj</td>
+	<td>zwikitestproj</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary : Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>testuser1@gmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Nokia Open Source License</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>document.forms[2].elements[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='prjtagblk']/div/div[4]/div/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tags</td>
+	<td>hello,test</td>
+</tr>
+<tr>
+	<td>keyPress</td>
+	<td>tags</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=hello</td>
+	<td>hello</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=test</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[1]</td>
+	<td>Project</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td>Components</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td>Milestones</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[4]</td>
+	<td>Versions</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td>Teams</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td>Permissions</td>
+</tr>
+<!--Create teams-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='addprjteam']/div/div[2]/div[1]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add users to team</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New version :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='delprjteam']/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='delprjteam']/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>team_type</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>projuser</td>
+	<td>label=testuser5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delprjteam']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<!--Developer perm- WIKI VIEW, COMMENT_CREATE, CREATE, PROJECT_VIRW-->
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKICOMMENT_CREATE</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]</td>
+	<td>Permissions :<br /> <br /> ✓Submit</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKI_VIEW</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]</td>
+	<td>Permissions :<br /> <br /> ✓Submit</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKI_CREATE</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]</td>
+	<td>Permissions :<br /> <br /> ✓Submit</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New version :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New version :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]/div[1]</td>
+	<td>Permissions :</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<!--Member perm- COMMENT_CREATE, WIKI_VIEW-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKICOMMENT_CREATE</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]/div[1]</td>
+	<td>Permissions :</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKI_VIEW</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]/div[1]</td>
+	<td>Permissions :</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]/div[1]</td>
+	<td>Permissions :</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>feedHeader</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>zwikitestproj Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser4</td>
+	<td></td>
+</tr>
+<!--Owner permissions - WIKI VIEW-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=WIKI_VIEW</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=owner</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='delteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=developer</td>
+</tr>
+<!--Check preview-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary : Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Roadmap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bdy']/div/div/div/h3[1]</td>
+	<td>Open Milestones</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary : Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-wiki']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cont_tooltips']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=homepage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=homepage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary : Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Wikipage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tags</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Markups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Favorites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vote</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trgr_tooltips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Talkpage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0 upvotes,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0 downvotes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Use wiki markup. Zwiki reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>wcnttext</td>
+	<td>[&lt; &lt;div style=&quot;position; relative; float: right; width: 30%&quot;&gt; &gt;]<br /><br />{{ ProjectAttributes() }}<br />{{ ProjectTeam() }}<br /><br />[&lt; &lt;/div&gt; &gt;]<br /><br />Sample text added to homepage by Testuser1<br />{{ ProjectDescription( ) }}<br /><br />{{ ProjectComponents( ) }}<br /><br />{{ ProjectVersions( ) }}<br /><br />/* vim: set filetype=zwiki : */</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>preview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sample text added to homepage by Testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sample text added to homepage by Testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-wiki']</td>
+	<td></td>
+</tr>
+<!--Check attachments-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>attachments w100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>attachfile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Attachments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<!--Testuser1 create a new Wiki Page-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectwikipage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/p/zwikitestproj/wiki/WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-wiki']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Zwiki reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h2[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Use wiki markup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>wcnttext</td>
+	<td>=== GNU Compiler Collection<br /><br />The GNU Compiler Collection (usually shortened to GCC) is a compiler system produced by the GNU Project supporting various programming languages. '/ GCC '/ is a key component of the GNU toolchain. As well as being the official compiler of the GNU operating system, GCC has been adopted as the standard compiler by most other modern Unix-like computer operating systems, including ''GNU/Linux '', the BSD family and Mac OS X. <br /><br />== Structure<br /><br />* GENERIC and GIMPLE<br />* Front-ends<br />* Optimization</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>GNU Compiler Collection ⚓</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wdownload']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='wdownload']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as post-script</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as pdf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Authored by testuser1,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<!--Signin as testuser2-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>metanav</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=List-all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sample text added to homepage by Testuser1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=hello</td>
+	<td>hello</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=test</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testuser2, testuser3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='querystring' and @value='Search-wiki']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>GNU Compiler Collection</td>
+	<td></td>
+</tr>
+<!--Testuser2 edits WikiTestPage1-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>GNU Compiler Collection</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Use wiki markup. Zwiki reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>wcnttext</td>
+	<td>=== GNU Compiler Collection<br /><br />The GNU Compiler Collection (usually shortened to GCC) is a compiler system produced by the GNU Project supporting various programming languages. '/ GCC '/ is a key component of the GNU toolchain. As well as being the official compiler of the GNU operating system, GCC has been adopted as the standard compiler by most other modern Unix-like computer operating systems, including ''GNU/Linux '', the BSD family and Mac OS X. <br /><br />== Structure<br /><br />* GENERIC and GIMPLE<br />* Front-ends<br />* Optimization<br /><br />=== Edited by Test user2<br /><br />a simple reference link to [[ http://www.gcc.gnu.org | GNU GCC site ]]</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>preview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Preview( edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edited by Test user2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=GNU GCC site</td>
+	<td>GNU GCC site</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Authored by testuser2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='oldver' and @value='1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>newver</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Difference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Talkpage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talkpage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wcomments']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crwcmt_text</td>
+	<td>Comment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crwcmt_text</td>
+	<td>Comment added by testuser2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wcomments']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crwcmt_text</td>
+	<td>Comment 2 added by testuser2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=/p/zwikitestproj/wiki/WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=/p/zwikitestproj/wiki/WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='upvote']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>1 upvotes,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>casted vote</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=/p/zwikitestproj/wiki/WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=/p/zwikitestproj/wiki/WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='wvermenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@name='wdownload']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='wdownload']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as post-script</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=as pdf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<!--TestUser 4 signs in - cannot view-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User doesn't have the permissions ['PROJECT_VIEW']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<!--TestUser1 assigns PROJECT_VIEW PERM-->
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//form[@id='addteamperms']/div/div[1]/div[2]/select</td>
+	<td>label=member</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='patabs']/div/div[1]/span[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>perm_group</td>
+	<td>label=PROJECT_VIEW</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='delteamperms']/div/div[2]/div[1]</td>
+	<td>Permissions :</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>querystring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testuser4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testuser123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>authform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>metanav</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@name='myprojects']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=zwikitestproj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Summary : Project created to test zwiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//input[@name='querystring' and @value='Search-wiki']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>WikiTestPage1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectwikipage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>selectwikipage</td>
+	<td>label=WikiTestPage1</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>GNU Compiler Collection</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Talkpage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talkpage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wcomments']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>crwcmt_text</td>
+	<td>Comment3 added by testuser4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='createwcmt']/div/div[2]/span/span/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Comment3 added by testuser4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>| Conversation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='zeta_Comment_3']/div[1]/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rpwcmt_text</td>
+	<td>Replying to comment2 - By test user4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Replying to comment2 - By test user4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>4 Comments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wcomments']/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wcomments']/div[1]</td>
+	<td>| Normal</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>| Normal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>anonymous</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

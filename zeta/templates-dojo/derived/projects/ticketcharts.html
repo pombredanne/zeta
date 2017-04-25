@@ -1,0 +1,222 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="charts" file="/component/charts.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+chartoptions = [ 'chart21', 'chart22', 'chart23', 'chart24', 'chart25', ]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+    
+    <script type="text/javascript">
+    function setup_charts() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selchart' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="tckchart21(chart21_data)">
+    <div name="chart21" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart21( chart21_data, width="100%" )}
+    </div>
+</%def>
+
+<%def name="tckchart22(chart22_data, forowner, chart22_usrs)">
+    <div name="chart22" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart22( chart22_data, forowner, width="100%" )}
+    </div>
+
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for u in chart22_usrs :
+            <div><a href="${u[1]}">${u[0]}</a></div>
+            % endfor
+        </div>
+    </div>
+    <script type="text/javascript">
+    function setup_tckowners() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selowner' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="tckchart23(chart23_data, forcomp)">
+    <div name="chart23" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart23( chart23_data, forcomp, width="100%" )}
+    </div>
+    <script type="text/javascript">
+    function setup_tckcomps() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selcomp' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="tckchart24(chart24_data, formstn)">
+    <div name="chart24" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart24( chart24_data, formstn, width="100%" )}
+    </div>
+    <script type="text/javascript">
+    function setup_tckmstns() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selmstn' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="tckchart25(chart25_data, forver)">
+    <div name="chart25" class="p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart25( chart25_data, forver, width="100%" )}
+    </div>
+    <script type="text/javascript">
+    function setup_tckvers() {
+        /* Select goto */
+        var n_sel = dojo.byId( 'selver' );
+        n_sel ? select_goto( n_sel ) : null;
+    }
+    </script>
+</%def>
+
+<%def name="tckchart26(chart26_data, chart26_usrs)">
+    <div name="chart26" class="floatl p10" style="width: 70%; margin: 0 auto;">
+        ${charts.chart26( chart26_data, width="100%" )}
+    </div>
+
+    <div class="floatl p10 w20">
+        <div class="p5 ml20 br5" style="border: 2px solid LightSteelBlue">
+            % for u in chart26_usrs :
+            <div><a href="${u[1]}">${u[0]}</a></div>
+            % endfor
+        </div>
+    </div>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        psearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchproject', 'Search-project',
+                        h.suburl_search, c.searchproject
+                    )
+        tsearchbox = capture(
+                        forms.form_searchbox,
+                        c.authuser, 'searchticket', 'Search-ticket',
+                        h.suburl_search, c.searchfaces, classes="ml10"
+                    )
+
+        attachs= '<span class="ml10 fwnormal fntsmall">' + \
+                 ( '<a href="%s" title="List of files attached to tickets"> \
+                   Attachments</a></span>' % h.url_tckattachs )
+        tline  = capture( elements.iconlink, h.url_tcktimeline,
+                          'timeline', title="Timeline for project tickets",
+                          classes="ml10" )
+
+    %>
+    <div id="page" style="padding:0px;">
+        ${elements.mainnav( c.mainnavs, psearchbox,
+                            [ tsearchbox, attachs, tline ], tooltips=page_tooltips,
+                          )}
+        <div id="bdy" class="">
+        <div id="ticketcharts" class="fullpanel">
+            <div class="bggray1 p5 ralign"
+                 style="border-bottom: 1px solid green;">
+                % if c.selectedchart[0] == 'chart22' :
+                    <span class="fntbold fgcrimson">Chart for user</span>
+                    ${forms.select( id="selowner", options=c.ticketowners,
+                                    opt_selected=c.selectedowner )}
+                % elif c.selectedchart[0] == 'chart23' :
+                    <span class="fntbold fgcrimson">Chart for component</span>
+                    ${forms.select( id="selcomp", options=c.ticketcomps,
+                                    opt_selected=c.selectedcomp )}
+                % elif c.selectedchart[0] == 'chart24' :
+                    <span class="fntbold fgcrimson">Chart for milestone</span>
+                    ${forms.select( id="selmstn", options=c.ticketmstns,
+                                    opt_selected=c.selectedmstn )}
+                % elif c.selectedchart[0] == 'chart25' :
+                    <span class="fntbold fgcrimson">Chart for version</span>
+                    ${forms.select( id="selver", options=c.ticketvers,
+                                    opt_selected=c.selectedver )}
+                % endif
+
+                <span class="ml20 fntbold fgcrimson">select chart</span>
+                ${forms.select( id="selchart", options=c.chartoptions,
+                                opt_selected=c.selectedchart[1] )}
+            </div>
+
+            % if c.selectedchart[0] == 'chart21' :
+                <div style="margin : 0 auto;">
+                    ${tckchart21(c.chart21_data)}
+                </div>
+            % elif c.selectedchart[0] == 'chart22' :
+                <div style="margin : 0 auto;">
+                    ${tckchart22(c.chart22_data, c.forowner, c.chart22_usrs)}
+                </div>
+            % elif c.selectedchart[0] == 'chart23' :
+                <div style="margin : 0 auto;">
+                    ${tckchart23(c.chart23_data, c.forcomp)}
+                </div>
+            % elif c.selectedchart[0] == 'chart24' :
+                <div style="margin : 0 auto;">
+                    ${tckchart24(c.chart24_data, c.formstn)}
+                </div>
+            % elif c.selectedchart[0] == 'chart25' :
+                <div style="margin : 0 auto;">
+                    ${tckchart25(c.chart25_data, c.forver)}
+                </div>
+            % elif c.selectedchart[0] == 'chart26' :
+                <div style="margin : 0 auto;">
+                    ${tckchart26(c.chart26_data, c.chart26_usrs)}
+                </div>
+            % endif
+
+        </div>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_charts );
+
+        % if c.selectedchart[0] == 'chart21' :
+            dojo.addOnLoad( setup_chart21 );
+        % elif c.selectedchart[0] == 'chart22' :
+            dojo.addOnLoad( setup_tckowners );
+            dojo.addOnLoad( setup_chart22 );
+        % elif c.selectedchart[0] == 'chart23' :
+            dojo.addOnLoad( setup_tckcomps );
+            dojo.addOnLoad( setup_chart23 );
+        % elif c.selectedchart[0] == 'chart24' :
+            dojo.addOnLoad( setup_tckmstns );
+            dojo.addOnLoad( setup_chart24 );
+        % elif c.selectedchart[0] == 'chart25' :
+            dojo.addOnLoad( setup_tckvers );
+            dojo.addOnLoad( setup_chart25 );
+        % elif c.selectedchart[0] == 'chart26' :
+            dojo.addOnLoad( setup_chart26 );
+        % endif
+    </script>
+</%def>
+
+

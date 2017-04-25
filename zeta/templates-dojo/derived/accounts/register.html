@@ -1,0 +1,71 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+
+    <script type="text/javascript">
+        usernames = ${ h.json.dumps( c.usernames ) | n };
+    </script>
+</%def>
+
+<%def name="bd_body()">
+    <div id="page" class="p5">
+        <div class="p10 bgblue1 calign fntbold">
+            Registration form
+        </div>
+        <div id="bdy" class="mt20 w100" style="padding : 0 20% 0 0">
+            % if c.allowregistration :
+                <div class="disptable" style="margin: 0 auto;">
+                <div class="disptrow">
+                    <div class="disptcell">
+                        ${forms.form_userreg( h.suburl_userreg, c.captcha_urlpath )}
+                    </div>
+                    <div class="disptcell">
+                    <div style="width : 25em;">
+                        ${elements.helpboard("""
+                            <span class="fgred">All fields are mandatory.</span>
+                            <dl>
+                            <dt>username</dt>
+                                <dd>Pick a proper username, you may not be able to
+                                change it later.</dd>
+                            <dt>Terms of Service</dt>
+                                <dd>If `Terms of Service (tos)` it empty, prompt your
+                                site-administrator to add a valid TOS content at
+                                <a href="/tos">tos</a></dd>
+                            </dl>
+                        """)}
+                    </div>
+                    </div>
+                </div>
+                </div>
+            % else :
+            <div class="fgcrimson m20" style="font-size: 120%">
+                Registration is allowed only by invitation
+            </div>
+            % endif
+        </div>
+    </div>
+</%def>
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( initform_userreg );
+    </script>
+</%def>

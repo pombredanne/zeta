@@ -1,0 +1,230 @@
+* ''Project''
+  ** User Registration. ([[/help/UserRegistration#User Registration | more ]])
+  ** User registration by invitation.
+  ** Multiple project creation by registered users. ([[/help/project | more ]])
+  ** Divide project into components and manage them with milestones and versions.
+  ** Project teams.
+  ** Document with ZWiki. ([[ /help/zwiki/ZWiki | more ]])
+  ** Track issues with tickets. ([[ /help/ticket | more ]])
+  ** Integrate with respositories, navigate, analyse and refer its content.
+     ([[ /help/vcs | more ]]).
+  ** Review documents, source code in repositories and ZWiki pages.
+     ([[ /help/review | more ]]).
+  ** Mount any number of repository directories (containing documents) onto
+     project's url path.
+     ([[ http://dev.discoverzeta.com/help/vcs#Mounting directories | more ]])
+  ** Project roadmap.
+  ** Project downloads.
+  ** User Favorites for projects, wiki pages and tickets.
+  ** Vote for wiki pages and tickets.
+  ** //Zetalinks//, for generating quick hyper links for zeta resources 
+     (like license, projects, tickets ... ).
+     ([[ /help/zwiki/zetalink | more ]])
+  ** Timeline(s).
+  ** RSS feeds available in about dozen ways.
+  ** Charts and analytics.
+  ** Faceted searching.
+  ** Permission management system, customizable for user needs.
+     ([[ /help/pms | more ]])
+  ** Attachments for wiki, ticket, review, projects, site, etc ...
+  ** Tagging wiki, ticket, review, project, etc ...
+
+* ''Wiki''
+  ** Wiki engine developed from scratch to cater to the needs of Zeta.
+  ** Version controlled wiki pages for project documentation.
+  ** Color coded difference between versions, help resolving conflict.
+  ** Spreadsheet like wiki page listing, with inline edit.
+  ** User favorites.
+  ** User voting.
+  ** Wiki page downloaded in other formats like ps, pdf, text.
+  ** Single click review request.
+  ** Wiki talk page, for discussion.
+  ** Charts and analytics.
+  ** [[ /help/zwiki/ZWiki | Complete list of ZWiki features ]]
+
+* '' Issue tracking ''
+  ** Create and track issues.
+  ** Spreadsheet like ticket listing, with inline edit.
+  ** Ticket filters, supported both on server-side and browser-side.
+  ** Powerful regular expression based filtering rules.
+  ** Filters can be saved per user.
+  ** Ticket discussion.
+  ** Ticket workflow.
+  ** User favorites.
+  ** User voting.
+  ** Charts and analytics.
+
+* '' Source browser ''
+  ** Integration with VCS (Version Control System). ''SVN'' and ''Bazaar''
+     supported.
+  ** Explorer style, repository navigation (for requested revision)
+  ** Mount any number of repository directories (containing documents) onto
+     project's url path. Documents can be in wiki, html or plain-text format.
+  ** Fully annotated and syntax highlighted listing of files.
+  ** Single click review request for a single file or for a change-set.
+  ** Navigate through repository revisions and download the changeset in
+     patch-file format.
+  ** ``{r} Source code analytics`` [<FN 2 >]
+
+* '' Review ''
+  ** Review wiki pages and files in repositories.
+  ** Spreadsheet like review listing, with inline edit.
+  ** Group reviews into reviewset.
+  ** Create reviews with author, moderator and participants, with prescribed
+     permissions.
+  ** Inline review (while listing the file's content), with syntax
+     highlighting and color coding for modified lines.
+  ** User favorites.
+  ** Charts and analytics.
+
+* ''Email integration'' [<FN 1 >]
+  ** SMTP client.
+  ** POP3 client.
+  ** Invitations for new users.
+  ** Notifications on changes to favorite projects, wikis, tickets and
+     reviews.
+  ** Create / publish static wiki pages via email.
+  ** Create / publish wiki pages or add your comment to wiki pages via email.
+  ** Create / edit tickets and ticket attributes, and add your ticket
+     comments via email.
+  ** Add review comments via email.
+
+* ''Integration with vim''
+  ** Vim plugin available for //zwiki// syntax highlighting.
+  ** Read, edit, and publish static wiki pages via Vim.
+  ** Read, edit, and publish wiki pages via Vim.
+  ** Read, create and edit tickets via Vim.
+  ** Map source files to reviews and add review comments as you browse the
+     source file in Vim.
+
+* '' Other features ''
+  ** Guest wiki, to compose and organise help pages, common pages, user pages
+     etc ...
+  ** User home page.
+  ** For each user, consolidated listing of tickets owned by the user across
+     all projects.
+  ** Via web user preference.
+  ** Creating and managing license documents.
+  ** Navigation Breadcrumbs and Url breadcrumbs
+  ** Session management.
+  ** Tool-tip widget.
+  ** Site administration and project administration via web.
+  ** Integration with google maps.
+  ** Integration with google analytics.
+  ** Deployable under apache-wsgi environment.
+  ** MySQL database.
+  ** Integration with editors, VCS and email servers.
+
+h3. Packaging and distribution
+
+h4. To build
+
+{{{ Code bash
+
+  python setup.py build
+
+}}}
+
+
+h4. To egg-package
+
+{{{ Code bash
+
+  ./bin/pkgzeta.sh
+
+}}}
+
+The .egg package will be availabe under dist/ directory
+
+
+h4. To upload into pypi
+
+Registering and uploading it into pypi
+
+{{{ Code bash
+
+  python ./setup.py bdist_egg --exclude-source-files register upload --show-response 
+
+}}}
+
+
+h3. Installation
+
+The latest package will be available in python package index under the
+name, ''zeta'', install it, into your system or into virtual-environment
+by,
+
+{{{ Code bash
+
+  easy_install -U zeta
+
+}}}
+
+Note that only beta releases are available for free installation.
+
+h3. Setting up zeta for virtual-environment
+
+Bazaar branch,
+
+{{{ Code bash
+
+    bzr branch <from-authorized-source>/zeta/ zeta/
+    bzr branch <from-authorized-source>/zwiki/ zwiki/
+
+}}}
+
+h4. Setting up development environment
+
+{{{ Code bash
+
+  # install virtualenv package under system python path
+  sudo easy_install virtualenv
+
+  # Create a virtual environment for zeta-application, under the zeta/ in
+  # current-working-directory
+  virtualenv --no-site-packages zeta
+
+  # Now, enter the virtual environment by doing,
+  source zeta/bin/activate
+
+  # you can see that shell prompt is prefixed with -- (zeta), which means
+  # you have entered into the virtual environment
+
+  # Create egg file for zwiki, the egg file will be created under the dist/
+  # directory
+  cd zwiki/
+  ./bin/cleanzwiki.sh
+  ./bin/pkg.py egg
+
+  # Install zwiki, since you are executing the following command under `zeta`
+  # virtual environment, zwiki package will be installed under virtual
+  # environment
+  easy_install dist/<egg-file>
+
+  # Setup zeta. The following command will download all the dependency
+  # packages and install it under virtual environment.
+  cd zeta/
+  python setup.py develop
+
+  # Start the server via paster.
+  paster serve --reload development.ini
+
+  # Server will be started displaying the details of IP address and port
+  # address it is listening to.
+
+}}}
+
+Enter the ipaddress:port in the browser address bar. Voila ....  
+
+h3. Development Notes
+
+* python-xapian, pysvn packages are not available via easy_install, so, when
+  entering virtualenv, make sure that PYTHONPATH is set to system's xapian and
+  pysvn modules.
+* Some-times, packages like [<PRE  sqlalchemy, setuptools >]
+  might be installed at system level, as well as in the virtual environment.
+  Make sure that both the versions are same.
+* python-openid egg package is suddenly broken for version 2.2.4, search in
+  the net to get it.
+
+/* vim: set filetype=zwiki : */

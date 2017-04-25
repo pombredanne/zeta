@@ -1,0 +1,23 @@
+Deployment issues :
+
+1. mod_wsgi + virtualenv :
+    
+    PYTHONPATH
+
+    --no-site-packages
+        ( Looks like the only way to solve this problem. But nobody is
+          confirming )
+
+    sys.path.insert
+
+    PREPEND to sys.path instead of APPENDING to it, check out the code from
+    mod_wsgi wiki page.
+
+    WSGIApplicationGroup %{GLOBAL}
+
+    The actual problem seems to be with mod_python + mod_wsgi. Better dont
+    load mod_python. And dont have any Virtualhost configuration using
+    mod_python directives.
+
+
+WebHelpers - FeedGenerator broken in 1.0b1

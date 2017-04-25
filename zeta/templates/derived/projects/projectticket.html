@@ -1,0 +1,81 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="element"  file="/component/elements.html"/>
+<%namespace name="libform"  file="/forms/lib.html"/>
+<%namespace name="proj"     file="/forms/proj.html"/>
+<%namespace name="attc"     file="/forms/attc.html"/>
+<%namespace name="tag"      file="/forms/tag.html"/>
+
+<%!
+    ticketmenu = []
+%>
+
+<%def name="init()">
+    <%
+    global ticketmenu
+
+    ticketmenu    = [ (h.url_for( h.r_projticket,
+                                  projectname=c.projectname,
+                                  action='newticket',
+                                  form='request' ),
+                                  'Create new ticket',
+                                  'new-ticket',
+                      ),
+                      (h.url_for( h.r_projticket,
+                                  projectname=c.projectname,
+                                  action='ticketlist', ),
+                                  'List all the tickets for this project',
+                                  'list-tickets',
+                      ),
+                    ]
+
+    %>
+</%def>
+
+<%def name="bd_mainnav()">
+    ${element.mainnav()}
+</%def>
+
+<%def name="bd_body()">
+    ${init()}
+    <div class="gbrdr">
+    <div class="ctxtnav" style="margin-left : 1px;">
+        ## Context items
+        % for tm in ticketmenu :
+            % if c.action == tm[2] :
+            <div class="ctxtitem" style="background: #FFFFFF">
+                <span class="tab">${tm[2]}</span>
+            </div>
+            % else :
+            <div class="ctxtitem">
+                <a class="tab nodec" title="${tm[1]}" href="${tm[0]}">${tm[2]}</a>
+            </div>
+            % endif
+        % endfor
+    </div>
+    </div>
+
+    <div class="gbrdr">
+    <div class="cont form">
+        <table style="width: 100%;"><tr>
+        <td style="width: 80%;">
+            % if c.action == 'ticket' :
+                ${project_form( c.user, c.project, c.usernames, c.licensenames)}
+            % elif c.action == 'tickets' :
+                ${notification_form( c.user, c.project )}
+            % elif c.action == 'list-tickets' :
+                ${comp_form( c.user, c.project, c.usernames, c.username, c.componentnames )}
+            % elif c.action == 'new-tickets' :
+                ${mstn_form( c.user, c.project, c.milestonenames )}
+            % endif
+        </td>
+        <td style="width: 20%;">
+            Tips and  help
+        </td>
+        </tr></table>
+    </div>
+    </div>
+</%def>

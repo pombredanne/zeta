@@ -1,0 +1,131 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%!
+
+page_tooltips = [
+
+[ 'Help',
+"""List of all registered users and their summary"""
+],
+[ 'GoogleMap',
+"""If enabled in site-admin -> site-config, watch yourself and your friends in
+googlemap"""
+],
+[ 'Timeline',
+"""Timeline of users activity"""
+],
+
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="userdetail( user, userinfo, urlphoto )">
+    <%
+        username = user.username
+        urlphoto = urlphoto or ''
+    %>
+    % if urlphoto :
+        <img style="max-width: 100px; max-height: 100px;" class="floatl"
+             src="${urlphoto}"/>
+    % else :
+        <div class="floatl fntbold fggray calign" style="width: 100px; height: 100px;">
+            Photo</div>
+    % endif
+    <ul class="lstnone"
+        style="margin-left: 100px; height: 100px;">
+        <li>
+        <span class="fntbold fntlarge">
+        ${'%s %s %s' % (userinfo.firstname, userinfo.middlename, userinfo.lastname) }
+        </span>
+        </li>
+        <li>
+        <span class="fntbold fggray ">Registered as :</span>
+        <span class="fntbold ">
+            <a href="${c.cntlrobj.url_user(username)}">${username}</a></span>
+        </li>
+        <li>
+        <span class="fntbold fggray">Email-id : </span>
+        <span class="fntbold ">${user.emailid}</span>
+        </li>
+        <li>
+        <span class="fntbold fggray ">Timezone : </span>
+        <span class="fntbold ">${user.timezone}</span>
+        </li>
+        <li>
+        <span class="fntbold fggray ">Registered on :</span>
+        <span class="fntbold ">${userinfo.created_on.strftime("%a, %b %d, %Y")}</span>
+        </li>
+    </ul>
+</%def>
+
+<%def name="bd_body()">
+    <% 
+        pagebartext = "Users registered with this site"
+
+        usersgmap = '<span class="ml10 fwnormal fntsmall">' +\
+                    ( '<a href="%s">OnGooglemap</a></span>' % h.url_usersgmap )
+        charts = capture( elements.iconlink, h.url_userscharts,
+                          'barchart', title="Analytics for users", classes="ml20" )
+        tline = capture( elements.iconlink, h.url_usertline,
+                         'timeline', title="Timeline", classes="ml10" )
+        ruler = False
+        pgheight = (len(c.indexlist) * 35) + 100
+    %>
+    <div class="floatl" style="width: 50px; margin-top: 35px;">
+        <ul class="lstnone" style="padding-left: 20px;">
+            % for i in c.indexlist :
+                % if i == c.alphaindex :
+                    <li class="indexitem bggray"
+                        style="border-width: 1px; border-style: solid;
+                               border-color: white gray gray white;">
+                        <a href="${c.cntlrobj.url_users(alphaindex=i)}">${i}</a>
+                    </li>
+                % else :
+                    <li class="indexitem">
+                        <a href="${c.cntlrobj.url_users(alphaindex=i)}">${i}</a>
+                    </li>
+                % endif
+            % endfor
+        </ul>
+    </div>
+    <div id="page"
+        style="margin-left: 50px; min-width: 950px; min-height: ${pgheight}px">
+        ${elements.pagebar( pagebartext, [ usersgmap, charts, tline ],
+                            tooltips=page_tooltips )}
+        <div id="bdy">
+            <ul class="lstnone">
+            % for user in c.users :
+                <% 
+                    url_userphoto = c.url_usersphoto.get( user.id, '' )
+                    ruler = True
+                %>
+                <li class="m5 p5 userentry">
+                    ${userdetail( user, user.userinfo, url_userphoto )}
+                </li>
+            % endfor
+            </ul>
+        </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+
+

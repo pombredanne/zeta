@@ -1,0 +1,57 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%inherit file="/base/basic1.html"/>
+<%namespace name="forms" file="/component/forms.html"/>
+<%namespace name="elements" file="/component/elements.html"/>
+
+<%!
+
+page_tooltips = [
+]
+
+%>
+
+<%def name="hd_script()">
+    ${parent.hd_script()}
+</%def>
+
+<%def name="bd_body()">
+    <div id="bdy" class="mt50">
+    <div id="invtuser" class="brtr10 brtl10">
+        <div class="disptable w100">
+            <div class="disptrow">
+                <div class="distcell fntsmall p5">
+                % if c.usercaninvite : 
+                    ${forms.form_inviteuser( c.authuser, h.suburl_inviteuser ) }
+                    <div class="p10 bgblue1">
+                    User invitation must be enabled in <b>site-admin->siteConfig</b>.
+                    <em>regrbyinvite</em>.
+                    Also, for any registered user to invite their friends,
+                    configure <em>invitebyall</em> in site-admin->siteConfig
+                    </div>
+                % else :
+                    <div class="fgcrimson calign" style="font-size: 120%">
+                        Contact site administrator to enable invitation.
+                    </div>
+                % endif
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</%def>
+
+
+
+<%def name="bd_script()">
+    ${parent.bd_script()}
+
+    <script type="text/javascript">
+        dojo.addOnLoad( setup_userpanes );
+        dojo.addOnLoad( adjust_upheight );
+    </script>
+</%def>
+
+

@@ -1,0 +1,16 @@
+Since, we focus our effort to support projects that involves digitized
+content, we have to address the second most important process (the first
+being Version Control ) that a project ought to follow. That is "review",
+called with various names as "peer review", "source inspections" and many more ...
+
+Be it water-fall model, or spiral model, structured programming or extreme
+programming, review process have always found a place in all of them. We
+facilitate users to review source files in repository or wiki documents at
+their place at their time. All that matters are their comments.
+
+Create a review with author, moderator and participants, where each of them
+will have respective permissions to update review attributes, while all of
+them will have permissions to comment on the review resource or reply to
+other's comments. More than that, review source files as you view / navigate
+and edit them with your editor or IDE, and don't bother to open your bowser to
+add your comments.

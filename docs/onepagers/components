@@ -1,0 +1,23 @@
+    Managing many is the same as managing few,
+        It is a question of division.
+                                - Sun Tzu, Chapter 5.
+
+Organization and management has come a long way from its simple beginnings. We
+manage in a heirarchy style or matrix style or more recently, flat style ..
+No matter what style and method one follows, one cannot get away with the "art of
+division". 
+
+To execute projects, considering Frederick Brooks' diagram on "Evolution of a
+program to programming systems product", the art of dividing a project banks
+on,
+    * understanding the specifics
+    * abstracting and generalizing the specifics
+    * interfacing them
+    * documentating and testing
+    * and, the question of maintanence
+
+In our tool, we provide two ways to correlate with your project's
+organisation. One, by creating multiple collaboration instance and
+two, by creating components within a single collaboration instance. In both
+ways, find suitable people to be your project-administrators and
+component-owners, who could share the same will.

@@ -1,0 +1,146 @@
+Users : 
+  
+    The user identification, authentication, authorization is done horizontally
+across all the projects.
+    Every request to the application is made under a user context. If request
+is made by an un-authenticated user, then the user is considered as 'anonymous'
+user.
+    For a given installation, there will be a super-user called
+site-administrator identified by the name 'admin'. Site-administrator have 100%
+access to the application.
+
+  admin : 
+    The intention of having an administrator is to arbitrate between project
+    owners. Otherwise, most of the facilities and reponsibilities attributed
+    to an admin user is also attributed to owners.
+    There can be only one administrator at any time and only the current
+    administrator can assign the next administrator for the project.
+
+Tag : 
+
+    Manythings can be tagged,like,
+
+        attachment, license, project, component, milestone, 
+        version, wiki, ticket
+
+    Some tags have special meaning based on the item that is tagged.
+
+      featured,     wiki, attachment, project, milestone, version
+        If an item is tagged as featured, it will be highlighted in featured
+        boxes and might also receive special highligting in the web-page view.
+
+      blueprint,    wiki, source
+        When tagged as blueprint, a wiki page or source file can be used as a
+        blueprint.
+
+      docs,         wiki, source, attachment
+        These items will be listed under project document section.
+
+      download,     wiki, source, attachment
+        These items will be listed under project download section.
+
+      <versionname>,    wiki, source, attachment
+        When an item is tagged with a version-name, then the item will be
+        associated with the project's particular version identified by the
+        same version name.
+
+Project : 
+    
+    Projects are the basic collaboration units. Users can associate with
+projects only via 'project-teams'. A project team is synonymous to the
+'role' the user is expected to play in the project. And thus, single user can
+be expected to play multiple roles in a project. There is also project
+administrator, who is the one, who created the project. Project administrator
+can assign a different user as project-admin and re-linquish controle. Project
+level permissions are granted at team level. All the pages accessed under a
+given project is governed by project-level permissions, except project
+administrator and site administrator, who have complete access.
+
+Project Components : 
+
+    Project components are meant to split activities into logical entities.
+Each component should have a owner.
+
+Project Milestones : 
+
+    Project's progress can be tracked via milestones. Due-date can be set to
+milestones. Milestones can either be closed or cancelled, if neither then the
+milestone is considered open.
+
+Project Versions : 
+
+    Complete milestones, can be taged into releases or versions.
+
+Implications of removing a user from project : 
+
+    * Component ownership.
+    * Votes on wiki pages and ticket belonging to a project.
+    * Favourite projects. Favourite tickets and wikis belonging to the project.
+    * Tickets from project, prompting user and/or  owned by user.
+    * Wiki from project, created by user.
+    * Review from project, authored by user and/or moderated by user and/or 
+      participated by user.
+    * Review Comments (Review comments are more tailored for review-process).
+
+    Other user associations,
+
+    * Attachment uploader.
+    * Ticket comments.
+    * Wiki Comments.
+
+Tickets : 
+
+    Tickets help to track project activities. By making a ticket part of a
+project's component, milestone and version, activity delegation and
+responsibilites can be organised better.
+    By marking blocking tickets and blockedby tickets, ticket can be organised
+based on dependancy.
+    By using parent, children relationship between tickets, a huge activiy can
+be split into multiple small activities and tracked.
+
+Ticket Status : 
+
+    Ticket status maps the flow of work for a given ticket. When ever a user
+changes the ticket status, he/she becomes the owner of the ticket and expected
+to respond with in a due_date (if marked). If the current status of the ticket
+expects another user to respond, then the ticket can be marked with
+'promptuser' prompting the user.
+    'due_date' can be used for time and estimation for each activity. While the
+next status entry for the ticket 'created_on' column can be used for actual
+time taken for activities.  Ticket entry has a 'currowner_id' field while, the
+ticket_status_history entry also has a ownerid. Most of the time, whenever a
+user changes the status, his/her id will be treated as the 'currowner_id' and
+'ownerid'.  Except, when the new status requires action from a specific user
+other than the user who is modifying the ticket status, in which case, the
+'currowner_id' will that of the modifying user id and 'ownerid' will be of the
+user id, who has to respond.
+
+
+Review : 
+
+    Every review comment should be acted upon by the author and moderated by
+the moderator. The action taken by the author should be one of the value
+mentioned under 'actionname' column.
+
+    For every review activity initiated, a row should be created under this
+table. And every review that is created should be associated with a ticket.
+    A [review] row is related to one or more [review_material] rows, to
+specify the collection of materials to be reviewed. Review Comments should be
+acted upon by the author and approved by the moderator, after which the review
+can be 'closed'
+
+    Each comment should be acted upon by the author.
+    'position', can be,
+        line number if review material is <source>
+        paranumber if review material is <wiki>
+
+Wiki : 
+
+    Every wiki page should be associated with a project. Each row in this
+table maps to a wiki URL. There can be multiple entries (multiple wiki pages)
+that are mapped to the same wiki table. This facilitates in wiki-redirecting.
+'wikiurl' is the full path-name in the URL. 'latest_version' refers to the
+'id' column of table mapped to the wikipage.
+
+    Actual wiki table. Every wiki page has a table of this type, with a unique
+table name.  Wiki Version id is equalent to the value of the 'id' column.

@@ -1,0 +1,200 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%!
+    restrict_kwargs = lambda kwargs, allowed_keys : \
+                        [ kwargs.pop( k )
+                            for k in kwargs.keys()
+                            if k not in allowed_keys ]
+    general_attrs   = [ 'id', 'class', 'title', 'style' ]
+%>
+
+## ------------ Input Label ---------------------
+
+<%def name="label_input( forelm, label )">
+    <label for="${forelm}">${label}</label>
+</%def>
+
+## ------------ Regular inputs -------------------
+
+<%def name="input_text( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'disabled', 'maxlength', 'readonly', 'size', 'value' ]
+                   )
+    %>
+    <input type="text" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+<%def name="input_password( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'disabled', 'maxlength', 'size' ]
+                   )
+    %>
+    <input type="password" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+<%def name="input_checkbox( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'checked', 'disabled', 'value' ]
+                   )
+    %>
+    <input type="checkbox" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+<%def name="input_radio( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'checked', 'disabled', 'value' ]
+                   )
+    %>
+    <input type="radio" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+## ----------- File inputs ---------------------
+
+<%def name="input_file( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'disabled', 'size' ]
+                   )
+    %>
+    <input type="file" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+## ----------- Button inputs --------------------
+
+<%def name="input_submit( name='submit', value='Submit')">
+    <%
+    %>
+    <input type="submit" name="${name}" value="${value}"/>
+</%def>
+
+<%def name="input_reset( name='reset',  value='Reset' )">
+    <%
+    %>
+    <input type="reset" name="${name}" value="${value}"/>
+</%def>
+
+<%def name="input_button( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs, general_attrs + [ 'value' ] )
+    %>
+    <input type="button" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+## ----------- Special inputs -------------------
+
+<%def name="input_hidden( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs, general_attrs + [ 'value' ] )
+    %>
+    <input type="hidden" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+<%def name="input_image( name, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'alt', 'disabled', 'src', 'value' ] )
+    %>
+    <input type="hidden" name="${name}"
+           % for k in kwargs :
+           ${k}="${kwargs[k]}"
+           % endfor
+    />
+</%def>
+
+## ----------- Textarea inputs ------------------
+
+<%def name="input_textarea( name, cols, rows, text='', **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'disabled', 'readonly' ] )
+    %>
+    <textarea name="${name}" rows="${rows}" cols="${cols}" 
+              % for k in kwargs :
+              ${k}="${kwargs[k]}"
+              % endfor
+    >${text}</textarea>
+</%def>
+
+## ---------- Select from list ------------------
+
+<%def name="input_option( text, **kwargs )">
+    <%
+    restrict_kwargs( kwargs,
+                     general_attrs + [ 'disabled', 'label', 'selected', 'value' ]
+                   )
+    %>
+    <option 
+            % for k in kwargs :
+            ${k}="${kwargs[k]}"
+            % endfor
+    >${text}</option>
+</%def>
+
+<%def name="input_optgroup( label, disabled=None )">
+    <optgroup label="${label}" 
+              % if disabled :
+              disabled="${disabled}"
+              % endif
+    />
+</%def>
+
+## ----------- Captcha -------------------------
+
+<%def name="input_captcha( name, label, id, imgsrc, maxlen, help )">
+    <tr>
+    <td class="label">${label_input( id, label )}</div>
+    <td class="formitem">
+    <div class="input">
+        ${input_text( name=name, id=id, maxlength=maxlen )}
+        <img class="req" src="${imgsrc}"/>
+        <span class="frmhlp">${help}</span>
+    </div>
+    </td>
+    </tr>
+</%def>
+
+## ----------- Form standard buttons ------------
+
+<%def name="form_submit_button( **kwargs )" >
+    <div class="submit">${input_submit( **kwargs )}</div>
+</%def>
+
+<%def name="form_reset_button( **kwargs )" >
+    <div class="reset">${input_reset( **kwargs )}</div>
+</%def>
+
+

@@ -1,0 +1,7 @@
+Attachment chart :
+(By uploaders)
+    * X-Axis starting and ending ticks are not aligned with data set.
+
+Ticket charts :
+(including many pie charts)
+    * Some times hover-tooltips do not pop up.

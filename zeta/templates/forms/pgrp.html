@@ -1,0 +1,93 @@
+## This file is subject to the terms and conditions defined in
+## file 'LICENSE', which is part of this source code package.
+##       Copyright (c) 2009 SKR Farms (P) LTD.
+
+<%namespace name="lib" file="/forms/lib.html"/>
+
+<%def name="pgroup_select_list( perm_groups, defselect )">
+    ## POST : perm_group
+
+    <div class="input">
+        <select name="perm_group" size="1" id="pgsl">
+            % for perm_group in perm_groups :
+                % if perm_group == defselect :
+                    ${lib.input_option( perm_group, value=perm_group, selected='selected' )}
+                % else :
+                    ${lib.input_option( perm_group, value=perm_group )}
+                % endif 
+            % endfor
+        </select>
+    </div>
+</%def>
+
+<%def name="pgroup_create( perm_groups=[], perm_names=[] )">
+    ## POST : (perm_group_id), perm_group, addpn*, rmpn*
+
+    <tr>
+    <td class="label">Create Permission Group :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Create group by name </td>
+            <td>
+            ${lib.input_text( name='perm_group', id='createpg', maxlength=h.LEN_NAME )}
+            <br></br>
+            <span class="frmhlp">Minimum 3 characters, Maximum ${h.LEN_NAME} characters</span>
+            </td>
+        <tr>
+        <tr>
+            <td>Group Permissions </td>
+            <td>
+            <select name="pntopg" multiple="multiple" size=4 id="pntopg">
+                % for pn in perm_names :
+                    ${lib.input_option( pn, value=pn )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="label">Update Permission Group :</td>
+    <td class="formitem">
+    <div class="input">
+        <table style="width : auto;">
+        <tr>
+            <td>Select PermissionGroup </td>
+            <td>
+            <select name="updtpg" size=1 id="updtpg">
+                % for pg in [ '' ] + perm_groups :
+                    ${lib.input_option( pg, value=pg )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Remove PermissionNames </td>
+            <td>
+            <select name="rmpn" multiple="multiple" size=4 id="rmpn" disabled="disabled">
+                % for pn in perm_names :
+                    ${lib.input_option( pn, value=pn )}
+                % endfor
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Add permissions </td>
+            <td>
+            <select name="addpn" multiple="multiple" size=4 id="addpn" disabled="disabled">
+                % for pn in perm_names :
+                    ${lib.input_option( pn, value=pn )}
+                % endfor
+            </select>
+            </td>
+        <tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+</%def>

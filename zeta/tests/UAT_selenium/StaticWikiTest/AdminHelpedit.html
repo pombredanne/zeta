@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AdminHelpedit</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AdminHelpedit</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=help</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>swtext</td>
+	<td>@ { 'Helvetica,Arial,sans-serif' }<br /><br />[&lt; &lt;style type=&quot;text/css&quot;&gt; &gt;]<br />h1 { <br />&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;background-color : #004E8B;<br />&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />}<br />[&lt; &lt;/style&gt; &gt;]<br /><br />[&lt; &lt;style type=&quot;text/css&quot;&gt; &gt;]<br />h2, h3, h4, h5 { <br />&nbsp;&nbsp;&nbsp;&nbsp;margin : 0px;<br />&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0px 2px 3px;<br />&nbsp;&nbsp;&nbsp;&nbsp;background-color : #EAEAFC;<br />&nbsp;&nbsp;&nbsp;&nbsp;border-bottom: 1px solid #CCCCCC;<br />}<br />[&lt; &lt;/style&gt; &gt;]<br /><br />{{ Toc( float='right' ) }}<br /><br />== Administration<br /><br />=== Site Admin<br /><br />The site administrator has access to all the resources. Following tabs can be found<br />in the '/ site-admin '/ page.<br /><br />==== Site info<br /><br />Site info tab contains the global configuration fields which are applicable<br />to all projects. These fields are read-only and can be modified<br />only in the .ini file.<br /><br />==== Site config<br /><br />Configuration parameters for Zeta application,<br /><br />||{ {margin-left:20px}<br />||- <br />||= {background:#F7F7F7} | Field<br />||= Description<br />||-<br />|| {background:#F7F7F7} |&nbsp;&nbsp;def_wikitype<br />|| Default wiki-type assigned to a new wiki page<br />||-<br />|| {background:#F7F7F7} | interzeta<br />|| // {{ Span( 'This feature is in development', color='red' ) }} //<br />||-<br />|| {background:#F7F7F7} |&nbsp;&nbsp;projteamtypes<br />|| Comma seperated list of all team names, by which a user can take part in a project<br />||-<br />|| {background:#F7F7F7} | reviewactions<br />|| Comma seperated list of all possible actions that can be taken on a review comment<br />||-<br />|| {background:#F7F7F7} | reviewnatures<br />|| Comma seperated list of possible nature for a review comment<br />||-<br />|| {background:#F7F7F7} | specialtags<br />|| Tag names that will be interpreted by the application<br />||-<br />|| {background:#F7F7F7} | ticketstatus<br />|| Comma seperated list of all possible ticket status names<br />||-<br />|| {background:#F7F7F7} | ticketresolv<br />|| A subset of ticket status names which distinguish a ticket as resolved<br />||-<br />|| {background:#F7F7F7} | ticketseverity<br />|| Specifies the severity or in other words criticality of tickets for eg blocker, critical, major, minor etc<br />||-<br />|| {background:#F7F7F7} | tickettypes<br />|| Specifies the nature of tickets such as blueprint, defect, enhancement etc.<br />||-<br />|| {background:#F7F7F7} | vcstypes<br />|| Types of version control systems supported. Currently svn is supported by default<br />||-<br />|| {background:#F7F7F7} |&nbsp;&nbsp;welcomestring<br />|| Welcome string to be displayed in the home page's //page bar//.<br />||-<br />|| {background:#F7F7F7} |&nbsp;&nbsp;wikitypes<br />|| Types of wiki pages supported<br />||}<br /><br /><br />==== Test sub-header<br />Sub-header added for testing<br /><br />==== User management<br /><br />'/ Users '/ tab is used for assigning site-level permissions to registered users.<br />These permissions do not cover project level permissions (project-level permissions<br />are managed in the respective project's admin tab)<br />Site level resources include license create, view, email id view etc..<br />Enabling or Disabling users do not have any effect now. This feature is <br />left for future development.<br /><br />==== Projects<br /><br />Enabling or Disabling projects do not have any effect now. This feature is<br />left for future development.<br /><br />==== Permissions<br /><br />'/ Permissions '/ tab is used for creating and updating permission groups.<br />A set of permission names can be grouped under a permission group. Know<br />more about [[ /help/pms | Permission Managment System ]]<br /><br /><br />==== License<br /><br />'/ licensetab '/ gives a snapshot of all the license available in the site. License pages can be<br /> accessed only through this page and project's admin page.<br /><br />=== Test header<br />Main header added for testing<br /><br />=== Project Administrator<br /><br />Whoever creates a project becomes the project's administrator. Subsequently any registered user <br />can be re-assigned as the project's administrator by //site-admin// or by the project's current<br />administrator. The project admin has unrestrictedaccess to all pages related to the project.<br /><br />'' Being a //project administrator// is to administor project meta details. For contributing to<br />a project join one (or more) of project's team.''<br /><br />The project meta details are classified as,<br /><br />: Project :: \<br />Project admin can give an overview description of the project and upload the project logo and icon which \<br />will be displayed in all project-pages.<br /><br />:Component ::\<br />A project can be divided into components for the purpose of managing the same. \<br />Each component is assigned an //owner//.<br /><br /><br />:Milestone ::\<br />The project admin can create milestones for the project and specify a //due date//. Milestones can be closed by \<br />completing or cancelling it. Milestones can be used to track key dates in the project.<br /><br />:Versions ::\<br />The project admin can create and remove versions which can be used to track releases.<br /><br />&gt; '' Tickets can be associated to project components, milestones and versions. ''<br /><br />:Teams ::\<br />Users can be added or removed from project teams. Team names can be created only by site admininistrator \<br />and are common to all projects. Every user who participates in the project needs to be assigned to a team, \<br />but those with multiple roles can be associated with more than one team.<br /><br />:Permissions ::\<br />Permission management is done at a team level by adding or removing permissions to teams.<br />Know more about [[ /help/pms | Permission Managment System ]] <br /><br />/* vim: set filetype=zwiki : */<br /></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dijit_form_Button_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>help/admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h4[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Sub-heade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='bdy']/div/div/div/div[2]/h3[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Main header added for testing</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

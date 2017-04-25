@@ -1,0 +1,25 @@
+The following list of wiki enabled contents can get outdated,
+  * guest wiki content
+  * project description
+  * component description
+  * milestone description
+  * milestone closing remark
+  * version description
+  * ticket description
+  * ticket comment
+  * review comment
+  * wiki text
+  * wiki comment
+
+Reasons why wiki conent might get outdated,
+
+When using one or more of the following macros,
+  * YearsBefore
+  * ProjectDescription
+  * ProjectAttributes
+  * ProjectTeam
+  * ProjectComponents
+  * ProjectVersions
+
+When using one or more of the following extension,
+  -
